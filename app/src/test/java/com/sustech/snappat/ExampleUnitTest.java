@@ -1,4 +1,4 @@
-package com.test.rentao.testjavaprojects;
+package com.sustech.snappat;
 
 import org.junit.Test;
 

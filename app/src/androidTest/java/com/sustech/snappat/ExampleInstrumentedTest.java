@@ -1,4 +1,4 @@
-package com.test.rentao.testjavaprojects;
+package com.sustech.snappat;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.test.rentao.testjavaprojects", appContext.getPackageName());
+        assertEquals("com.sustech.snappat", appContext.getPackageName());
     }
 }
