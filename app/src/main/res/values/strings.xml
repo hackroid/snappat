@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FuckJava App</string>
+    <string name="title_home">Page 1</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="main_content1">The best tool in the world to develop Android App -- Java.</string>
+</resources>
