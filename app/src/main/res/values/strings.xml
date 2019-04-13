@@ -3,4 +3,5 @@
     <string name="title_home">Snap</string>
     <string name="title_dashboard">Photos</string>
     <string name="title_notifications">Msg</string>
+    <string name="hint">Hint</string>
 </resources>

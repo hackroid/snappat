@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="240dp"
+        android:layout_height="320dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+       />
+
+    <EditText
+        android:id="@+id/hint"
+        android:layout_below="@+id/picture"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:hint="@string/hint"
+        android:inputType="text"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/bg_edittext_selector"
+        android:padding="5dip"
+        android:singleLine="true"
+        android:textCursorDrawable="@drawable/cursor_color"
+        android:textSize="18dip" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_alignStart="@+id/hint"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="135dp"
+        android:text="Display your location?"
+        android:textSize="18dip" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/location"
+        android:layout_alignEnd="@+id/hint"
+        />
+
+</RelativeLayout>
