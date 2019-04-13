@@ -3,8 +3,10 @@ package com.sustech.snappat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 public class PublishActivity extends AppCompatActivity {
 
     private EditText mHint;
+    private EditText mMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,29 @@ public class PublishActivity extends AppCompatActivity {
             }
         });
 
+        //使用findViewById 得到mymessage对象
+        mMessage = (EditText) findViewById(R.id.mymessage);
+        mMessage.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        mMessage.setGravity(Gravity.TOP);
+        mMessage.setSingleLine(false);
+        mMessage.setHorizontallyScrolling(false);
+        mMessage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                toast("您输入的数据为："+s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void toast(String s){

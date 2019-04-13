@@ -3,5 +3,12 @@
     <string name="title_home">Snap</string>
     <string name="title_dashboard">Photos</string>
     <string name="title_notifications">Msg</string>
-    <string name="hint">Hint</string>
+    <string name="text_hint">Hint: </string>
+    <string name="myhint"> Please enter a short hint message</string>
+    <string name="award">Award Money: </string>
+    <string name="location">Display your location?</string>
+    <string name="awardnum">1~999</string>
+    <string name="user_message">Say what ever you want to tell people who solve your mystery!</string>
+    <string name="btn_publish">PUBLISH THIS MYSTERY!</string>
+
 </resources>
