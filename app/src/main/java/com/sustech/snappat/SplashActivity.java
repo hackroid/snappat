@@ -26,10 +26,9 @@ public class SplashActivity extends Activity {
         imgV.setOnClickListener(new View.OnClickListener() {//创建监听器
             @Override
             public void onClick(View view) {
-                if(time<1){
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 //        getSharedPreferences 记录状态
@@ -38,20 +37,18 @@ public class SplashActivity extends Activity {
 //        boolean aTrue = sh.getBoolean("true", false);
 //        edit.putBoolean("true",true);
 //        edit.commit();
-            Timer timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-
-                @Override
-                public void run() {
-                    time--;
-                    if (time==0){
-                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                time--;
+                if (time==0){
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
-            }, 0, 2000);
+            }
+        }, 0, 2000);
 
 
     }

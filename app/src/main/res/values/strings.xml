@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Snappat</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">Snap!</string>
+    <string name="title_notifications">Profile</string>
     <string name="app_preference">com.sustech.snappat.main_preference</string>
     <string name="pref_login">com.sustech.snappat.login</string>
     <string name="title_activity_login">Sign in</string>
