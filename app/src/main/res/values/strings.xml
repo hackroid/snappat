@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Snappat</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Snap!</string>
-    <string name="title_notifications">Profile</string>
+    <string name="title_home">主页</string>
+    <string name="title_cam">Snap!</string>
+    <string name="title_message">消息</string>
+    <string name="title_person">我的</string>
+    <string name="home_latest">最新</string>
+    <string name="home_hot">最热</string>
+    <string name="home_under">悬赏</string>
+    <string name="home_friend">好友</string>
     <string name="app_preference">com.sustech.snappat.main_preference</string>
     <string name="pref_login">com.sustech.snappat.login</string>
     <string name="title_activity_login">Sign in</string>
@@ -19,4 +24,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="home_hot_fragment">Home hot fragment</string>
+    <string name="home_latest_fragment">Home latest fragment</string>
+    <string name="home_under_fragment">Home under fragment</string>
+    <string name="home_friend_fragment">Home friend fragment</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
