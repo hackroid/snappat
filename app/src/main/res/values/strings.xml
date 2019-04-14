@@ -5,6 +5,11 @@
     <string name="title_notifications">Notifications</string>
     <string name="app_preference">com.sustech.snappat.main_preference</string>
     <string name="pref_login">com.sustech.snappat.login</string>
+    <string name="user_id">com.sustech.snappat.login</string>
+    <string name="user_phone">com.sustech.snappat.user_phone</string>
+    <string name="user_name">com.sustech.snappat.user_name</string>
+
+
     <string name="title_activity_login">Sign in</string>
     <string name="login_button">Login in</string>
     <!-- Strings related to login -->
@@ -16,6 +21,9 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="verify_code">Verify Code</string>
+    <string name="send_code">send</string>
+    <string name="phone_number">Phone Number</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
