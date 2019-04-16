@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sustech.snappat.CameraActivity.CameraActivity;
+import com.sustech.snappat.CameraActivity.DetectorActivity;
 import com.sustech.snappat.LoginActivity.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean(getString(R.string.pref_login),false);
                 editor.commit();
-                Intent camera_intent = new Intent(context, CameraActivity.class);
+                Intent camera_intent = new Intent(context, DetectorActivity.class);
                 startActivity(camera_intent );
             }
         });
