@@ -32,8 +32,11 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Vector;
 
-/** A classifier specialized to label images using TensorFlow. */
+/**
+ * A classifier specialized to label images using TensorFlow.
+ */
 public class TensorFlowImageClassifier implements Classifier {
+
   private static final String TAG = "TensorFlowImageClassifier";
 
   // Only return this many results with at least this confidence.
@@ -58,7 +61,8 @@ public class TensorFlowImageClassifier implements Classifier {
 
   private TensorFlowInferenceInterface inferenceInterface;
 
-  private TensorFlowImageClassifier() {}
+  private TensorFlowImageClassifier() {
+  }
 
   /**
    * Initializes a native TensorFlow session for classifying images.
@@ -71,17 +75,16 @@ public class TensorFlowImageClassifier implements Classifier {
    * @param imageStd The assumed std of the image values.
    * @param inputName The label of the image input node.
    * @param outputName The label of the output node.
-   * @throws IOException
    */
   public static Classifier create(
-      AssetManager assetManager,
-      String modelFilename,
-      String labelFilename,
-      int inputSize,
-      int imageMean,
-      float imageStd,
-      String inputName,
-      String outputName) {
+    AssetManager assetManager,
+    String modelFilename,
+    String labelFilename,
+    int inputSize,
+    int imageMean,
+    float imageStd,
+    String inputName,
+    String outputName) {
     TensorFlowImageClassifier c = new TensorFlowImageClassifier();
     c.inputName = inputName;
     c.outputName = outputName;
@@ -99,7 +102,7 @@ public class TensorFlowImageClassifier implements Classifier {
       }
       br.close();
     } catch (IOException e) {
-      throw new RuntimeException("Problem reading label file!" , e);
+      throw new RuntimeException("Problem reading label file!", e);
     }
 
     c.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);
@@ -117,7 +120,7 @@ public class TensorFlowImageClassifier implements Classifier {
     c.imageStd = imageStd;
 
     // Pre-allocate buffers.
-    c.outputNames = new String[] {outputName};
+    c.outputNames = new String[]{outputName};
     c.intValues = new int[inputSize * inputSize];
     c.floatValues = new float[inputSize * inputSize * 3];
     c.outputs = new float[numClasses];
@@ -159,20 +162,20 @@ public class TensorFlowImageClassifier implements Classifier {
 
     // Find the best classifications.
     PriorityQueue<Recognition> pq =
-        new PriorityQueue<Recognition>(
-            3,
-            new Comparator<Recognition>() {
-              @Override
-              public int compare(Recognition lhs, Recognition rhs) {
-                // Intentionally reversed to put high confidence at the head of the queue.
-                return Float.compare(rhs.getConfidence(), lhs.getConfidence());
-              }
-            });
+      new PriorityQueue<Recognition>(
+        3,
+        new Comparator<Recognition>() {
+          @Override
+          public int compare(Recognition lhs, Recognition rhs) {
+            // Intentionally reversed to put high confidence at the head of the queue.
+            return Float.compare(rhs.getConfidence(), lhs.getConfidence());
+          }
+        });
     for (int i = 0; i < outputs.length; ++i) {
       if (outputs[i] > THRESHOLD) {
         pq.add(
-            new Recognition(
-                "" + i, labels.size() > i ? labels.get(i) : "unknown", outputs[i], null));
+          new Recognition(
+            "" + i, labels.size() > i ? labels.get(i) : "unknown", outputs[i], null));
       }
     }
     final ArrayList<Recognition> recognitions = new ArrayList<Recognition>();

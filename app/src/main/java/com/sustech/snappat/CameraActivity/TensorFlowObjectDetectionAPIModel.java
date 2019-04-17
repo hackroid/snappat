@@ -40,6 +40,7 @@ import java.util.Vector;
  * github.com/tensorflow/models/tree/master/research/object_detection
  */
 public class TensorFlowObjectDetectionAPIModel implements Classifier {
+
   private static final Logger LOGGER = new Logger();
 
   // Only return this many results.
@@ -71,10 +72,10 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
    * @param labelFilename The filepath of label file for classes.
    */
   public static Classifier create(
-      final AssetManager assetManager,
-      final String modelFilename,
-      final String labelFilename,
-      final int inputSize) throws IOException {
+    final AssetManager assetManager,
+    final String modelFilename,
+    final String labelFilename,
+    final int inputSize) throws IOException {
     final TensorFlowObjectDetectionAPIModel d = new TensorFlowObjectDetectionAPIModel();
 
     InputStream labelsInput = null;
@@ -88,7 +89,6 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
       d.labels.add(line);
     }
     br.close();
-
 
     d.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);
 
@@ -120,8 +120,8 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
     }
 
     // Pre-allocate buffers.
-    d.outputNames = new String[] {"detection_boxes", "detection_scores",
-                                  "detection_classes", "num_detections"};
+    d.outputNames = new String[]{"detection_boxes", "detection_scores",
+      "detection_classes", "num_detections"};
     d.intValues = new int[d.inputSize * d.inputSize];
     d.byteValues = new byte[d.inputSize * d.inputSize * 3];
     d.outputScores = new float[MAX_RESULTS];
@@ -131,7 +131,8 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
     return d;
   }
 
-  private TensorFlowObjectDetectionAPIModel() {}
+  private TensorFlowObjectDetectionAPIModel() {
+  }
 
   @Override
   public List<Recognition> recognizeImage(final Bitmap bitmap) {
@@ -174,26 +175,26 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
 
     // Find the best detections.
     final PriorityQueue<Recognition> pq =
-        new PriorityQueue<Recognition>(
-            1,
-            new Comparator<Recognition>() {
-              @Override
-              public int compare(final Recognition lhs, final Recognition rhs) {
-                // Intentionally reversed to put high confidence at the head of the queue.
-                return Float.compare(rhs.getConfidence(), lhs.getConfidence());
-              }
-            });
+      new PriorityQueue<Recognition>(
+        1,
+        new Comparator<Recognition>() {
+          @Override
+          public int compare(final Recognition lhs, final Recognition rhs) {
+            // Intentionally reversed to put high confidence at the head of the queue.
+            return Float.compare(rhs.getConfidence(), lhs.getConfidence());
+          }
+        });
 
     // Scale them back to the input size.
     for (int i = 0; i < outputScores.length; ++i) {
       final RectF detection =
-          new RectF(
-              outputLocations[4 * i + 1] * inputSize,
-              outputLocations[4 * i] * inputSize,
-              outputLocations[4 * i + 3] * inputSize,
-              outputLocations[4 * i + 2] * inputSize);
+        new RectF(
+          outputLocations[4 * i + 1] * inputSize,
+          outputLocations[4 * i] * inputSize,
+          outputLocations[4 * i + 3] * inputSize,
+          outputLocations[4 * i + 2] * inputSize);
       pq.add(
-          new Recognition("" + i, labels.get((int) outputClasses[i]), outputScores[i], detection));
+        new Recognition("" + i, labels.get((int) outputClasses[i]), outputScores[i], detection));
     }
 
     final ArrayList<Recognition> recognitions = new ArrayList<Recognition>();

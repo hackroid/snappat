@@ -27,6 +27,7 @@ import com.sustech.snappat.CameraActivity.Classifier.Recognition;
 import java.util.List;
 
 public class RecognitionScoreView extends View implements ResultsView {
+
   private static final float TEXT_SIZE_DIP = 24;
   private List<Recognition> results;
   private final float textSizePx;
@@ -37,8 +38,8 @@ public class RecognitionScoreView extends View implements ResultsView {
     super(context, set);
 
     textSizePx =
-        TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
+      TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
     fgPaint = new Paint();
     fgPaint.setTextSize(textSizePx);
 

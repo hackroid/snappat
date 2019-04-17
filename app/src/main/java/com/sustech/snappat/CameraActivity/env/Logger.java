@@ -24,6 +24,7 @@ import java.util.Set;
  * Wrapper for the platform log function, allows convenient message prefixing and log disabling.
  */
 public final class Logger {
+
   private static final String DEFAULT_TAG = "tensorflow";
   private static final int DEFAULT_MIN_LOG_LEVEL = Log.DEBUG;
 
@@ -60,12 +61,12 @@ public final class Logger {
   }
 
   /**
-   * Creates a Logger with a custom tag and a custom message prefix. If the message prefix
-   * is set to <pre>null</pre>, the caller's class name is used as the prefix.
+   * Creates a Logger with a custom tag and a custom message prefix. If the message prefix is set to
+   * <pre>null</pre>, the caller's class name is used as the prefix.
    *
    * @param tag identifies the source of a log message.
    * @param messagePrefix prepended to every message if non-null. If null, the name of the caller is
-   *                      being used
+   * being used
    */
   public Logger(final String tag, final String messagePrefix) {
     this.tag = tag;
@@ -99,11 +100,9 @@ public final class Logger {
   /**
    * Return caller's simple name.
    *
-   * Android getStackTrace() returns an array that looks like this:
-   *     stackTrace[0]: dalvik.system.VMStack
-   *     stackTrace[1]: java.lang.Thread
-   *     stackTrace[2]: com.google.android.apps.unveil.env.UnveilLogger
-   *     stackTrace[3]: com.google.android.apps.unveil.BaseApplication
+   * Android getStackTrace() returns an array that looks like this: stackTrace[0]:
+   * dalvik.system.VMStack stackTrace[1]: java.lang.Thread stackTrace[2]:
+   * com.google.android.apps.unveil.env.UnveilLogger stackTrace[3]: com.google.android.apps.unveil.BaseApplication
    *
    * This function returns the simple version of the first non-filtered name.
    *

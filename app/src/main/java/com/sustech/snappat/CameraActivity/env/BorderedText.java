@@ -29,6 +29,7 @@ import java.util.Vector;
  * A class that encapsulates the tedious bits of rendering legible, bordered text onto a canvas.
  */
 public class BorderedText {
+
   private final Paint interiorPaint;
   private final Paint exteriorPaint;
 
@@ -107,7 +108,7 @@ public class BorderedText {
   }
 
   public void getTextBounds(
-          final String line, final int index, final int count, final Rect lineBounds) {
+    final String line, final int index, final int count, final Rect lineBounds) {
     interiorPaint.getTextBounds(line, index, count, lineBounds);
   }
 
