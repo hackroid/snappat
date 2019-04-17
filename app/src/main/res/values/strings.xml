@@ -30,6 +30,7 @@
     <string name="request_permission">This sample needs camera permission.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
+<<<<<<< HEAD
     <!--sheepman-->
     <string name="text_hint">Hint: </string>
     <string name="myhint"> Please enter a short hint message</string>
@@ -38,4 +39,7 @@
     <string name="awardnum">1~999</string>
     <string name="user_message">Say whatever you want to tell people who solve your mystery!</string>
     <string name="btn_publish">PUBLISH THIS MYSTERY!</string>
+=======
+
+>>>>>>> master
 </resources>
