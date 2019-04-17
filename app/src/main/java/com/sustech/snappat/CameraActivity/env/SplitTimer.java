@@ -21,6 +21,7 @@ import android.os.SystemClock;
  * A simple utility timer for measuring CPU time and wall-clock splits.
  */
 public class SplitTimer {
+
   private final Logger logger;
 
   private long lastWallTime;
@@ -41,8 +42,8 @@ public class SplitTimer {
     final long currCpuTime = SystemClock.currentThreadTimeMillis();
 
     logger.i(
-        "%s: cpu=%dms wall=%dms",
-        splitName, currCpuTime - lastCpuTime, currWallTime - lastWallTime);
+      "%s: cpu=%dms wall=%dms",
+      splitName, currCpuTime - lastCpuTime, currWallTime - lastWallTime);
 
     lastWallTime = currWallTime;
     lastCpuTime = currCpuTime;

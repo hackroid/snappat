@@ -64,6 +64,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 public class CameraConnectionFragment extends Fragment {
+
   private static final Logger LOGGER = new Logger();
 
   /**
@@ -90,33 +91,35 @@ public class CameraConnectionFragment extends Fragment {
    * {@link TextureView}.
    */
   private final TextureView.SurfaceTextureListener surfaceTextureListener =
-      new TextureView.SurfaceTextureListener() {
-        @Override
-        public void onSurfaceTextureAvailable(
-                final SurfaceTexture texture, final int width, final int height) {
-          openCamera(width, height);
-        }
+    new TextureView.SurfaceTextureListener() {
+      @Override
+      public void onSurfaceTextureAvailable(
+        final SurfaceTexture texture, final int width, final int height) {
+        openCamera(width, height);
+      }
 
-        @Override
-        public void onSurfaceTextureSizeChanged(
-                final SurfaceTexture texture, final int width, final int height) {
-          configureTransform(width, height);
-        }
+      @Override
+      public void onSurfaceTextureSizeChanged(
+        final SurfaceTexture texture, final int width, final int height) {
+        configureTransform(width, height);
+      }
 
-        @Override
-        public boolean onSurfaceTextureDestroyed(final SurfaceTexture texture) {
-          return true;
-        }
+      @Override
+      public boolean onSurfaceTextureDestroyed(final SurfaceTexture texture) {
+        return true;
+      }
 
-        @Override
-        public void onSurfaceTextureUpdated(final SurfaceTexture texture) {}
-      };
+      @Override
+      public void onSurfaceTextureUpdated(final SurfaceTexture texture) {
+      }
+    };
 
   /**
-   * Callback for Activities to use to initialize their data once the
-   * selected preview size is known.
+   * Callback for Activities to use to initialize their data once the selected preview size is
+   * known.
    */
   public interface ConnectionCallback {
+
     void onPreviewSizeChosen(Size size, int cameraRotation);
   }
 
@@ -151,37 +154,37 @@ public class CameraConnectionFragment extends Fragment {
   private Size previewSize;
 
   /**
-   * {@link android.hardware.camera2.CameraDevice.StateCallback}
-   * is called when {@link CameraDevice} changes its state.
+   * {@link android.hardware.camera2.CameraDevice.StateCallback} is called when {@link CameraDevice}
+   * changes its state.
    */
   private final CameraDevice.StateCallback stateCallback =
-      new CameraDevice.StateCallback() {
-        @Override
-        public void onOpened(final CameraDevice cd) {
-          // This method is called when the camera is opened.  We start camera preview here.
-          cameraOpenCloseLock.release();
-          cameraDevice = cd;
-          createCameraPreviewSession();
-        }
+    new CameraDevice.StateCallback() {
+      @Override
+      public void onOpened(final CameraDevice cd) {
+        // This method is called when the camera is opened.  We start camera preview here.
+        cameraOpenCloseLock.release();
+        cameraDevice = cd;
+        createCameraPreviewSession();
+      }
 
-        @Override
-        public void onDisconnected(final CameraDevice cd) {
-          cameraOpenCloseLock.release();
-          cd.close();
-          cameraDevice = null;
-        }
+      @Override
+      public void onDisconnected(final CameraDevice cd) {
+        cameraOpenCloseLock.release();
+        cd.close();
+        cameraDevice = null;
+      }
 
-        @Override
-        public void onError(final CameraDevice cd, final int error) {
-          cameraOpenCloseLock.release();
-          cd.close();
-          cameraDevice = null;
-          final Activity activity = getActivity();
-          if (null != activity) {
-            activity.finish();
-          }
+      @Override
+      public void onError(final CameraDevice cd, final int error) {
+        cameraOpenCloseLock.release();
+        cd.close();
+        cameraDevice = null;
+        final Activity activity = getActivity();
+        if (null != activity) {
+          activity.finish();
         }
-      };
+      }
+    };
 
   /**
    * An additional thread for running tasks that shouldn't block the UI.
@@ -218,7 +221,9 @@ public class CameraConnectionFragment extends Fragment {
    */
   private final OnImageAvailableListener imageListener;
 
-  /** The input size in pixels desired by TensorFlow (width and height of a square bitmap). */
+  /**
+   * The input size in pixels desired by TensorFlow (width and height of a square bitmap).
+   */
   private final Size inputSize;
 
   /**
@@ -230,10 +235,10 @@ public class CameraConnectionFragment extends Fragment {
   private final ConnectionCallback cameraConnectionCallback;
 
   private CameraConnectionFragment(
-      final ConnectionCallback connectionCallback,
-      final OnImageAvailableListener imageListener,
-      final int layout,
-      final Size inputSize) {
+    final ConnectionCallback connectionCallback,
+    final OnImageAvailableListener imageListener,
+    final int layout,
+    final Size inputSize) {
     this.cameraConnectionCallback = connectionCallback;
     this.imageListener = imageListener;
     this.layout = layout;
@@ -249,12 +254,12 @@ public class CameraConnectionFragment extends Fragment {
     final Activity activity = getActivity();
     if (activity != null) {
       activity.runOnUiThread(
-          new Runnable() {
-            @Override
-            public void run() {
-              Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
-            }
-          });
+        new Runnable() {
+          @Override
+          public void run() {
+            Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
+          }
+        });
     }
   }
 
@@ -309,16 +314,16 @@ public class CameraConnectionFragment extends Fragment {
   }
 
   public static CameraConnectionFragment newInstance(
-      final ConnectionCallback callback,
-      final OnImageAvailableListener imageListener,
-      final int layout,
-      final Size inputSize) {
+    final ConnectionCallback callback,
+    final OnImageAvailableListener imageListener,
+    final int layout,
+    final Size inputSize) {
     return new CameraConnectionFragment(callback, imageListener, layout, inputSize);
   }
 
   @Override
   public View onCreateView(
-          final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+    final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
     return inflater.inflate(layout, container, false);
   }
 
@@ -369,13 +374,13 @@ public class CameraConnectionFragment extends Fragment {
       final CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
 
       final StreamConfigurationMap map =
-          characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+        characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
 
       // For still image captures, we use the largest available size.
       final Size largest =
-          Collections.max(
-              Arrays.asList(map.getOutputSizes(ImageFormat.YUV_420_888)),
-              new CompareSizesByArea());
+        Collections.max(
+          Arrays.asList(map.getOutputSizes(ImageFormat.YUV_420_888)),
+          new CompareSizesByArea());
 
       sensorOrientation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
 
@@ -383,9 +388,9 @@ public class CameraConnectionFragment extends Fragment {
       // bus' bandwidth limitation, resulting in gorgeous previews but the storage of
       // garbage capture data.
       previewSize =
-          chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
-              inputSize.getWidth(),
-              inputSize.getHeight());
+        chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
+          inputSize.getWidth(),
+          inputSize.getHeight());
 
       // We fit the aspect ratio of TextureView to the size of preview we picked.
       final int orientation = getResources().getConfiguration().orientation;
@@ -402,7 +407,7 @@ public class CameraConnectionFragment extends Fragment {
       // TODO(andrewharp): abstract ErrorDialog/RuntimeException handling out into new method and
       // reuse throughout app.
       ErrorDialog.newInstance(getString(R.string.camera_error))
-          .show(getChildFragmentManager(), FRAGMENT_DIALOG);
+        .show(getChildFragmentManager(), FRAGMENT_DIALOG);
       throw new RuntimeException(getString(R.string.camera_error));
     }
 
@@ -478,19 +483,21 @@ public class CameraConnectionFragment extends Fragment {
   }
 
   private final CameraCaptureSession.CaptureCallback captureCallback =
-      new CameraCaptureSession.CaptureCallback() {
-        @Override
-        public void onCaptureProgressed(
-            final CameraCaptureSession session,
-            final CaptureRequest request,
-            final CaptureResult partialResult) {}
+    new CameraCaptureSession.CaptureCallback() {
+      @Override
+      public void onCaptureProgressed(
+        final CameraCaptureSession session,
+        final CaptureRequest request,
+        final CaptureResult partialResult) {
+      }
 
-        @Override
-        public void onCaptureCompleted(
-            final CameraCaptureSession session,
-            final CaptureRequest request,
-            final TotalCaptureResult result) {}
-      };
+      @Override
+      public void onCaptureCompleted(
+        final CameraCaptureSession session,
+        final CaptureRequest request,
+        final TotalCaptureResult result) {
+      }
+    };
 
   /**
    * Creates a new {@link CameraCaptureSession} for camera preview.
@@ -514,61 +521,61 @@ public class CameraConnectionFragment extends Fragment {
 
       // Create the reader for the preview frames.
       previewReader =
-          ImageReader.newInstance(
-              previewSize.getWidth(), previewSize.getHeight(), ImageFormat.YUV_420_888, 2);
+        ImageReader.newInstance(
+          previewSize.getWidth(), previewSize.getHeight(), ImageFormat.YUV_420_888, 2);
 
       previewReader.setOnImageAvailableListener(imageListener, backgroundHandler);
       previewRequestBuilder.addTarget(previewReader.getSurface());
 
       // Here, we create a CameraCaptureSession for camera preview.
       cameraDevice.createCaptureSession(
-          Arrays.asList(surface, previewReader.getSurface()),
-          new CameraCaptureSession.StateCallback() {
+        Arrays.asList(surface, previewReader.getSurface()),
+        new CameraCaptureSession.StateCallback() {
 
-            @Override
-            public void onConfigured(final CameraCaptureSession cameraCaptureSession) {
-              // The camera is already closed
-              if (null == cameraDevice) {
-                return;
-              }
-
-              // When the session is ready, we start displaying the preview.
-              captureSession = cameraCaptureSession;
-              try {
-                // Auto focus should be continuous for camera preview.
-                previewRequestBuilder.set(
-                    CaptureRequest.CONTROL_AF_MODE,
-                    CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-                // Flash is automatically enabled when necessary.
-                previewRequestBuilder.set(
-                    CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
-
-                // Finally, we start displaying the camera preview.
-                previewRequest = previewRequestBuilder.build();
-                captureSession.setRepeatingRequest(
-                    previewRequest, captureCallback, backgroundHandler);
-              } catch (final CameraAccessException e) {
-                LOGGER.e(e, "Exception!");
-              }
+          @Override
+          public void onConfigured(final CameraCaptureSession cameraCaptureSession) {
+            // The camera is already closed
+            if (null == cameraDevice) {
+              return;
             }
 
-            @Override
-            public void onConfigureFailed(final CameraCaptureSession cameraCaptureSession) {
-              showToast("Failed");
+            // When the session is ready, we start displaying the preview.
+            captureSession = cameraCaptureSession;
+            try {
+              // Auto focus should be continuous for camera preview.
+              previewRequestBuilder.set(
+                CaptureRequest.CONTROL_AF_MODE,
+                CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
+              // Flash is automatically enabled when necessary.
+              previewRequestBuilder.set(
+                CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
+
+              // Finally, we start displaying the camera preview.
+              previewRequest = previewRequestBuilder.build();
+              captureSession.setRepeatingRequest(
+                previewRequest, captureCallback, backgroundHandler);
+            } catch (final CameraAccessException e) {
+              LOGGER.e(e, "Exception!");
             }
-          },
-          null);
+          }
+
+          @Override
+          public void onConfigureFailed(final CameraCaptureSession cameraCaptureSession) {
+            showToast("Failed");
+          }
+        },
+        null);
     } catch (final CameraAccessException e) {
       LOGGER.e(e, "Exception!");
     }
   }
 
   /**
-   * Configures the necessary {@link android.graphics.Matrix} transformation to `mTextureView`.
-   * This method should be called after the camera preview size is determined in
-   * setUpCameraOutputs and also the size of `mTextureView` is fixed.
+   * Configures the necessary {@link android.graphics.Matrix} transformation to `mTextureView`. This
+   * method should be called after the camera preview size is determined in setUpCameraOutputs and
+   * also the size of `mTextureView` is fixed.
    *
-   * @param viewWidth  The width of `mTextureView`
+   * @param viewWidth The width of `mTextureView`
    * @param viewHeight The height of `mTextureView`
    */
   private void configureTransform(final int viewWidth, final int viewHeight) {
@@ -586,9 +593,9 @@ public class CameraConnectionFragment extends Fragment {
       bufferRect.offset(centerX - bufferRect.centerX(), centerY - bufferRect.centerY());
       matrix.setRectToRect(viewRect, bufferRect, Matrix.ScaleToFit.FILL);
       final float scale =
-          Math.max(
-              (float) viewHeight / previewSize.getHeight(),
-              (float) viewWidth / previewSize.getWidth());
+        Math.max(
+          (float) viewHeight / previewSize.getHeight(),
+          (float) viewWidth / previewSize.getWidth());
       matrix.postScale(scale, scale, centerX, centerY);
       matrix.postRotate(90 * (rotation - 2), centerX, centerY);
     } else if (Surface.ROTATION_180 == rotation) {
@@ -601,11 +608,12 @@ public class CameraConnectionFragment extends Fragment {
    * Compares two {@code Size}s based on their areas.
    */
   static class CompareSizesByArea implements Comparator<Size> {
+
     @Override
     public int compare(final Size lhs, final Size rhs) {
       // We cast here to ensure the multiplications won't overflow
       return Long.signum(
-          (long) lhs.getWidth() * lhs.getHeight() - (long) rhs.getWidth() * rhs.getHeight());
+        (long) lhs.getWidth() * lhs.getHeight() - (long) rhs.getWidth() * rhs.getHeight());
     }
   }
 
@@ -613,6 +621,7 @@ public class CameraConnectionFragment extends Fragment {
    * Shows an error message dialog.
    */
   public static class ErrorDialog extends DialogFragment {
+
     private static final String ARG_MESSAGE = "message";
 
     public static ErrorDialog newInstance(final String message) {
@@ -627,16 +636,16 @@ public class CameraConnectionFragment extends Fragment {
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
       final Activity activity = getActivity();
       return new AlertDialog.Builder(activity)
-          .setMessage(getArguments().getString(ARG_MESSAGE))
-          .setPositiveButton(
-              android.R.string.ok,
-              new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(final DialogInterface dialogInterface, final int i) {
-                  activity.finish();
-                }
-              })
-          .create();
+        .setMessage(getArguments().getString(ARG_MESSAGE))
+        .setPositiveButton(
+          android.R.string.ok,
+          new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialogInterface, final int i) {
+              activity.finish();
+            }
+          })
+        .create();
     }
   }
 }

@@ -41,6 +41,7 @@ import java.util.StringTokenizer;
  * Deep Neural Networks (https://arxiv.org/abs/1312.2249).
  */
 public class TensorFlowMultiBoxDetector implements Classifier {
+
   private static final Logger LOGGER = new Logger();
 
   // Only return this many results.
@@ -79,14 +80,14 @@ public class TensorFlowMultiBoxDetector implements Classifier {
    * @param outputName The label of the output node.
    */
   public static Classifier create(
-      final AssetManager assetManager,
-      final String modelFilename,
-      final String locationFilename,
-      final int imageMean,
-      final float imageStd,
-      final String inputName,
-      final String outputLocationsName,
-      final String outputScoresName) {
+    final AssetManager assetManager,
+    final String modelFilename,
+    final String locationFilename,
+    final int imageMean,
+    final float imageStd,
+    final String inputName,
+    final String outputLocationsName,
+    final String outputScoresName) {
     final TensorFlowMultiBoxDetector d = new TensorFlowMultiBoxDetector();
 
     d.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);
@@ -122,7 +123,7 @@ public class TensorFlowMultiBoxDetector implements Classifier {
     }
 
     // Pre-allocate buffers.
-    d.outputNames = new String[] {outputLocationsName, outputScoresName};
+    d.outputNames = new String[]{outputLocationsName, outputScoresName};
     d.intValues = new int[d.inputSize * d.inputSize];
     d.floatValues = new float[d.inputSize * d.inputSize * 3];
     d.outputScores = new float[d.numLocations];
@@ -131,11 +132,12 @@ public class TensorFlowMultiBoxDetector implements Classifier {
     return d;
   }
 
-  private TensorFlowMultiBoxDetector() {}
+  private TensorFlowMultiBoxDetector() {
+  }
 
   private void loadCoderOptions(
-          final AssetManager assetManager, final String locationFilename, final float[] boxPriors)
-      throws IOException {
+    final AssetManager assetManager, final String locationFilename, final float[] boxPriors)
+    throws IOException {
     // Try to be intelligent about opening from assets or sdcard depending on prefix.
     final String assetPrefix = "file:///android_asset/";
     InputStream is;
@@ -166,7 +168,7 @@ public class TensorFlowMultiBoxDetector implements Classifier {
     }
     if (priorIndex != boxPriors.length) {
       throw new RuntimeException(
-          "BoxPrior length mismatch: " + priorIndex + " vs " + boxPriors.length);
+        "BoxPrior length mismatch: " + priorIndex + " vs " + boxPriors.length);
     }
   }
 
@@ -241,24 +243,24 @@ public class TensorFlowMultiBoxDetector implements Classifier {
 
     // Find the best detections.
     final PriorityQueue<Recognition> pq =
-        new PriorityQueue<Recognition>(
-            1,
-            new Comparator<Recognition>() {
-              @Override
-              public int compare(final Recognition lhs, final Recognition rhs) {
-                // Intentionally reversed to put high confidence at the head of the queue.
-                return Float.compare(rhs.getConfidence(), lhs.getConfidence());
-              }
-            });
+      new PriorityQueue<Recognition>(
+        1,
+        new Comparator<Recognition>() {
+          @Override
+          public int compare(final Recognition lhs, final Recognition rhs) {
+            // Intentionally reversed to put high confidence at the head of the queue.
+            return Float.compare(rhs.getConfidence(), lhs.getConfidence());
+          }
+        });
 
     // Scale them back to the input size.
     for (int i = 0; i < outputScores.length; ++i) {
       final RectF detection =
-          new RectF(
-              outputLocations[4 * i] * inputSize,
-              outputLocations[4 * i + 1] * inputSize,
-              outputLocations[4 * i + 2] * inputSize,
-              outputLocations[4 * i + 3] * inputSize);
+        new RectF(
+          outputLocations[4 * i] * inputSize,
+          outputLocations[4 * i + 1] * inputSize,
+          outputLocations[4 * i + 2] * inputSize,
+          outputLocations[4 * i + 3] * inputSize);
       pq.add(new Recognition("" + i, null, outputScores[i], detection));
     }
 

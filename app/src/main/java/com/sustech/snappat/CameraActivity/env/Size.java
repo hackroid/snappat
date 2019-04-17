@@ -46,6 +46,7 @@ public class Size implements Comparable<Size>, Serializable {
 
   /**
    * Rotate a size by the given number of degrees.
+   *
    * @param size Size to rotate.
    * @param rotation Degrees {0, 90, 180, 270} to rotate the size.
    * @return Rotated size.
