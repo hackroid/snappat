@@ -39,7 +39,7 @@ public class PublishActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                toast("您输入的数据为："+s.toString());
+                toast("您输入的数据为："+s.toString());
             }
 
             @Override

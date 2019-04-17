@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-<<<<<<< HEAD
 
     mTextMessage = (TextView) findViewById(R.id.message);
     BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -87,31 +86,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(pub_intent);
         }
     });
-=======
-
-    mTextMessage = (TextView) findViewById(R.id.message);
-    BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-    navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-//        Button used for test
-    ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.container);
-    final Context context = this;
-    Button camera_button = new Button(getBaseContext());
-    camera_button.setText("CameraButton");
-    camera_button.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        SharedPreferences sharedPreferences = getBaseContext()
-          .getSharedPreferences(getString(R.string.app_preference), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(getString(R.string.pref_login), false);
-        editor.commit();
-        Intent camera_intent = new Intent(context, DetectorActivity.class);
-        startActivity(camera_intent);
-      }
-    });
-    constraintLayout.addView(camera_button);
->>>>>>> master
 
     SharedPreferences sharedPreferences = getBaseContext()
       .getSharedPreferences(getString(R.string.app_preference), Context.MODE_PRIVATE);
