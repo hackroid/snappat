@@ -111,7 +111,59 @@ Back-end is the infrastructure of the application. We use PHP as back-end server
 
 ### Features Testing Scenarios
 
+#### Login 
+* postive:
+  login correctly, change activity and show login successfully
+* negative
+  If phone number is not in correct format:
+  	Toast show 'wrong phone number' 
+  If verify code is not in correct format:
+  	Toast show 'wrong phone number' 
 
+#### Object Recognition
+This part immports lots of google's code, and there are also some places to improve and finish. This part will test later.
+
+#### Server
+
+##### Login
+
+* Positive: login correctly, return user info
+* Negative: wrong phone or wrong verity code, return failed
+
+##### getMysteryList
+
+* Positive: with right cookie, it can return your mystery list.
+* Negative: wrong cookie or no cookie, it will return failed.
+
+##### getHistroyList
+
+* Positive:with right cookie, it can return your history list. 
+* Negative:wrong cookie or no cookie, it will return failed.
+
+##### getMessageList
+
+* Positive:with right cookie, it can return your message list. 
+* Negative:wrong cookie or no cookie, it will return failed.
+
+##### getUserInfoById
+
+* Positive:with user_id and right cookie, it can return user info.
+* Negative:wrong cookie or no cookie or user_id doesn't match, it will return failed.
+
+##### addMystery
+
+* Positive:with right cookie and mystery infomation, it will add new mystery and return success.
+* Negative: lacking of mystery info or unexcepted cookie, it will return failed.
+
+##### updateMystery
+
+* Positive: with right cookie and mystery decoder,favor,comment,view info, it will update and return success.
+* Negative: lacking of mystery info  or unexcepted cookie, it will return failed.
+
+##### crackMystery
+
+* Positive: with right cookie and mystery id, it will add crack history and update your coins, return success.
+* Negative: lacking of mystery info or unexcepted cookie, it will return failed.
 
 ### Features Implementation
 
