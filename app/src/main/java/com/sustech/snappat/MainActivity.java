@@ -15,9 +15,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.sustech.snappat.CameraActivity.CameraActivity;
 import com.sustech.snappat.CameraActivity.DetectorActivity;
-import com.sustech.snappat.LoginActivity.LoginActivity;
+import com.sustech.snappat.LoginActivityUITest.LoginActivity;
+
+/**
+ * Class {@code MainActivity} main activity of this app.
+ *
+ * <p>Center of all activities and features.</p>
+ * <p>extends {@code AppCompatActivity}, over write some functions of {@link AppCompatActivity}</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 1.0
+ */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     }
   };
 
+  /**
+   * {@inheritDoc}
+   * */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

@@ -1,4 +1,4 @@
-package com.sustech.snappat.LoginActivity;
+package com.sustech.snappat.LoginActivityUITest;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,14 +6,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sustech.snappat.CameraActivity.CameraActivity;
 import com.sustech.snappat.Data.UserInfo;
 import com.sustech.snappat.R;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+/**
+ * Class {@code LoginActivity} Login Activity of this app.
+ *
+ * <p>Login activity of this app. Implements send verify code, receive verify code result,
+ * react with verify code result, activity jump and link</p>
+ * <p>extends {@code AppCompatActivity}, over write some functions of {@link AppCompatActivity}</p>
+ * <p>implement {@code View.OnClickListener}, over write some functions of {@link View.OnClickListener}</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 1.0
+ */
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -28,6 +38,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
   private Boolean isSend = false;
   private int Counter = 0;
 
+  /**
+   * execute when create this activity
+   *
+   * <p>implement input and show phone number, verify code. implement send verify code</p>
+   *
+   * {@inheritDoc}
+   * */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -52,6 +69,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
       info, Toast.LENGTH_LONG).show();
   }
 
+  /**
+   * Get user information.
+   *
+   * <p>Get user information with id, user name, phone number from server.</p>
+   *
+   * @return {@code UserInfo}
+   * @since 1.0
+   * */
   public UserInfo getUserInfo() {
     return new UserInfo(123L, "12313", 12313222);
   }
@@ -68,6 +93,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
   }
 
+  /**
+   * Called by click event
+   *
+   * <p>React click event with different situation, include: had not sent verify code, wrong verify
+   * and login successfully</p>
+   *
+   * {@inheritDoc}
+   * */
   @Override
   public void onClick(View v) {
     switch (v.getId()) {
@@ -106,4 +139,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         break;
     }
   }
+
+
 }
