@@ -115,11 +115,31 @@ Back-end is the infrastructure of the application. We use PHP as back-end server
 
 ### Features Implementation
 
+#### Feature: Login
+
+![Login](https://i.loli.net/2019/04/20/5cbb196f74151.png)
+
+#### Feature: Object Recognition
+
+![Recognition](https://i.loli.net/2019/04/20/5cbb1a39b62d8.png)
+
+#### Feature: Back-end
+
 
 
 ### Program Debugging and Cleanliness
 
+#### Google Code Style
 
+> com.sustech.snappet.utils is not a source directory, and we currently haven't used it.
+>
+> So it won't be covered by the code style check. 
+
+All Java files passed the Google Code Style check.
+
+#### FindBugs
+
+#### PMD
 
 ### Javadoc
 
@@ -133,10 +153,14 @@ Back-end is the infrastructure of the application. We use PHP as back-end server
 
 > The plan for the following development
 
-|      |      |      |
-| ---- | ---- | ---- |
-|      |      |      |
-|      |      |      |
+| Week No. | Plan                                |
+| -------- | ----------------------------------- |
+| Week 10  | Take photos                         |
+| Week 11  | Set personal information            |
+| Week 12  | Leave comments                      |
+| Week 13  | Collections & Likes                 |
+| Week 14  | Achievement system & Ranking system |
+| Week 15  | Follow users &  Message box         |
 
 ## Code Review Group
 

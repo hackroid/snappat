@@ -631,8 +631,8 @@ public class ObjectTracker {
   }
 
   /** ********************* NATIVE CODE ************************************ */
-  // Todo: Missing a Javadoc comment
-  /** This will contain an opaque pointer to the native ObjectTracker */
+
+  /** This will contain an opaque pointer to the native ObjectTracker. */
   private long nativeObjectTracker;
 
   private native void initNative(int imageWidth, int imageHeight, boolean alwaysTrack);
