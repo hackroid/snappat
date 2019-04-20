@@ -1,4 +1,4 @@
-package com.sustech.snappat.CameraActivity;
+package com.sustech.snappat.cameraactivity;
 
 /*
  * Copyright 2017 The TensorFlow Authors. All Rights Reserved.
@@ -32,8 +32,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sustech.snappat.R;
-import com.sustech.snappat.CameraActivity.env.ImageUtils;
-import com.sustech.snappat.CameraActivity.env.Logger;
+import com.sustech.snappat.cameraactivity.env.ImageUtils;
+import com.sustech.snappat.cameraactivity.env.Logger;
 
 import java.io.IOException;
 import java.util.List;
@@ -50,8 +50,9 @@ public class LegacyCameraConnectionFragment extends Fragment {
    */
   private int layout;
 
+  // Todo: Missing a Javadoc comment
   public LegacyCameraConnectionFragment(
-    final Camera.PreviewCallback imageListener, final int layout, final Size desiredSize) {
+      final Camera.PreviewCallback imageListener, final int layout, final Size desiredSize) {
     this.imageListener = imageListener;
     this.layout = layout;
     this.desiredSize = desiredSize;
@@ -74,61 +75,61 @@ public class LegacyCameraConnectionFragment extends Fragment {
    * {@link TextureView}.
    */
   private final TextureView.SurfaceTextureListener surfaceTextureListener =
-    new TextureView.SurfaceTextureListener() {
-      @Override
-      public void onSurfaceTextureAvailable(
-        final SurfaceTexture texture, final int width, final int height) {
+      new TextureView.SurfaceTextureListener() {
+        @Override
+        public void onSurfaceTextureAvailable(
+            final SurfaceTexture texture, final int width, final int height) {
 
-        int index = getCameraId();
-        camera = Camera.open(index);
+          int index = getCameraId();
+          camera = Camera.open(index);
 
-        try {
-          Camera.Parameters parameters = camera.getParameters();
-          List<String> focusModes = parameters.getSupportedFocusModes();
-          if (focusModes != null
-            && focusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
-            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+          try {
+            Camera.Parameters parameters = camera.getParameters();
+            List<String> focusModes = parameters.getSupportedFocusModes();
+            if (focusModes != null
+                && focusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+              parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+            }
+            List<Camera.Size> cameraSizes = parameters.getSupportedPreviewSizes();
+            Size[] sizes = new Size[cameraSizes.size()];
+            int i = 0;
+            for (Camera.Size size : cameraSizes) {
+              sizes[i++] = new Size(size.width, size.height);
+            }
+            Size previewSize =
+                CameraConnectionFragment.chooseOptimalSize(
+                    sizes, desiredSize.getWidth(), desiredSize.getHeight());
+            parameters.setPreviewSize(previewSize.getWidth(), previewSize.getHeight());
+            camera.setDisplayOrientation(90);
+            camera.setParameters(parameters);
+            camera.setPreviewTexture(texture);
+          } catch (IOException exception) {
+            camera.release();
           }
-          List<Camera.Size> cameraSizes = parameters.getSupportedPreviewSizes();
-          Size[] sizes = new Size[cameraSizes.size()];
-          int i = 0;
-          for (Camera.Size size : cameraSizes) {
-            sizes[i++] = new Size(size.width, size.height);
-          }
-          Size previewSize =
-            CameraConnectionFragment.chooseOptimalSize(
-              sizes, desiredSize.getWidth(), desiredSize.getHeight());
-          parameters.setPreviewSize(previewSize.getWidth(), previewSize.getHeight());
-          camera.setDisplayOrientation(90);
-          camera.setParameters(parameters);
-          camera.setPreviewTexture(texture);
-        } catch (IOException exception) {
-          camera.release();
+
+          camera.setPreviewCallbackWithBuffer(imageListener);
+          Camera.Size s = camera.getParameters().getPreviewSize();
+          camera.addCallbackBuffer(new byte[ImageUtils.getYuvByteSize(s.height, s.width)]);
+
+          textureView.setAspectRatio(s.height, s.width);
+
+          camera.startPreview();
         }
 
-        camera.setPreviewCallbackWithBuffer(imageListener);
-        Camera.Size s = camera.getParameters().getPreviewSize();
-        camera.addCallbackBuffer(new byte[ImageUtils.getYUVByteSize(s.height, s.width)]);
+        @Override
+        public void onSurfaceTextureSizeChanged(
+            final SurfaceTexture texture, final int width, final int height) {
+        }
 
-        textureView.setAspectRatio(s.height, s.width);
+        @Override
+        public boolean onSurfaceTextureDestroyed(final SurfaceTexture texture) {
+          return true;
+        }
 
-        camera.startPreview();
-      }
-
-      @Override
-      public void onSurfaceTextureSizeChanged(
-        final SurfaceTexture texture, final int width, final int height) {
-      }
-
-      @Override
-      public boolean onSurfaceTextureDestroyed(final SurfaceTexture texture) {
-        return true;
-      }
-
-      @Override
-      public void onSurfaceTextureUpdated(final SurfaceTexture texture) {
-      }
-    };
+        @Override
+        public void onSurfaceTextureUpdated(final SurfaceTexture texture) {
+        }
+      };
 
   /**
    * An {@link AutoFitTextureView} for camera preview.
@@ -142,7 +143,7 @@ public class LegacyCameraConnectionFragment extends Fragment {
 
   @Override
   public View onCreateView(
-    final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+      final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
     return inflater.inflate(layout, container, false);
   }
 
@@ -196,7 +197,7 @@ public class LegacyCameraConnectionFragment extends Fragment {
       backgroundThread.join();
       backgroundThread = null;
     } catch (final InterruptedException e) {
-      LOGGER.e(e, "Exception!");
+      LOGGER.ee(e, "Exception!");
     }
   }
 

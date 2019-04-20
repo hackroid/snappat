@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.sustech.snappat.CameraActivity;
+package com.sustech.snappat.cameraactivity;
 
 import android.graphics.Bitmap;
 import android.graphics.RectF;
@@ -52,8 +52,9 @@ public interface Classifier {
      */
     private RectF location;
 
+    // Todo: Missing a Javadoc comment
     public Recognition(
-      final String id, final String title, final Float confidence, final RectF location) {
+        final String id, final String title, final Float confidence, final RectF location) {
       this.id = id;
       this.title = title;
       this.confidence = confidence;

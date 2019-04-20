@@ -13,9 +13,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.sustech.snappat.CameraActivity;
+package com.sustech.snappat.cameraactivity;
 
-import com.sustech.snappat.CameraActivity.Classifier.Recognition;
+import com.sustech.snappat.cameraactivity.Classifier.Recognition;
 
 import java.util.List;
 

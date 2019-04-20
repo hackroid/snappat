@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.sustech.snappat.CameraActivity.tracking;
+package com.sustech.snappat.cameraactivity.tracking;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -23,8 +23,8 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 
-import com.sustech.snappat.CameraActivity.env.Logger;
-import com.sustech.snappat.CameraActivity.env.Size;
+import com.sustech.snappat.cameraactivity.env.Logger;
+import com.sustech.snappat.cameraactivity.env.Size;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,13 +40,13 @@ import javax.microedition.khronos.opengles.GL10;
  * It provides a simplified Java interface to the analogous native object defined by
  * jni/client_vision/tracking/object_tracker.*.
  *
- * Currently, the ObjectTracker is a singleton due to native code restrictions, and so must
+ * <p>Currently, the ObjectTracker is a singleton due to native code restrictions, and so must
  * be allocated by ObjectTracker.getInstance(). In addition, release() should be called
  * as soon as the ObjectTracker is no longer needed, and before a new one is created.
  *
- * nextFrame() should be called as new frames become available, preferably as often as possible.
+ * <p>nextFrame() should be called as new frames become available, preferably as often as possible.
  *
- * After allocation, new TrackedObjects may be instantiated via trackObject(). TrackedObjects
+ * <p>After allocation, new TrackedObjects may be instantiated via trackObject(). TrackedObjects
  * are associated with the ObjectTracker that created them, and are only valid while that
  * ObjectTracker still exists.
  */
@@ -60,7 +60,7 @@ public class ObjectTracker {
       System.loadLibrary("tensorflow_demo");
       libraryFound = true;
     } catch (UnsatisfiedLinkError e) {
-      LOGGER.e("libtensorflow_demo.so not found, tracking unavailable");
+      LOGGER.ee("libtensorflow_demo.so not found, tracking unavailable");
     }
   }
 
@@ -116,27 +116,29 @@ public class ObjectTracker {
    * FrameChange.
    */
   public static class Keypoint {
-    public final float x;
-    public final float y;
+    public final float xxFloat;
+    public final float yyFloat;
     public final float score;
     public final int type;
 
-    public Keypoint(final float x, final float y) {
-      this.x = x;
-      this.y = y;
+    // Todo: Missing a Javadoc comment
+    public Keypoint(final float xxFloat, final float yyFloat) {
+      this.xxFloat = xxFloat;
+      this.yyFloat = yyFloat;
       this.score = 0;
       this.type = -1;
     }
 
-    public Keypoint(final float x, final float y, final float score, final int type) {
-      this.x = x;
-      this.y = y;
+    // Todo: Missing a Javadoc comment
+    public Keypoint(final float xxFloat, final float yyFloat, final float score, final int type) {
+      this.xxFloat = xxFloat;
+      this.yyFloat = yyFloat;
       this.score = score;
       this.type = type;
     }
 
     Keypoint delta(final Keypoint other) {
-      return new Keypoint(this.x - other.x, this.y - other.y);
+      return new Keypoint(this.xxFloat - other.xxFloat, this.yyFloat - other.yyFloat);
     }
   }
 
@@ -151,6 +153,7 @@ public class ObjectTracker {
     Keypoint pointDelta;
     private final boolean wasFound;
 
+    // Todo: Missing a Javadoc comment
     public PointChange(final float x1, final float y1,
                        final float x2, final float y2,
                        final float score, final int type,
@@ -161,6 +164,7 @@ public class ObjectTracker {
       keypointB = new Keypoint(x2, y2);
     }
 
+    // Todo: Missing a Javadoc comment
     public Keypoint getDelta() {
       if (pointDelta == null) {
         pointDelta = keypointB.delta(keypointA);
@@ -178,6 +182,7 @@ public class ObjectTracker {
     private final float minScore;
     private final float maxScore;
 
+    // Todo: Missing a Javadoc comment
     public FrameChange(final float[] framePoints) {
       float minScore = 100.0f;
       float maxScore = -100.0f;
@@ -206,10 +211,11 @@ public class ObjectTracker {
     }
   }
 
+  // Todo: Missing a Javadoc comment
   public static synchronized ObjectTracker getInstance(
       final int frameWidth, final int frameHeight, final int rowStride, final boolean alwaysTrack) {
     if (!libraryFound) {
-      LOGGER.e(
+      LOGGER.ee(
           "Native object tracking support not found. "
               + "See tensorflow/examples/android/README.md for details.");
       return null;
@@ -225,6 +231,7 @@ public class ObjectTracker {
     return instance;
   }
 
+  // Todo: Missing a Javadoc comment
   public static synchronized void clearInstance() {
     if (instance != null) {
       instance.release();
@@ -244,8 +251,7 @@ public class ObjectTracker {
     debugHistory = new Vector<PointF>(MAX_DEBUG_HISTORY_SIZE);
 
     downsampledFrame =
-        new byte
-            [(frameWidth + DOWNSAMPLE_FACTOR - 1)
+        new byte[(frameWidth + DOWNSAMPLE_FACTOR - 1)
                 / DOWNSAMPLE_FACTOR
                 * (frameWidth + DOWNSAMPLE_FACTOR - 1)
                 / DOWNSAMPLE_FACTOR];
@@ -261,6 +267,7 @@ public class ObjectTracker {
 
   private long downsampledTimestamp;
 
+  // Todo: Missing a Javadoc comment
   @SuppressWarnings("unused")
   public synchronized void drawOverlay(final GL10 gl,
       final Size cameraViewSize, final Matrix matrix) {
@@ -270,6 +277,7 @@ public class ObjectTracker {
     drawNative(cameraViewSize.width, cameraViewSize.height, matrixValues);
   }
 
+  // Todo: Missing a Javadoc comment
   public synchronized void nextFrame(
       final byte[] frameData, final byte[] uvData,
       final long timestamp, final float[] transformationMatrix,
@@ -299,6 +307,7 @@ public class ObjectTracker {
     lastTimestamp = timestamp;
   }
 
+  // Todo: Missing a Javadoc comment
   public synchronized void release() {
     releaseMemoryNative();
     synchronized (ObjectTracker.class) {
@@ -365,8 +374,8 @@ public class ObjectTracker {
         final int color = 0xFF000000 | (r << 16) | b;
         p.setColor(color);
 
-        final float[] screenPoints = {keypoint.keypointA.x, keypoint.keypointA.y,
-                                      keypoint.keypointB.x, keypoint.keypointB.y};
+        final float[] screenPoints = {keypoint.keypointA.xxFloat, keypoint.keypointA.yyFloat,
+                                      keypoint.keypointB.xxFloat, keypoint.keypointB.yyFloat};
         canvas.drawRect(screenPoints[2] - keypointSize,
                         screenPoints[3] - keypointSize,
                         screenPoints[2] + keypointSize,
@@ -378,11 +387,11 @@ public class ObjectTracker {
         if (DRAW_TEXT) {
           p.setColor(Color.WHITE);
           canvas.drawText(keypoint.keypointA.type + ": " + keypoint.keypointA.score,
-              keypoint.keypointA.x, keypoint.keypointA.y, p);
+              keypoint.keypointA.xxFloat, keypoint.keypointA.yyFloat, p);
         }
       } else {
         p.setColor(Color.YELLOW);
-        final float[] screenPoint = {keypoint.keypointA.x, keypoint.keypointA.y};
+        final float[] screenPoint = {keypoint.keypointA.xxFloat, keypoint.keypointA.yyFloat};
         canvas.drawCircle(screenPoint[0], screenPoint[1], 5.0f, p);
       }
     }
@@ -428,6 +437,7 @@ public class ObjectTracker {
     }
   }
 
+  // Todo: Missing a Javadoc comment
   public synchronized void drawDebug(final Canvas canvas, final Matrix frameToCanvas) {
     canvas.save();
     canvas.setMatrix(frameToCanvas);
@@ -438,6 +448,7 @@ public class ObjectTracker {
     canvas.restore();
   }
 
+  // Todo: Missing a Javadoc comment
   public Vector<String> getDebugText() {
     final Vector<String> lines = new Vector<String>();
 
@@ -450,6 +461,7 @@ public class ObjectTracker {
     return lines;
   }
 
+  // Todo: Missing a Javadoc comment
   public synchronized List<byte[]> pollAccumulatedFlowData(final long endFrameTime) {
     final List<byte[]> frameDeltas = new ArrayList<byte[]>();
     while (timestampedDeltas.size() > 0) {
@@ -513,6 +525,7 @@ public class ObjectTracker {
       }
     }
 
+    // Todo: Missing a Javadoc comment
     public void stopTracking() {
       checkValidObject();
 
@@ -540,7 +553,7 @@ public class ObjectTracker {
       checkValidObject();
       synchronized (ObjectTracker.this) {
         if (lastExternalPositionTime > timestamp) {
-          LOGGER.w("Tried to use older position time!");
+          LOGGER.ww("Tried to use older position time!");
           return;
         }
         final RectF externalPosition = downscaleRect(position);
@@ -575,6 +588,7 @@ public class ObjectTracker {
       visibleInLastFrame = isObjectVisible(id);
     }
 
+    // Todo: Missing a Javadoc comment
     public synchronized RectF getTrackedPositionInPreviewFrame() {
       checkValidObject();
 
@@ -601,6 +615,7 @@ public class ObjectTracker {
     }
   }
 
+  // Todo: Missing a Javadoc comment
   public synchronized TrackedObject trackObject(
           final RectF position, final long timestamp, final byte[] frameData) {
     if (downsampledTimestamp != timestamp) {
@@ -617,7 +632,7 @@ public class ObjectTracker {
 
   /** ********************* NATIVE CODE ************************************ */
 
-  /** This will contain an opaque pointer to the native ObjectTracker */
+  /** This will contain an opaque pointer to the native ObjectTracker. */
   private long nativeObjectTracker;
 
   private native void initNative(int imageWidth, int imageHeight, boolean alwaysTrack);
@@ -636,7 +651,9 @@ public class ObjectTracker {
   protected native String getModelIdNative(String key);
 
   protected native boolean haveObject(String key);
+  
   protected native boolean isObjectVisible(String key);
+  
   protected native float getCurrentCorrelation(String key);
 
   protected native float getMatchScore(String key);

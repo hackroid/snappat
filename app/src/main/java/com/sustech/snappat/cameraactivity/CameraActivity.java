@@ -1,5 +1,5 @@
 
-package com.sustech.snappat.CameraActivity;
+package com.sustech.snappat.cameraactivity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -25,13 +25,13 @@ import android.view.KeyEvent;
 import android.view.Surface;
 import android.view.WindowManager;
 import android.widget.Toast;
-import java.nio.ByteBuffer;
-import com.sustech.snappat.CameraActivity.env.ImageUtils;
-import com.sustech.snappat.CameraActivity.env.Logger;
 import com.sustech.snappat.R;
+import com.sustech.snappat.cameraactivity.env.ImageUtils;
+import com.sustech.snappat.cameraactivity.env.Logger;
+import java.nio.ByteBuffer;
 
 public abstract class CameraActivity extends Activity
-  implements OnImageAvailableListener, Camera.PreviewCallback {
+    implements OnImageAvailableListener, Camera.PreviewCallback {
 
   private static final Logger LOGGER = new Logger();
 
@@ -44,11 +44,11 @@ public abstract class CameraActivity extends Activity
 
   private Handler handler;
   private HandlerThread handlerThread;
-  private boolean useCamera2API;
+  private boolean useCamera2Api;
   private boolean isProcessingFrame = false;
   private byte[][] yuvBytes = new byte[3][];
   private int[] rgbBytes = null;
-  private int yRowStride;
+  private int yyRowStride;
 
   protected int previewWidth = 0;
   protected int previewHeight = 0;
@@ -58,7 +58,7 @@ public abstract class CameraActivity extends Activity
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
-    LOGGER.d("onCreate " + this);
+    LOGGER.dd("onCreate " + this);
     super.onCreate(null);
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -79,7 +79,7 @@ public abstract class CameraActivity extends Activity
   }
 
   protected int getLuminanceStride() {
-    return yRowStride;
+    return yyRowStride;
   }
 
   protected byte[] getLuminance() {
@@ -92,7 +92,7 @@ public abstract class CameraActivity extends Activity
   @Override
   public void onPreviewFrame(final byte[] bytes, final Camera camera) {
     if (isProcessingFrame) {
-      LOGGER.w("Dropping frame!");
+      LOGGER.ww("Dropping frame!");
       return;
     }
 
@@ -106,20 +106,20 @@ public abstract class CameraActivity extends Activity
         onPreviewSizeChosen(new Size(previewSize.width, previewSize.height), 90);
       }
     } catch (final Exception e) {
-      LOGGER.e(e, "Exception!");
+      LOGGER.ee(e, "Exception!");
       return;
     }
 
     isProcessingFrame = true;
     lastPreviewFrame = bytes;
     yuvBytes[0] = bytes;
-    yRowStride = previewWidth;
+    yyRowStride = previewWidth;
 
     imageConverter =
       new Runnable() {
         @Override
         public void run() {
-          ImageUtils.convertYUV420SPToARGB8888(bytes, previewWidth, previewHeight, rgbBytes);
+          ImageUtils.convertYuv420spToArgB8888(bytes, previewWidth, previewHeight, rgbBytes);
         }
       };
 
@@ -134,8 +134,9 @@ public abstract class CameraActivity extends Activity
     processImage();
   }
 
+  // Todo: Missing a Javadoc comment
   /**
-   * Callback for Camera2 API
+   * Callback for Camera2 API.
    */
   @Override
   public void onImageAvailable(final ImageReader reader) {
@@ -161,24 +162,24 @@ public abstract class CameraActivity extends Activity
       Trace.beginSection("imageAvailable");
       final Plane[] planes = image.getPlanes();
       fillBytes(planes, yuvBytes);
-      yRowStride = planes[0].getRowStride();
+      yyRowStride = planes[0].getRowStride();
       final int uvRowStride = planes[1].getRowStride();
       final int uvPixelStride = planes[1].getPixelStride();
 
-      imageConverter =
-        new Runnable() {
+      imageConverter = new Runnable() {
           @Override
           public void run() {
-            ImageUtils.convertYUV420ToARGB8888(
-              yuvBytes[0],
-              yuvBytes[1],
-              yuvBytes[2],
-              previewWidth,
-              previewHeight,
-              yRowStride,
-              uvRowStride,
-              uvPixelStride,
-              rgbBytes);
+            ImageUtils.convertYuv420ToArgb8888(
+                yuvBytes[0],
+                yuvBytes[1],
+                yuvBytes[2],
+                previewWidth,
+                previewHeight,
+                yyRowStride,
+                uvRowStride,
+                uvPixelStride,
+                rgbBytes
+            );
           }
         };
 
@@ -193,7 +194,7 @@ public abstract class CameraActivity extends Activity
 
       processImage();
     } catch (final Exception e) {
-      LOGGER.e(e, "Exception!");
+      LOGGER.ee(e, "Exception!");
       Trace.endSection();
       return;
     }
@@ -202,13 +203,13 @@ public abstract class CameraActivity extends Activity
 
   @Override
   public synchronized void onStart() {
-    LOGGER.d("onStart " + this);
+    LOGGER.dd("onStart " + this);
     super.onStart();
   }
 
   @Override
   public synchronized void onResume() {
-    LOGGER.d("onResume " + this);
+    LOGGER.dd("onResume " + this);
     super.onResume();
 
     handlerThread = new HandlerThread("inference");
@@ -218,10 +219,10 @@ public abstract class CameraActivity extends Activity
 
   @Override
   public synchronized void onPause() {
-    LOGGER.d("onPause " + this);
+    LOGGER.dd("onPause " + this);
 
     if (!isFinishing()) {
-      LOGGER.d("Requesting finish");
+      LOGGER.dd("Requesting finish");
       finish();
     }
 
@@ -231,7 +232,7 @@ public abstract class CameraActivity extends Activity
       handlerThread = null;
       handler = null;
     } catch (final InterruptedException e) {
-      LOGGER.e(e, "Exception!");
+      LOGGER.ee(e, "Exception!");
     }
 
     super.onPause();
@@ -239,13 +240,13 @@ public abstract class CameraActivity extends Activity
 
   @Override
   public synchronized void onStop() {
-    LOGGER.d("onStop " + this);
+    LOGGER.dd("onStop " + this);
     super.onStop();
   }
 
   @Override
   public synchronized void onDestroy() {
-    LOGGER.d("onDestroy " + this);
+    LOGGER.dd("onDestroy " + this);
     super.onDestroy();
   }
 
@@ -257,11 +258,11 @@ public abstract class CameraActivity extends Activity
 
   @Override
   public void onRequestPermissionsResult(
-    final int requestCode, final String[] permissions, final int[] grantResults) {
+      final int requestCode, final String[] permissions, final int[] grantResults) {
     if (requestCode == PERMISSIONS_REQUEST) {
       if (grantResults.length > 0
-        && grantResults[0] == PackageManager.PERMISSION_GRANTED
-        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+          && grantResults[0] == PackageManager.PERMISSION_GRANTED
+          && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
         setFragment();
       } else {
         requestPermission();
@@ -271,8 +272,8 @@ public abstract class CameraActivity extends Activity
 
   private boolean hasPermission() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      return checkSelfPermission(PERMISSION_CAMERA) == PackageManager.PERMISSION_GRANTED &&
-        checkSelfPermission(PERMISSION_STORAGE) == PackageManager.PERMISSION_GRANTED;
+      return checkSelfPermission(PERMISSION_CAMERA) == PackageManager.PERMISSION_GRANTED
+          && checkSelfPermission(PERMISSION_STORAGE) == PackageManager.PERMISSION_GRANTED;
     } else {
       return true;
     }
@@ -280,8 +281,8 @@ public abstract class CameraActivity extends Activity
 
   private void requestPermission() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      if (shouldShowRequestPermissionRationale(PERMISSION_CAMERA) ||
-        shouldShowRequestPermissionRationale(PERMISSION_STORAGE)) {
+      if (shouldShowRequestPermissionRationale(PERMISSION_CAMERA)
+          || shouldShowRequestPermissionRationale(PERMISSION_STORAGE)) {
         Toast.makeText(CameraActivity.this,
           "Camera AND storage permission are required for this demo", Toast.LENGTH_LONG).show();
       }
@@ -291,7 +292,7 @@ public abstract class CameraActivity extends Activity
 
   // Returns true if the device supports the required hardware level, or better.
   private boolean isHardwareLevelSupported(
-    CameraCharacteristics characteristics, int requiredLevel) {
+      CameraCharacteristics characteristics, int requiredLevel) {
     int deviceLevel = characteristics.get(CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL);
     if (deviceLevel == CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY) {
       return requiredLevel == deviceLevel;
@@ -313,7 +314,7 @@ public abstract class CameraActivity extends Activity
         }
 
         final StreamConfigurationMap map =
-          characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+            characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
 
         if (map == null) {
           continue;
@@ -322,14 +323,14 @@ public abstract class CameraActivity extends Activity
         // Fallback to camera1 API for internal cameras that don't have full support.
         // This should help with legacy situations where using the camera2 API causes
         // distorted or otherwise broken previews.
-        useCamera2API = (facing == CameraCharacteristics.LENS_FACING_EXTERNAL)
+        useCamera2Api = (facing == CameraCharacteristics.LENS_FACING_EXTERNAL)
           || isHardwareLevelSupported(characteristics,
           CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_FULL);
-        LOGGER.i("Camera API lv2?: %s", useCamera2API);
+        LOGGER.ii("Camera API lv2?: %s", useCamera2Api);
         return cameraId;
       }
     } catch (CameraAccessException e) {
-      LOGGER.e(e, "Not allowed to access camera");
+      LOGGER.ee(e, "Not allowed to access camera");
     }
 
     return null;
@@ -343,20 +344,20 @@ public abstract class CameraActivity extends Activity
     }
 
     Fragment fragment;
-    if (useCamera2API) {
+    if (useCamera2Api) {
       CameraConnectionFragment camera2Fragment =
-        CameraConnectionFragment.newInstance(
-          new CameraConnectionFragment.ConnectionCallback() {
-            @Override
-            public void onPreviewSizeChosen(final Size size, final int rotation) {
-              previewHeight = size.getHeight();
-              previewWidth = size.getWidth();
-              CameraActivity.this.onPreviewSizeChosen(size, rotation);
-            }
-          },
-          this,
-          getLayoutId(),
-          getDesiredPreviewFrameSize());
+          CameraConnectionFragment.newInstance(
+              new CameraConnectionFragment.ConnectionCallback() {
+                  @Override
+                  public void onPreviewSizeChosen(final Size size, final int rotation) {
+                    previewHeight = size.getHeight();
+                    previewWidth = size.getWidth();
+                    CameraActivity.this.onPreviewSizeChosen(size, rotation);
+                  }
+              },
+              this,
+              getLayoutId(),
+              getDesiredPreviewFrameSize());
 
       camera2Fragment.setCamera(cameraId);
       fragment = camera2Fragment;
@@ -377,7 +378,7 @@ public abstract class CameraActivity extends Activity
     for (int i = 0; i < planes.length; ++i) {
       final ByteBuffer buffer = planes[i].getBuffer();
       if (yuvBytes[i] == null) {
-        LOGGER.d("Initializing buffer %d at size %d", i, buffer.capacity());
+        LOGGER.dd("Initializing buffer %dd at size %dd", i, buffer.capacity());
         yuvBytes[i] = new byte[buffer.capacity()];
       }
       buffer.get(yuvBytes[i]);
@@ -388,6 +389,7 @@ public abstract class CameraActivity extends Activity
     return debug;
   }
 
+  // Todo: Missing a Javadoc comment
   public void requestRender() {
     final OverlayView overlay = (OverlayView) findViewById(R.id.debug_overlay);
     if (overlay != null) {
@@ -395,6 +397,7 @@ public abstract class CameraActivity extends Activity
     }
   }
 
+  // Todo: Missing a Javadoc comment
   public void addCallback(final OverlayView.DrawCallback callback) {
     final OverlayView overlay = (OverlayView) findViewById(R.id.debug_overlay);
     if (overlay != null) {
@@ -408,7 +411,7 @@ public abstract class CameraActivity extends Activity
   @Override
   public boolean onKeyDown(final int keyCode, final KeyEvent event) {
     if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP
-      || keyCode == KeyEvent.KEYCODE_BUTTON_L1 || keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+        || keyCode == KeyEvent.KEYCODE_BUTTON_L1 || keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
       debug = !debug;
       requestRender();
       onSetDebug(debug);
