@@ -19,7 +19,7 @@ import com.sustech.snappat.loginactivity.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-  private TextView textMessage;
+  private transient TextView textMessage;
 
   private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
       = new BottomNavigationView.OnNavigationItemSelectedListener() {

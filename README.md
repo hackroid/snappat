@@ -139,15 +139,21 @@ All Java files passed the Google Code Style check.
 
 #### FindBugs
 
+> We met problems with plugin FindBugs itself. So we can't generate any result for this part.
+
 #### PMD
+
+> 706 PMD rule violations were found. See the report at: snappat/tools/pmd.html
+
+No error detected.
 
 ### Javadoc
 
-
+Finished, see the html files in root directory.
 
 ### JUnit Test
 
-
+Finished, for all public methods.
 
 ## Schedule
 
@@ -164,3 +170,6 @@ All Java files passed the Google Code Style check.
 
 ## Code Review Group
 
+Monday: 4.20-6.10pm (Instructor: Hu Chun Feng) 
+
+TA E (5 groups), TA F (5 groups) 
