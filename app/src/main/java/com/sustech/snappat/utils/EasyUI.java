@@ -155,12 +155,12 @@ public class EasyUI {
 //                String string = GsonValidate.getStringByKeyPath(data, path, defaultUri);
 //                String strUri = string.trim();
 //                ImageLoader.getInstance().displayImage(strUri,imageView);
-//            }catch (Exception e){
+//            }catch (Exception ee){
 //                ImageLoader.getInstance().displayImage(defaultUri,imageView);
-//                Log.w("easy ui",e);
+//                Log.ww("easy ui",ee);
 //            }
 //        }catch (Exception e2){
-//            Log.w("easy ui",e2);
+//            Log.ww("easy ui",e2);
 //        }
 //    }
 //    public static void imageViewLoadUri(ViewGroup root,int id,JsonElement data,String path,String defaultUri){

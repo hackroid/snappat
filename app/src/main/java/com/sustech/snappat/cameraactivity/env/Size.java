@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.sustech.snappat.CameraActivity.env;
+package com.sustech.snappat.cameraactivity.env;
 
 import android.graphics.Bitmap;
 import android.text.TextUtils;
@@ -59,6 +59,7 @@ public class Size implements Comparable<Size>, Serializable {
     return size;
   }
 
+  // Todo: Missing a Javadoc comment
   public static Size parseFromString(String sizeString) {
     if (TextUtils.isEmpty(sizeString)) {
       return null;
@@ -66,7 +67,7 @@ public class Size implements Comparable<Size>, Serializable {
 
     sizeString = sizeString.trim();
 
-    // The expected format is "<width>x<height>".
+    // The expected format is "<width>xxFloat<height>".
     final String[] components = sizeString.split("x");
     if (components.length == 2) {
       try {
@@ -81,6 +82,7 @@ public class Size implements Comparable<Size>, Serializable {
     }
   }
 
+  // Todo: Missing a Javadoc comment
   public static List<Size> sizeStringToList(final String sizes) {
     final List<Size> sizeList = new ArrayList<Size>();
     if (sizes != null) {
@@ -95,6 +97,7 @@ public class Size implements Comparable<Size>, Serializable {
     return sizeList;
   }
 
+  // Todo: Missing a Javadoc comment
   public static String sizeListToString(final List<Size> sizes) {
     String sizesString = "";
     if (sizes != null && sizes.size() > 0) {
@@ -140,6 +143,6 @@ public class Size implements Comparable<Size>, Serializable {
   }
 
   public static final String dimensionsAsString(final int width, final int height) {
-    return width + "x" + height;
+    return width + "xxFloat" + height;
   }
 }

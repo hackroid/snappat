@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sustech.snappat.CameraActivity;
+package com.sustech.snappat.cameraactivity;
 
 import android.content.Context;
 import android.util.AttributeSet;

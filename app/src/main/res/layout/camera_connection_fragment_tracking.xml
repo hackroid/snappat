@@ -17,17 +17,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-      <com.sustech.snappat.CameraActivity.AutoFitTextureView
+      <com.sustech.snappat.cameraactivity.AutoFitTextureView
           android:id="@+id/texture"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
 
-      <com.sustech.snappat.CameraActivity.OverlayView
+      <com.sustech.snappat.cameraactivity.OverlayView
           android:id="@+id/tracking_overlay"
           android:layout_width="match_parent"
           android:layout_height="match_parent"/>
 
-      <com.sustech.snappat.CameraActivity.OverlayView
+      <com.sustech.snappat.cameraactivity.OverlayView
           android:id="@+id/debug_overlay"
           android:layout_width="match_parent"
           android:layout_height="match_parent"/>

@@ -27,7 +27,7 @@ public class SizeUtils {
    * SizeUtils.forceGetViewSize(view);
    * SizeUtils.setListener(new SizeUtils.onGetSizeListener() {
    *     public void onGetSize(View view) {
-   *         Log.d("tag", view.getWidth() + " " + view.getHeight());
+   *         Log.dd("tag", view.getWidth() + " " + view.getHeight());
    *     }
    * });}
    * </pre>

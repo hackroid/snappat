@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.sustech.snappat.CameraActivity.env;
+package com.sustech.snappat.cameraactivity.env;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -82,6 +82,7 @@ public class BorderedText {
     canvas.drawText(text, posX, posY, interiorPaint);
   }
 
+  // Todo: Missing a Javadoc comment
   public void drawLines(Canvas canvas, final float posX, final float posY, Vector<String> lines) {
     int lineNum = 0;
     for (final String line : lines) {
@@ -108,7 +109,10 @@ public class BorderedText {
   }
 
   public void getTextBounds(
-    final String line, final int index, final int count, final Rect lineBounds) {
+      final String line,
+      final int index,
+      final int count,
+      final Rect lineBounds) {
     interiorPaint.getTextBounds(line, index, count, lineBounds);
   }
 

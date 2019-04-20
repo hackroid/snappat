@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.sustech.snappat.CameraActivity.env;
+package com.sustech.snappat.cameraactivity.env;
 
 import android.os.SystemClock;
 
@@ -37,13 +37,16 @@ public class SplitTimer {
     lastCpuTime = SystemClock.currentThreadTimeMillis();
   }
 
+  // Todo: Missing a Javadoc comment
   public void endSplit(final String splitName) {
     final long currWallTime = SystemClock.uptimeMillis();
     final long currCpuTime = SystemClock.currentThreadTimeMillis();
 
-    logger.i(
-      "%s: cpu=%dms wall=%dms",
-      splitName, currCpuTime - lastCpuTime, currWallTime - lastWallTime);
+    logger.ii(
+        "%s: cpu=%dms wall=%dms",
+        splitName,
+        currCpuTime - lastCpuTime, currWallTime - lastWallTime
+    );
 
     lastWallTime = currWallTime;
     lastCpuTime = currCpuTime;
