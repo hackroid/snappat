@@ -17,6 +17,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sustech.snappat.cameraactivity.DetectorActivity;
 import com.sustech.snappat.loginactivity.LoginActivity;
 
+/**
+ * Class {@code MainActivity} main activity of this app.
+ *
+ * <p>Center of all activities and features.</p>
+ * <p>extends {@code AppCompatActivity}, over write some functions of {@link AppCompatActivity}</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 1.0
+ */
 public class MainActivity extends AppCompatActivity {
 
   private transient TextView textMessage;
@@ -41,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         }
       };
 
+  /**
+   * {@inheritDoc}
+   * */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
