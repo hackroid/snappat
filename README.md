@@ -5,6 +5,7 @@ CS304 Project: Progress Report
 
 * Group Name: **Snappat**
 * Member:
+
 | Member |    ID    |
 | ----- | ------ |
 | 赵博弘 | 11612706 |
