@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.sustech.snappat.CameraActivity;
+package com.sustech.snappat.cameraactivity;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -22,7 +22,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.sustech.snappat.CameraActivity.Classifier.Recognition;
+import com.sustech.snappat.cameraactivity.Classifier.Recognition;
 
 import java.util.List;
 
@@ -34,12 +34,13 @@ public class RecognitionScoreView extends View implements ResultsView {
   private final Paint fgPaint;
   private final Paint bgPaint;
 
+  // Todo: Missing a Javadoc comment
   public RecognitionScoreView(final Context context, final AttributeSet set) {
     super(context, set);
 
     textSizePx =
-      TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
+        TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
     fgPaint = new Paint();
     fgPaint.setTextSize(textSizePx);
 

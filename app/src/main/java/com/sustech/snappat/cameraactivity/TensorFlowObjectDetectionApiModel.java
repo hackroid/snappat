@@ -13,17 +13,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.sustech.snappat.CameraActivity;
+package com.sustech.snappat.cameraactivity;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.os.Trace;
-
-import org.tensorflow.Graph;
-import org.tensorflow.Operation;
-import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
-import com.sustech.snappat.CameraActivity.env.Logger;
+import com.sustech.snappat.cameraactivity.env.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,12 +30,15 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Vector;
+import org.tensorflow.Graph;
+import org.tensorflow.Operation;
+import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
 
 /**
  * Wrapper for frozen detection models trained using the Tensorflow Object Detection API:
  * github.com/tensorflow/models/tree/master/research/object_detection
  */
-public class TensorFlowObjectDetectionAPIModel implements Classifier {
+public class TensorFlowObjectDetectionApiModel implements Classifier {
 
   private static final Logger LOGGER = new Logger();
 
@@ -72,11 +71,11 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
    * @param labelFilename The filepath of label file for classes.
    */
   public static Classifier create(
-    final AssetManager assetManager,
-    final String modelFilename,
-    final String labelFilename,
-    final int inputSize) throws IOException {
-    final TensorFlowObjectDetectionAPIModel d = new TensorFlowObjectDetectionAPIModel();
+      final AssetManager assetManager,
+      final String modelFilename,
+      final String labelFilename,
+      final int inputSize) throws IOException {
+    final TensorFlowObjectDetectionApiModel d = new TensorFlowObjectDetectionApiModel();
 
     InputStream labelsInput = null;
     String actualFilename = labelFilename.split("file:///android_asset/")[1];
@@ -85,7 +84,7 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
     br = new BufferedReader(new InputStreamReader(labelsInput));
     String line;
     while ((line = br.readLine()) != null) {
-      LOGGER.w(line);
+      LOGGER.ww(line);
       d.labels.add(line);
     }
     br.close();
@@ -121,7 +120,7 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
 
     // Pre-allocate buffers.
     d.outputNames = new String[]{"detection_boxes", "detection_scores",
-      "detection_classes", "num_detections"};
+        "detection_classes", "num_detections"};
     d.intValues = new int[d.inputSize * d.inputSize];
     d.byteValues = new byte[d.inputSize * d.inputSize * 3];
     d.outputScores = new float[MAX_RESULTS];
@@ -131,7 +130,7 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
     return d;
   }
 
-  private TensorFlowObjectDetectionAPIModel() {
+  private TensorFlowObjectDetectionApiModel() {
   }
 
   @Override
@@ -175,9 +174,7 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
 
     // Find the best detections.
     final PriorityQueue<Recognition> pq =
-      new PriorityQueue<Recognition>(
-        1,
-        new Comparator<Recognition>() {
+        new PriorityQueue<Recognition>(1, new Comparator<Recognition>() {
           @Override
           public int compare(final Recognition lhs, final Recognition rhs) {
             // Intentionally reversed to put high confidence at the head of the queue.
@@ -188,13 +185,13 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
     // Scale them back to the input size.
     for (int i = 0; i < outputScores.length; ++i) {
       final RectF detection =
-        new RectF(
-          outputLocations[4 * i + 1] * inputSize,
-          outputLocations[4 * i] * inputSize,
-          outputLocations[4 * i + 3] * inputSize,
-          outputLocations[4 * i + 2] * inputSize);
+          new RectF(
+              outputLocations[4 * i + 1] * inputSize,
+              outputLocations[4 * i] * inputSize,
+              outputLocations[4 * i + 3] * inputSize,
+              outputLocations[4 * i + 2] * inputSize);
       pq.add(
-        new Recognition("" + i, labels.get((int) outputClasses[i]), outputScores[i], detection));
+          new Recognition("" + i, labels.get((int) outputClasses[i]), outputScores[i], detection));
     }
 
     final ArrayList<Recognition> recognitions = new ArrayList<Recognition>();

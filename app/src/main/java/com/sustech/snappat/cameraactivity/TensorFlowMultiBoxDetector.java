@@ -13,18 +13,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.sustech.snappat.CameraActivity;
+package com.sustech.snappat.cameraactivity;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.os.Trace;
 
-import org.tensorflow.Graph;
-import org.tensorflow.Operation;
-import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
-import com.sustech.snappat.CameraActivity.env.Logger;
-
+import com.sustech.snappat.cameraactivity.env.Logger;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,6 +31,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
+import org.tensorflow.Graph;
+import org.tensorflow.Operation;
+import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
 
 /**
  * A detector for general purpose object detection as described in Scalable Object Detection using
@@ -67,27 +66,28 @@ public class TensorFlowMultiBoxDetector implements Classifier {
 
   private float[] boxPriors;
 
+  // Todo: two arguments below have been annotated due to unused cases
   /**
    * Initializes a native TensorFlow session for classifying images.
    *
    * @param assetManager The asset manager to be used to load assets.
    * @param modelFilename The filepath of the model GraphDef protocol buffer.
    * @param locationFilename The filepath of label file for classes.
-   * @param inputSize The input size. A square image of inputSize x inputSize is assumed.
+//   * @param inputSize The input size. A square image of inputSize xxFloat inputSize is assumed.
    * @param imageMean The assumed mean of the image values.
    * @param imageStd The assumed std of the image values.
    * @param inputName The label of the image input node.
-   * @param outputName The label of the output node.
+//   * @param outputName The label of the output node.
    */
   public static Classifier create(
-    final AssetManager assetManager,
-    final String modelFilename,
-    final String locationFilename,
-    final int imageMean,
-    final float imageStd,
-    final String inputName,
-    final String outputLocationsName,
-    final String outputScoresName) {
+      final AssetManager assetManager,
+      final String modelFilename,
+      final String locationFilename,
+      final int imageMean,
+      final float imageStd,
+      final String inputName,
+      final String outputLocationsName,
+      final String outputScoresName) {
     final TensorFlowMultiBoxDetector d = new TensorFlowMultiBoxDetector();
 
     d.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);
@@ -136,8 +136,8 @@ public class TensorFlowMultiBoxDetector implements Classifier {
   }
 
   private void loadCoderOptions(
-    final AssetManager assetManager, final String locationFilename, final float[] boxPriors)
-    throws IOException {
+      final AssetManager assetManager, final String locationFilename, final float[] boxPriors)
+      throws IOException {
     // Try to be intelligent about opening from assets or sdcard depending on prefix.
     final String assetPrefix = "file:///android_asset/";
     InputStream is;
@@ -168,7 +168,7 @@ public class TensorFlowMultiBoxDetector implements Classifier {
     }
     if (priorIndex != boxPriors.length) {
       throw new RuntimeException(
-        "BoxPrior length mismatch: " + priorIndex + " vs " + boxPriors.length);
+          "BoxPrior length mismatch: " + priorIndex + " vs " + boxPriors.length);
     }
   }
 
@@ -190,7 +190,7 @@ public class TensorFlowMultiBoxDetector implements Classifier {
     }
 
     if (!nonZero) {
-      LOGGER.w("No non-zero encodings; check log for inference errors.");
+      LOGGER.ww("No non-zero encodings; check log for inference errors.");
     }
     return locations;
   }
@@ -243,9 +243,7 @@ public class TensorFlowMultiBoxDetector implements Classifier {
 
     // Find the best detections.
     final PriorityQueue<Recognition> pq =
-      new PriorityQueue<Recognition>(
-        1,
-        new Comparator<Recognition>() {
+        new PriorityQueue<Recognition>(1, new Comparator<Recognition>() {
           @Override
           public int compare(final Recognition lhs, final Recognition rhs) {
             // Intentionally reversed to put high confidence at the head of the queue.
@@ -256,11 +254,11 @@ public class TensorFlowMultiBoxDetector implements Classifier {
     // Scale them back to the input size.
     for (int i = 0; i < outputScores.length; ++i) {
       final RectF detection =
-        new RectF(
-          outputLocations[4 * i] * inputSize,
-          outputLocations[4 * i + 1] * inputSize,
-          outputLocations[4 * i + 2] * inputSize,
-          outputLocations[4 * i + 3] * inputSize);
+          new RectF(
+              outputLocations[4 * i] * inputSize,
+              outputLocations[4 * i + 1] * inputSize,
+              outputLocations[4 * i + 2] * inputSize,
+              outputLocations[4 * i + 3] * inputSize);
       pq.add(new Recognition("" + i, null, outputScores[i], detection));
     }
 

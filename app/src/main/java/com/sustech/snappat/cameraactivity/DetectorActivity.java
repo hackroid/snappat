@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sustech.snappat.CameraActivity;
+package com.sustech.snappat.cameraactivity;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -31,12 +31,12 @@ import android.util.Size;
 import android.util.TypedValue;
 import android.widget.Toast;
 
-import com.sustech.snappat.CameraActivity.OverlayView.DrawCallback;
 import com.sustech.snappat.R;
-import com.sustech.snappat.CameraActivity.env.BorderedText;
-import com.sustech.snappat.CameraActivity.env.ImageUtils;
-import com.sustech.snappat.CameraActivity.env.Logger;
-import com.sustech.snappat.CameraActivity.tracking.MultiBoxTracker;
+import com.sustech.snappat.cameraactivity.OverlayView.DrawCallback;
+import com.sustech.snappat.cameraactivity.env.BorderedText;
+import com.sustech.snappat.cameraactivity.env.ImageUtils;
+import com.sustech.snappat.cameraactivity.env.Logger;
+import com.sustech.snappat.cameraactivity.tracking.MultiBoxTracker;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -60,16 +60,16 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   private static final String MB_OUTPUT_SCORES_NAME = "output_scores/Reshape";
   private static final String MB_MODEL_FILE = "file:///android_asset/multibox_model.pb";
   private static final String MB_LOCATION_FILE =
-    "file:///android_asset/multibox_location_priors.txt";
+      "file:///android_asset/multibox_location_priors.txt";
 
   private static final int TF_OD_API_INPUT_SIZE = 300;
   private static final String TF_OD_API_MODEL_FILE =
-    "file:///android_asset/ssd_mobilenet_v1_android_export.pb";
+      "file:///android_asset/ssd_mobilenet_v1_android_export.pb";
   private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/coco_labels_list.txt";
 
   // Configuration values for tiny-yolo-voc. Note that the graph is not included with TensorFlow and
   // must be manually placed in the assets/ directory by the user.
-  // Graphs and models downloaded from http://pjreddie.com/darknet/yolo/ may be converted e.g. via
+  // Graphs and models downloaded from http://pjreddie.com/darknet/yolo/ may be converted ee.g. via
   // DarkFlow (https://github.com/thtrieu/darkflow). Sample command:
   // ./flow --model cfg/tiny-yolo-voc.cfg --load bin/tiny-yolo-voc.weights --savepb --verbalise
   private static final String YOLO_MODEL_FILE = "file:///android_asset/graph-tiny-yolo-voc.pb";
@@ -124,8 +124,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   @Override
   public void onPreviewSizeChosen(final Size size, final int rotation) {
     final float textSizePx =
-      TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
+        TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
     borderedText = new BorderedText(textSizePx);
     borderedText.setTypeface(Typeface.MONOSPACE);
 
@@ -134,36 +134,36 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     int cropSize = TF_OD_API_INPUT_SIZE;
     if (MODE == DetectorMode.YOLO) {
       detector =
-        TensorFlowYoloDetector.create(
-          getAssets(),
-          YOLO_MODEL_FILE,
-          YOLO_INPUT_SIZE,
-          YOLO_INPUT_NAME,
-          YOLO_OUTPUT_NAMES,
-          YOLO_BLOCK_SIZE);
+          TensorFlowYoloDetector.create(
+              getAssets(),
+              YOLO_MODEL_FILE,
+              YOLO_INPUT_SIZE,
+              YOLO_INPUT_NAME,
+              YOLO_OUTPUT_NAMES,
+              YOLO_BLOCK_SIZE);
       cropSize = YOLO_INPUT_SIZE;
     } else if (MODE == DetectorMode.MULTIBOX) {
       detector =
-        TensorFlowMultiBoxDetector.create(
-          getAssets(),
-          MB_MODEL_FILE,
-          MB_LOCATION_FILE,
-          MB_IMAGE_MEAN,
-          MB_IMAGE_STD,
-          MB_INPUT_NAME,
-          MB_OUTPUT_LOCATIONS_NAME,
-          MB_OUTPUT_SCORES_NAME);
+          TensorFlowMultiBoxDetector.create(
+              getAssets(),
+              MB_MODEL_FILE,
+              MB_LOCATION_FILE,
+              MB_IMAGE_MEAN,
+              MB_IMAGE_STD,
+              MB_INPUT_NAME,
+              MB_OUTPUT_LOCATIONS_NAME,
+              MB_OUTPUT_SCORES_NAME);
       cropSize = MB_INPUT_SIZE;
     } else {
       try {
-        detector = TensorFlowObjectDetectionAPIModel.create(
-          getAssets(), TF_OD_API_MODEL_FILE, TF_OD_API_LABELS_FILE, TF_OD_API_INPUT_SIZE);
+        detector = TensorFlowObjectDetectionApiModel.create(
+            getAssets(), TF_OD_API_MODEL_FILE, TF_OD_API_LABELS_FILE, TF_OD_API_INPUT_SIZE);
         cropSize = TF_OD_API_INPUT_SIZE;
       } catch (final IOException e) {
-        LOGGER.e("Exception initializing classifier!", e);
+        LOGGER.ee("Exception initializing classifier!", e);
         Toast toast =
-          Toast.makeText(
-            getApplicationContext(), "Classifier could not be initialized", Toast.LENGTH_SHORT);
+            Toast.makeText(
+                getApplicationContext(), "Classifier could not be initialized", Toast.LENGTH_SHORT);
         toast.show();
         finish();
       }
@@ -173,75 +173,75 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     previewHeight = size.getHeight();
 
     sensorOrientation = rotation - getScreenOrientation();
-    LOGGER.i("Camera orientation relative to screen canvas: %d", sensorOrientation);
+    LOGGER.ii("Camera orientation relative to screen canvas: %dd", sensorOrientation);
 
-    LOGGER.i("Initializing at size %dx%d", previewWidth, previewHeight);
+    LOGGER.ii("Initializing at size %dx%dd", previewWidth, previewHeight);
     rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Config.ARGB_8888);
     croppedBitmap = Bitmap.createBitmap(cropSize, cropSize, Config.ARGB_8888);
 
     frameToCropTransform =
-      ImageUtils.getTransformationMatrix(
-        previewWidth, previewHeight,
-        cropSize, cropSize,
-        sensorOrientation, MAINTAIN_ASPECT);
+        ImageUtils.getTransformationMatrix(
+            previewWidth, previewHeight,
+            cropSize, cropSize,
+            sensorOrientation, MAINTAIN_ASPECT);
 
     cropToFrameTransform = new Matrix();
     frameToCropTransform.invert(cropToFrameTransform);
 
     trackingOverlay = (OverlayView) findViewById(R.id.tracking_overlay);
     trackingOverlay.addCallback(
-      new DrawCallback() {
-        @Override
-        public void drawCallback(final Canvas canvas) {
-          tracker.draw(canvas);
-          if (isDebug()) {
-            tracker.drawDebug(canvas);
-          }
-        }
-      });
-
-    addCallback(
-      new DrawCallback() {
-        @Override
-        public void drawCallback(final Canvas canvas) {
-          if (!isDebug()) {
-            return;
-          }
-          final Bitmap copy = cropCopyBitmap;
-          if (copy == null) {
-            return;
-          }
-
-          final int backgroundColor = Color.argb(100, 0, 0, 0);
-          canvas.drawColor(backgroundColor);
-
-          final Matrix matrix = new Matrix();
-          final float scaleFactor = 2;
-          matrix.postScale(scaleFactor, scaleFactor);
-          matrix.postTranslate(
-            canvas.getWidth() - copy.getWidth() * scaleFactor,
-            canvas.getHeight() - copy.getHeight() * scaleFactor);
-          canvas.drawBitmap(copy, matrix, new Paint());
-
-          final Vector<String> lines = new Vector<String>();
-          if (detector != null) {
-            final String statString = detector.getStatString();
-            final String[] statLines = statString.split("\n");
-            for (final String line : statLines) {
-              lines.add(line);
+        new DrawCallback() {
+          @Override
+          public void drawCallback(final Canvas canvas) {
+            tracker.draw(canvas);
+            if (isDebug()) {
+              tracker.drawDebug(canvas);
             }
           }
-          lines.add("");
+        });
 
-          lines.add("Frame: " + previewWidth + "x" + previewHeight);
-          lines.add("Crop: " + copy.getWidth() + "x" + copy.getHeight());
-          lines.add("View: " + canvas.getWidth() + "x" + canvas.getHeight());
-          lines.add("Rotation: " + sensorOrientation);
-          lines.add("Inference time: " + lastProcessingTimeMs + "ms");
+    addCallback(
+        new DrawCallback() {
+          @Override
+          public void drawCallback(final Canvas canvas) {
+            if (!isDebug()) {
+              return;
+            }
+            final Bitmap copy = cropCopyBitmap;
+            if (copy == null) {
+              return;
+            }
 
-          borderedText.drawLines(canvas, 10, canvas.getHeight() - 10, lines);
-        }
-      });
+            final int backgroundColor = Color.argb(100, 0, 0, 0);
+            canvas.drawColor(backgroundColor);
+
+            final Matrix matrix = new Matrix();
+            final float scaleFactor = 2;
+            matrix.postScale(scaleFactor, scaleFactor);
+            matrix.postTranslate(
+                canvas.getWidth() - copy.getWidth() * scaleFactor,
+                canvas.getHeight() - copy.getHeight() * scaleFactor);
+            canvas.drawBitmap(copy, matrix, new Paint());
+
+            final Vector<String> lines = new Vector<String>();
+            if (detector != null) {
+              final String statString = detector.getStatString();
+              final String[] statLines = statString.split("\n");
+              for (final String line : statLines) {
+                lines.add(line);
+              }
+            }
+            lines.add("");
+
+            lines.add("Frame: " + previewWidth + "xxFloat" + previewHeight);
+            lines.add("Crop: " + copy.getWidth() + "xxFloat" + copy.getHeight());
+            lines.add("View: " + canvas.getWidth() + "xxFloat" + canvas.getHeight());
+            lines.add("Rotation: " + sensorOrientation);
+            lines.add("Inference time: " + lastProcessingTimeMs + "ms");
+
+            borderedText.drawLines(canvas, 10, canvas.getHeight() - 10, lines);
+          }
+        });
   }
 
   OverlayView trackingOverlay;
@@ -252,12 +252,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     final long currTimestamp = timestamp;
     byte[] originalLuminance = getLuminance();
     tracker.onFrame(
-      previewWidth,
-      previewHeight,
-      getLuminanceStride(),
-      sensorOrientation,
-      originalLuminance,
-      timestamp);
+        previewWidth,
+        previewHeight,
+        getLuminanceStride(),
+        sensorOrientation,
+        originalLuminance,
+        timestamp);
     trackingOverlay.postInvalidate();
 
     // No mutex needed as this method is not reentrant.
@@ -266,7 +266,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
       return;
     }
     computingDetection = true;
-    LOGGER.i("Preparing image " + currTimestamp + " for detection in bg thread.");
+    LOGGER.ii("Preparing image " + currTimestamp + " for detection in bg thread.");
 
     rgbFrameBitmap.setPixels(getRgbBytes(), 0, previewWidth, 0, 0, previewWidth, previewHeight);
 
@@ -284,55 +284,57 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     }
 
     runInBackground(
-      new Runnable() {
-        @Override
-        public void run() {
-          LOGGER.i("Running detection on image " + currTimestamp);
-          final long startTime = SystemClock.uptimeMillis();
-          final List<Classifier.Recognition> results = detector.recognizeImage(croppedBitmap);
-          lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
+        new Runnable() {
+          @Override
+          public void run() {
+            LOGGER.ii("Running detection on image " + currTimestamp);
+            final long startTime = SystemClock.uptimeMillis();
+            final List<Classifier.Recognition> results = detector.recognizeImage(croppedBitmap);
+            lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
 
-          cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
-          final Canvas canvas = new Canvas(cropCopyBitmap);
-          final Paint paint = new Paint();
-          paint.setColor(Color.RED);
-          paint.setStyle(Style.STROKE);
-          paint.setStrokeWidth(2.0f);
+            cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
+            final Canvas canvas = new Canvas(cropCopyBitmap);
+            final Paint paint = new Paint();
+            paint.setColor(Color.RED);
+            paint.setStyle(Style.STROKE);
+            paint.setStrokeWidth(2.0f);
 
-          float minimumConfidence = MINIMUM_CONFIDENCE_TF_OD_API;
-          switch (MODE) {
-            case TF_OD_API:
-              minimumConfidence = MINIMUM_CONFIDENCE_TF_OD_API;
-              break;
-            case MULTIBOX:
-              minimumConfidence = MINIMUM_CONFIDENCE_MULTIBOX;
-              break;
-            case YOLO:
-              minimumConfidence = MINIMUM_CONFIDENCE_YOLO;
-              break;
-          }
-
-          final List<Classifier.Recognition> mappedRecognitions =
-            new LinkedList<Classifier.Recognition>();
-
-          for (final Classifier.Recognition result : results) {
-            final RectF location = result.getLocation();
-            if (location != null && result.getConfidence() >= minimumConfidence) {
-              canvas.drawRect(location, paint);
-
-              cropToFrameTransform.mapRect(location);
-              result.setLocation(location);
-              mappedRecognitions.add(result);
+            float minimumConfidence = MINIMUM_CONFIDENCE_TF_OD_API;
+            switch (MODE) {
+              case TF_OD_API:
+                minimumConfidence = MINIMUM_CONFIDENCE_TF_OD_API;
+                break;
+              case MULTIBOX:
+                minimumConfidence = MINIMUM_CONFIDENCE_MULTIBOX;
+                break;
+              case YOLO:
+                minimumConfidence = MINIMUM_CONFIDENCE_YOLO;
+                break;
+              default:
+                break;
             }
+
+            final List<Classifier.Recognition> mappedRecognitions =
+                new LinkedList<Classifier.Recognition>();
+
+            for (final Classifier.Recognition result : results) {
+              final RectF location = result.getLocation();
+              if (location != null && result.getConfidence() >= minimumConfidence) {
+                canvas.drawRect(location, paint);
+
+                cropToFrameTransform.mapRect(location);
+                result.setLocation(location);
+                mappedRecognitions.add(result);
+              }
+            }
+
+            tracker.trackResults(mappedRecognitions, luminanceCopy, currTimestamp);
+            trackingOverlay.postInvalidate();
+
+            requestRender();
+            computingDetection = false;
           }
-
-          tracker.trackResults(mappedRecognitions, luminanceCopy, currTimestamp);
-          trackingOverlay.postInvalidate();
-
-          requestRender();
-          computingDetection = false;
-        }
-      });
+        });
   }
 
   @Override

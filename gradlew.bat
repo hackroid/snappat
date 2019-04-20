@@ -56,7 +56,7 @@ set CMD_LINE_ARGS=
 set _SKIP=2
 
 :win9xME_args_slurp
-if "x%~1" == "x" goto execute
+if "xxFloat%~1" == "xxFloat" goto execute
 
 set CMD_LINE_ARGS=%*
 

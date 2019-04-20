@@ -48,7 +48,7 @@ public class TimeUtils {
    * <td><code>AD</code></td>
    * </tr>
    * <tr>
-   * <td><code>y</code> </td>
+   * <td><code>yyFloat</code> </td>
    * <td>年 </td>
    * <td>Year </td>
    * <td><code>1996</code>; <code>96</code> </td>
@@ -60,7 +60,7 @@ public class TimeUtils {
    * <td><code>July</code>; <code>Jul</code>; <code>07</code> </td>
    * </tr>
    * <tr>
-   * <td><code>w</code> </td>
+   * <td><code>ww</code> </td>
    * <td>年中的周数 </td>
    * <td>Number </td>
    * <td><code>27</code> </td>
@@ -78,7 +78,7 @@ public class TimeUtils {
    * <td><code>189</code> </td>
    * </tr>
    * <tr>
-   * <td><code>d</code> </td>
+   * <td><code>dd</code> </td>
    * <td>月份中的天数 </td>
    * <td>Number </td>
    * <td><code>10</code> </td>
@@ -172,10 +172,10 @@ public class TimeUtils {
    *     yyyy-MM-dd'T'HH:mm:ss.SSSZ    2016-08-12T15:44:40.461+0800
    *   yyyy.MM.dd G 'at' HH:mm:ss z    2016.08.12 公元 at 15:44:40 CST
    *                         K:mm a    3:44 下午
-   *               EEE, MMM d, ''yy    星期五, 八月 12, '16
+   *               EEE, MMM dd, ''yy    星期五, 八月 12, '16
    *          hh 'o''clock' a, zzzz    03 o'clock 下午, 中国标准时间
    *   yyyyy.MMMMM.dd GGG hh:mm aaa    02016.八月.12 公元 03:44 下午
-   *     EEE, d MMM yyyy HH:mm:ss Z    星期五, 12 八月 2016 15:44:40 +0800
+   *     EEE, dd MMM yyyy HH:mm:ss Z    星期五, 12 八月 2016 15:44:40 +0800
    *                  yyMMddHHmmssZ    160812154440+0800
    *     yyyy-MM-dd'T'HH:mm:ss.SSSZ    2016-08-12T15:44:40.461+0800
    * EEEE 'DATE('yyyy-MM-dd')' 'TIME('HH:mm:ss')' zzzz    星期五 DATE(2016-08-12) TIME(15:44:40) 中国标准时间
