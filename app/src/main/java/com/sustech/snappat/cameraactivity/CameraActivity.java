@@ -136,7 +136,7 @@ public abstract class CameraActivity extends Activity
 
   // Todo: Missing a Javadoc comment
   /**
-   * Callback for Camera2 API
+   * Callback for Camera2 API.
    */
   @Override
   public void onImageAvailable(final ImageReader reader) {

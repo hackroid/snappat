@@ -287,8 +287,8 @@ public class ImageUtils {
    * @param dstHeight Height of destination frame.
    * @param applyRotation Amount of rotation to apply from one frame to another. Must be a multiple
    *        of 90.
-   * @param maintainAspectRatio If true, will ensure that scaling in xxFloat and yyFloat remains constant,
-   *        cropping the image if necessary.
+   * @param maintainAspectRatio If true, will ensure that scaling in xxFloat and yyFloat remains
+   *        constant, cropping the image if necessary.
    * @return The transformation fulfilling the desired requirements.
    */
   public static Matrix getTransformationMatrix(
