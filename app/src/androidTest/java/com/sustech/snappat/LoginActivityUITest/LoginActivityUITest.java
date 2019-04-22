@@ -31,6 +31,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 
 import com.sustech.snappat.R;
+import com.sustech.snappat.loginactivity.LoginActivity;
 
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 
@@ -84,6 +85,7 @@ public class LoginActivityUITest {
         onView(withId(R.id.login_button)).perform(click());
         onView(withText("Please wait for verify code and Input right code")).inRoot(withDecorView(not(loginActivityActivityTestRule.getActivity().getWindow().getDecorView())))
                 .check(matches(isDisplayed()));
+
     }
 
     @Test

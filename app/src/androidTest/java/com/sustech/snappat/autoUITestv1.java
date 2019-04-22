@@ -23,6 +23,7 @@ import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -30,7 +31,7 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class autoUITestv1 {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -42,7 +43,7 @@ public class MainActivityTest {
                     "android.permission.WRITE_EXTERNAL_STORAGE");
 
     @Test
-    public void mainActivityTest() {
+    public void autoUITestv1() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.sendcode_button), withText("send"),
                         childAtPosition(
@@ -54,16 +55,6 @@ public class MainActivityTest {
         appCompatButton.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.sendcode_button), withText("send"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.LinearLayout")),
-                                        2),
-                                1),
-                        isDisplayed()));
-        appCompatButton2.perform(click());
-
-        ViewInteraction appCompatButton3 = onView(
                 allOf(withId(R.id.login_button), withText("Login in"),
                         childAtPosition(
                                 childAtPosition(
@@ -71,7 +62,27 @@ public class MainActivityTest {
                                         0),
                                 3),
                         isDisplayed()));
-        appCompatButton3.perform(click());
+        appCompatButton2.perform(click());
+
+        ViewInteraction bottomNavigationItemView = onView(
+                allOf(withId(R.id.navigation_dashboard), withContentDescription("Dashboard"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.navigation),
+                                        0),
+                                1),
+                        isDisplayed()));
+        bottomNavigationItemView.perform(click());
+
+        ViewInteraction bottomNavigationItemView2 = onView(
+                allOf(withId(R.id.navigation_notifications), withContentDescription("Notifications"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.navigation),
+                                        0),
+                                2),
+                        isDisplayed()));
+        bottomNavigationItemView2.perform(click());
 
         ViewInteraction button = onView(
                 allOf(withText("CameraButton"),
@@ -83,6 +94,19 @@ public class MainActivityTest {
                                 2),
                         isDisplayed()));
         button.perform(click());
+
+//        ViewInteraction button2 = onView(
+//                allOf(withText("CameraButton"),
+//                        childAtPosition(
+//                                allOf(withId(R.id.container),
+//                                        childAtPosition(
+//                                                withId(android.R.id.content),
+//                                                0)),
+//                                2),
+//                        isDisplayed()));
+//        button2.perform(click());
+
+//        pressBack();
 
         pressBack();
     }

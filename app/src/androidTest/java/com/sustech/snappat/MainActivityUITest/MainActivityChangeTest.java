@@ -27,9 +27,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 
-import com.sustech.snappat.CameraActivity.CameraActivity;
 import com.sustech.snappat.MainActivity;
 import com.sustech.snappat.R;
+import com.sustech.snappat.cameraactivity.CameraActivity;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityChangeTest {

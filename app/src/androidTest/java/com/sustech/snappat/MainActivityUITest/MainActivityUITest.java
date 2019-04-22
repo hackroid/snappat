@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.ViewInteraction;
 import androidx.test.runner.AndroidJUnit4;
 
 import org.hamcrest.Matcher;
@@ -31,7 +32,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 
-import com.sustech.snappat.LoginActivityUITest.LoginActivity;
 import com.sustech.snappat.MainActivity;
 import com.sustech.snappat.R;
 
@@ -49,11 +49,25 @@ public class MainActivityUITest {
 
     @Test
     public void basicTest() {
-        onView(withId(R.id.navigation))
-                .check(matches((isDisplayed())));
+//        onView(withId(R.id.navigation))
+//                .check(matches((isDisplayed())));
 
-        onView(withId(R.id.message))
-                .check(matches((isDisplayed())));
+//        onView(withId(R.id.message))
+//                .check(matches((isDisplayed())));
+//        ViewInteraction appCompatButton2 = onView(
+//                allOf(withId(R.id.login_button), withText("Login in"),
+//                        childAtPosition(
+//                                childAtPosition(
+//                                        withId(android.R.id.content),
+//                                        0),
+//                                3),
+//                        isDisplayed()));
+//        appCompatButton2.perform(click());
+
+//        onView(withId(R.id.login_button))
+//                .check(matches((isDisplayed())));
+//
+//        onView(withId(R.id.login_button)).perform(click());
 
         onView(withText("CameraButton")).check(matches((isDisplayed())));
 

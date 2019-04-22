@@ -28,7 +28,7 @@ import static org.hamcrest.Matchers.not;
 
 import com.sustech.snappat.MainActivity;
 import com.sustech.snappat.R;
-
+import com.sustech.snappat.loginactivity.LoginActivity;
 
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityChangeUITest {
