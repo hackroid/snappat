@@ -1,27 +1,134 @@
 <resources>
 
-    <style name="SplashTheme" parent="android:Theme.Black.NoTitleBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <!-- Customize your theme here. -->
-    </style>
-
-    <!-- 界面切换动画 -->
-    <style name="animfade" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_from_right</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_out_to_left</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_to_right</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_in_from_left</item>
-    </style>
-
+    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowAnimationStyle">@style/animfade</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="ThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+
+    </style>
+
+    <style name="ThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+    <style name="Custom_Progress" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog的windowFrame框为无 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 设置dialog的背景 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否显示title -->
+    </style>
+    <style name="ThemeSplash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@mipmap/welcome</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="CustomCheckBoxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_style</item>
+    </style>
+    <style name="notAnimation">
+        <item name="android:activityOpenEnterAnimation">@null</item>
+        <item name="android:activityOpenExitAnimation">@null</item>
+        <item name="android:activityCloseEnterAnimation">@null</item>
+        <item name="android:activityCloseExitAnimation">@null</item>
+        <item name="android:taskOpenEnterAnimation">@null</item>
+        <item name="android:taskOpenExitAnimation">@null</item>
+        <item name="android:taskCloseEnterAnimation">@null</item>
+        <item name="android:taskCloseExitAnimation">@null</item>
+        <item name="android:taskToFrontEnterAnimation">@null</item>
+        <item name="android:taskToFrontExitAnimation">@null</item>
+        <item name="android:taskToBackEnterAnimation">@null</item>
+        <item name="android:taskToBackExitAnimation">@null</item>
+    </style>
+
+    <style name="CustomTheme_Dialog" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/notAnimation</item>
+    </style>
+
+
+    <style name="PermissionBaseWhiteStyle">
+        <item name="PermissionTitleColor">@color/permissionColorWhite</item>
+        <item name="PermissionMsgColor">@color/permissionColorWhite</item>
+        <item name="PermissionItemTextColor">@color/permissionColorWhite</item>
+        <item name="PermissionButtonTextColor">@color/permissionColorWhite</item>
+        <item name="PermissionIconFilterColor">@color/permissionColorWhite</item>
+    </style>
+    <style name="PermissionBaseblactStyle">
+        <item name="PermissionTitleColor">#737373</item>
+        <item name="PermissionMsgColor">#737373</item>
+        <item name="PermissionItemTextColor">#737373</item>
+        <item name="PermissionButtonTextColor">#737373</item>
+        <item name="PermissionIconFilterColor">#737373</item>
+    </style>
+    <style name="PermissionDefaultNormalStyle" >
+        <item name="PermissionTitleColor">#737373</item>
+        <item name="PermissionMsgColor">#737373</item>
+        <item name="PermissionItemTextColor">#737373</item>
+        <item name="PermissionButtonBackground">@drawable/shape_btn_next</item>
+        <item name="PermissionBackround">@drawable/shape_bg_white</item>
+        <item name="PermissionButtonTextColor">@android:color/white</item>
+    </style>
+
+    <style name="PermissionDefaultGreenStyle" parent="PermissionBaseWhiteStyle">
+        <item name="PermissionButtonBackground">@drawable/shape_btn_green_light</item>
+        <item name="PermissionBackround">@drawable/permission_card1</item>
+        <item name="PermissionBgFilterColor">@color/permissionBgColorGreenLight</item>
+    </style>
+
+    <style name="PermissionDefaultBlueStyle" parent="PermissionBaseWhiteStyle">
+        <item name="PermissionButtonBackground">@drawable/shape_btn_border_white</item>
+        <item name="PermissionBackround">@drawable/shape_btn_blue</item>
+    </style>
+    <style name="PermissionThemeStyle" parent="PermissionBaseblactStyle">
+        <item name="PermissionButtonBackground">@drawable/shape_btn_border_black</item>
+        <item name="PermissionBackround">@drawable/shape_bg_white</item>
+    </style>
+    <style name="PermissionAnimFade">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="PermissionAnimScale">
+        <item name="android:windowEnterAnimation">@anim/scale_in</item>
+        <item name="android:windowExitAnimation">@anim/scale_out</item>
+    </style>
+
+    <style name="PermissionAnimModal">
+        <item name="android:windowEnterAnimation">@anim/modal_in</item>
+        <item name="android:windowExitAnimation">@anim/modal_out</item>
     </style>
 
 </resources>
