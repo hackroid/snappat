@@ -11,6 +11,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sustech.snappat.R;
 import com.sustech.snappat.data.UserInfo;
 
+/**
+ * Class {@code LoginActivity} Login Activity of this app.
+ *
+ * <p>Login activity of this app. Implements send verify code, receive verify code result,
+ * react with verify code result, activity jump and link</p>
+ * <p>extends {@code AppCompatActivity}, over write some functions of {@link AppCompatActivity}</p>
+ * <p>implement {@code View.OnClickListener}, over write some functions of {@link View.OnClickListener}</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 1.0
+ */
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
   //    Secret 82ae7dc9a211c5b2a536215b
@@ -23,6 +35,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
   private Boolean isSend = false;
   private int counter = 0;
 
+
+  /**
+   * execute when create this activity
+   *
+   * <p>implement input and show phone number, verify code. implement send verify code</p>
+   *
+   * {@inheritDoc}
+   * */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -33,20 +53,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button button = (Button) findViewById(R.id.login_button);
     sendCode.setOnClickListener(this);
     button.setOnClickListener(this);
-    sharedPreferences = getBaseContext()
-        .getSharedPreferences(getString(R.string.app_preference), Context.MODE_PRIVATE);
+    sharedPreferences =
+        getBaseContext()
+            .getSharedPreferences(getString(R.string.app_preference), Context.MODE_PRIVATE);
 
     // used for debug
     editTextPhoneNumber.setText("13028871392");
     verifyCode.setText("123456");
-
   }
 
   public void log(String info) {
-    Toast.makeText(LoginActivity.this,
-        info, Toast.LENGTH_LONG).show();
+    Toast.makeText(LoginActivity.this, info, Toast.LENGTH_LONG).show();
   }
 
+  /**
+   * Get user information.
+   *
+   * <p>Get user information with id, user name, phone number from server.</p>
+   *
+   * @return {@code UserInfo}
+   * @since 1.0
+   * */
   public UserInfo getUserInfo() {
     return new UserInfo(123L, "12313", 12313222);
   }
@@ -55,14 +82,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     return true;
   }
 
-  private void sendVerifyCode() {
+  private void sendVerifyCode() {}
 
-  }
+  private void startCounter() {}
 
-  private void startCounter() {
-
-  }
-
+  /**
+   * Called by click event
+   *
+   * <p>React click event with different situation, include: had not sent verify code, wrong verify
+   * and login successfully</p>
+   *
+   * {@inheritDoc}
+   * */
   @Override
   public void onClick(View v) {
     switch (v.getId()) {
@@ -85,8 +116,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editor.putString(getString(R.string.user_name), userInfo.username);
         editor.putBoolean(getString(R.string.pref_login), true);
         editor.apply();
-        Toast.makeText(LoginActivity.this,
-            "Login Sucessfully", Toast.LENGTH_LONG).show();
+        Toast.makeText(LoginActivity.this, "Login Sucessfully", Toast.LENGTH_LONG).show();
         finish();
         break;
       case R.id.sendcode_button:
