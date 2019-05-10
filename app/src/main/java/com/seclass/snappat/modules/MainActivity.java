@@ -41,16 +41,6 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
 
     private long exitTime = 0;
 
-    @OnClick({R.id.main_tv})
-    public void onViewClicked(View v) {
-        switch (v.getId()) {
-//            case R.id.main_tv:
-//                main_tv.setText("hahahha");
-//                break;
-            default:
-                break;
-        }
-    }
 
     @Override
     protected int getLayoutId() {
