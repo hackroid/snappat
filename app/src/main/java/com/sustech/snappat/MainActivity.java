@@ -20,8 +20,9 @@ import com.sustech.snappat.loginactivity.LoginActivity;
 /**
  * Class {@code MainActivity} main activity of this app.
  *
- * <p>Center of all activities and features.</p>
- * <p>extends {@code AppCompatActivity}, over write some functions of {@link AppCompatActivity}</p>
+ * <p>Center of all activities and features.
+ *
+ * <p>extends {@code AppCompatActivity}, over write some functions of {@link AppCompatActivity}
  *
  * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
  * @since 1.0
@@ -30,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
   private transient TextView textMessage;
 
-  private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
-      = new BottomNavigationView.OnNavigationItemSelectedListener() {
+  private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener =
+      new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
           switch (item.getItemId()) {
@@ -50,9 +51,7 @@ public class MainActivity extends AppCompatActivity {
         }
       };
 
-  /**
-   * {@inheritDoc}
-   * */
+  /** {@inheritDoc} */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -67,22 +66,25 @@ public class MainActivity extends AppCompatActivity {
     final Context context = this;
     Button cameraButton = new Button(getBaseContext());
     cameraButton.setText("CameraButton");
-    cameraButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        SharedPreferences sharedPreferences = getBaseContext()
-            .getSharedPreferences(getString(R.string.app_preference), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(getString(R.string.pref_login), false);
-        editor.commit();
-        Intent cameraIntent = new Intent(context, DetectorActivity.class);
-        startActivity(cameraIntent);
-      }
-    });
+    cameraButton.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            SharedPreferences sharedPreferences =
+                getBaseContext()
+                    .getSharedPreferences(getString(R.string.app_preference), Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(getString(R.string.pref_login), false);
+            editor.commit();
+            Intent cameraIntent = new Intent(context, DetectorActivity.class);
+            startActivity(cameraIntent);
+          }
+        });
     constraintLayout.addView(cameraButton);
 
-    SharedPreferences sharedPreferences = getBaseContext()
-        .getSharedPreferences(getString(R.string.app_preference), Context.MODE_PRIVATE);
+    SharedPreferences sharedPreferences =
+        getBaseContext()
+            .getSharedPreferences(getString(R.string.app_preference), Context.MODE_PRIVATE);
     boolean islogin = sharedPreferences.getBoolean(getString(R.string.pref_login), false);
     if (!islogin) {
       Intent intent = new Intent(this, LoginActivity.class);
