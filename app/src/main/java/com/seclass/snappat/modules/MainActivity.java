@@ -22,9 +22,8 @@ import com.seclass.snappat.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity<NormalView, NormalPresenter> implements NormalView {
+public class MainActivity extends BaseActivity<NormalView, NormalPresenter> implements NormalView, View.OnClickListener {
 
     FrameLayout mContent;
     LinearLayout mLlHome;
@@ -40,17 +39,6 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
     private MineFragment mineFragment;
 
     private long exitTime = 0;
-
-    @OnClick({R.id.main_tv})
-    public void onViewClicked(View v) {
-        switch (v.getId()) {
-//            case R.id.main_tv:
-//                main_tv.setText("hahahha");
-//                break;
-            default:
-                break;
-        }
-    }
 
     @Override
     protected int getLayoutId() {
@@ -118,6 +106,23 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
         linearLayout.setSelected(true);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_home:
+                selectedFragment(0);
+                tabSelected(mLlHome);
+                break;
+            case R.id.ll_notify:
+                selectedFragment(1);
+                tabSelected(mLlNotify);
+                break;
+            case R.id.ll_mine:
+                selectedFragment(2);
+                tabSelected(mLlMine);
+                break;
+        }
+    }
 
     private void hideFragment(FragmentTransaction transaction) {
         if (homeFragment != null) {
@@ -130,6 +135,12 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
             transaction.hide(mineFragment);
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     @Override
     protected void initData() {
 
