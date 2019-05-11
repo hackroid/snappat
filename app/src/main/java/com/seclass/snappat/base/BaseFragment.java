@@ -13,8 +13,6 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.lzy.okgo.OkGo;
 import com.seclass.snappat.R;
 import com.seclass.snappat.utils.ToastUtils;
-import com.seclass.snappat.utils.Utils;
-
 import butterknife.ButterKnife;
 
 public abstract class BaseFragment<V, P extends BasePresent<V>> extends Fragment implements BaseView {

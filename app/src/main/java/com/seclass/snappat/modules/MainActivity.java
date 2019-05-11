@@ -6,7 +6,9 @@ package com.seclass.snappat.modules;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -22,10 +24,10 @@ import com.seclass.snappat.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity<NormalView, NormalPresenter> implements NormalView, View.OnClickListener {
+public class MainActivity extends BaseActivity<NormalView, NormalPresenter> implements NormalView {
 
-    FrameLayout mContent;
     LinearLayout mLlHome;
     LinearLayout mLlNotify;
     LinearLayout mLlMine;
@@ -45,12 +47,6 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
         return R.layout.activity_main;
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
-    }
 
     @Override
     public NormalPresenter initPresenter() {
@@ -107,22 +103,19 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ll_home:
-                selectedFragment(0);
-                tabSelected(mLlHome);
-                break;
-            case R.id.ll_notify:
-                selectedFragment(1);
-                tabSelected(mLlNotify);
-                break;
-            case R.id.ll_mine:
-                selectedFragment(2);
-                tabSelected(mLlMine);
-                break;
-        }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Fragment fragment = homeFragment;
+        fragment.onActivityResult(requestCode, resultCode, data);
+        hideProgress();
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
+    }
+
+
 
     private void hideFragment(FragmentTransaction transaction) {
         if (homeFragment != null) {
@@ -149,6 +142,29 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
     @Override
     public void initEvent() {
 
+        mLlHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedFragment(0);
+                tabSelected(mLlHome);
+            }
+        });
+
+        mLlNotify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedFragment(1);
+                tabSelected(mLlNotify);
+            }
+        });
+
+        mLlMine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedFragment(2);
+                tabSelected(mLlMine);
+            }
+        });
     }
 
     @Override
@@ -207,4 +223,5 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
         return super.onKeyDown(keyCode, event);
 
     }
+
 }
