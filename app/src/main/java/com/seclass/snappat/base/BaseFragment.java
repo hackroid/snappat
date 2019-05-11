@@ -1,13 +1,19 @@
 package com.seclass.snappat.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.lzy.okgo.OkGo;
+import com.seclass.snappat.R;
 import com.seclass.snappat.utils.ToastUtils;
+import com.seclass.snappat.utils.Utils;
 
 import butterknife.ButterKnife;
 
@@ -16,6 +22,21 @@ public abstract class BaseFragment<V, P extends BasePresent<V>> extends Fragment
     protected P presenter;
     protected ImmersionBar mImmersionBar;
     private View mView;  //缓存Fragment view
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (mView == null) {
+            Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.ThemeLight);
+            LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+            mView = localInflater.inflate(getContentViewLayoutID(), null);
+        }
+        ViewGroup parent = (ViewGroup) mView.getParent();
+        if (parent != null) {
+            parent.removeView(mView);
+        }
+        return mView;
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
