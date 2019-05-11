@@ -66,4 +66,6 @@ dependencies {
     implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
     //权限请求
     implementation 'me.weyye.hipermission:library:1.0.7'
+    //圆形头像框
+    implementation  'de.hdodenhof:circleimageview:3.0.0'
 }
