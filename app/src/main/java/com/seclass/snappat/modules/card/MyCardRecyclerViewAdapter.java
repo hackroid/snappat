@@ -5,10 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import com.seclass.snappat.R;
 import com.seclass.snappat.modules.card.CardFragment.OnListFragmentInteractionListener;
 import com.seclass.snappat.modules.card.dummy.DummyContent.DummyItem;
-
 import java.util.List;
 
 /**
