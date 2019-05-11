@@ -36,4 +36,6 @@
     <string name="notify_text">通知</string>
     <string name="mine_text">我</string>
     <string name="no_more">没了~~~</string>
+
+    <string name="camera_error">打开摄像头错误</string>
 </resources>
