@@ -3,13 +3,66 @@
   ~ Created by Snooow on 2019/5/10
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/home_tv"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/home_text"/>
-</LinearLayout>
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_60"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:id="@+id/home_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/home_title1"
+                    android:layout_width="@dimen/dimens_50"
+                    android:layout_height="@dimen/dimens_50"
+                    android:scaleType="center"
+                    android:src="@mipmap/home_title1"/>
+
+                <ImageView
+                    android:id="@+id/home_title2"
+                    android:layout_width="@dimen/dimens_50"
+                    android:layout_height="@dimen/dimens_50"
+                    android:scaleType="center"
+                    android:src="@mipmap/home_title2"/>
+
+                <ImageView
+                    android:id="@+id/home_title3"
+                    android:layout_width="@dimen/dimens_50"
+                    android:layout_height="@dimen/dimens_50"
+                    android:scaleType="center"
+                    android:src="@mipmap/home_title3"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_seting"
+                android:layout_width="@dimen/dimens_50"
+                android:layout_height="@dimen/dimens_50"
+                android:layout_centerVertical="true"
+                android:scaleType="center"
+                android:src="@mipmap/home_seting"/>
+
+            <TextView
+                android:id="@+id/home_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/home_text"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

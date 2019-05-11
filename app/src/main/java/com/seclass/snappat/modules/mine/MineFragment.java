@@ -5,9 +5,9 @@
 package com.seclass.snappat.modules.mine;
 
 import android.os.Bundle;
-
 import com.seclass.snappat.R;
 import com.seclass.snappat.base.BaseFragment;
+
 
 public class MineFragment extends BaseFragment<MineView, MinePresenter> implements MineView {
     @Override
