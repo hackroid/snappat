@@ -11,4 +11,9 @@
     android:src="@mipmap/person_bg">
 
 
+  <ImageView
+    android:id="@+id/iv_scan"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:srcCompat="@mipmap/import_go_scan_code"/>
 </FrameLayout>

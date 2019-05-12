@@ -122,7 +122,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     public void getCodeAuthDataHttp(CodeAuthBean.DataBean codeAuthBean) {
         Utils.getSpUtils().put("phone_number", mMobilePhone.getText().toString().trim());
         Utils.getSpUtils().put("uid", codeAuthBean.getUid());
-
+        Utils.getSpUtils().put("user_name", mMobilePhone.getText().toString().trim());
         Log.d("Debug", "getCodeAuthDataHttp: "+codeAuthBean.getUid());
 
         hideProgress();

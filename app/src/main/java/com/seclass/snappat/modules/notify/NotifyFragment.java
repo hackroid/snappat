@@ -6,13 +6,16 @@ package com.seclass.snappat.modules.notify;
 
 import android.os.Bundle;
 
+
+import com.seclass.snappat.R;
 import com.seclass.snappat.base.BaseFragment;
 import com.seclass.snappat.bean.ResponseBean;
 
 public class NotifyFragment extends BaseFragment<NotifyView, NotifyPresenter> implements NotifyView {
+
     @Override
     public NotifyPresenter initPresenter() {
-        return new NotifyPresenter();
+        return new NotifyPresenter(getActivity());
     }
 
     @Override
@@ -32,7 +35,7 @@ public class NotifyFragment extends BaseFragment<NotifyView, NotifyPresenter> im
 
     @Override
     protected int getContentViewLayoutID() {
-        return 0;
+        return R.layout.fragment_notify;
     }
 
     @Override

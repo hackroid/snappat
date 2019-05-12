@@ -6,12 +6,14 @@ package com.seclass.snappat.modules.mine;
 
 import android.os.Bundle;
 
+import com.seclass.snappat.R;
 import com.seclass.snappat.base.BaseFragment;
+
 
 public class MineFragment extends BaseFragment<MineView, MinePresenter> implements MineView {
     @Override
     public MinePresenter initPresenter() {
-        return new MinePresenter();
+        return new MinePresenter(getActivity());
     }
 
     @Override
@@ -31,6 +33,6 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
 
     @Override
     protected int getContentViewLayoutID() {
-        return 0;
+        return R.layout.fragment_mine;
     }
 }

@@ -54,19 +54,4 @@
     <attr name="item_color__style" format="color"/>
 
 
-
-    <!--自定义MLImageView的属性-->
-    <declare-styleable name="RoundImageView">
-        <attr name="press_alpha" format="integer" />
-        <attr name="press_color" format="color" />
-        <attr name="radius" format="dimension"/>
-        <attr name="border_width" format="dimension" />
-        <attr name="border_color" format="color"/>
-        <attr name="shape_type" format="enum">
-            <enum name="round" value="1"/>
-            <enum name="rectangle" value="0" />
-        </attr>
-    </declare-styleable>
-
-
 </resources>

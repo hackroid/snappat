@@ -4,7 +4,15 @@
 
 package com.seclass.snappat.modules.mine;
 
+
+import android.content.Context;
+
 import com.seclass.snappat.base.BasePresent;
 
 public class MinePresenter  extends BasePresent<MineView> {
+    private Context mContext;
+
+    public MinePresenter(Context context) {
+        this.mContext = context;
+    }
 }

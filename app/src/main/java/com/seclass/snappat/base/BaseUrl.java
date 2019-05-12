@@ -3,7 +3,8 @@ package com.seclass.snappat.base;
 public class BaseUrl {
     // 验证服务器
     public final static String HTTP_ADDRESS = "https://api.pocketeos.top/api_oc_personal/v1.0.0/";
-    public final static String Server_Url="http://10.21.17.138:8888/";
+    public final static String Server_Url="http://cn1.hackroid.com:8888/";
+
     // 获取验证码
     public final static String HTTP_Get_code = HTTP_ADDRESS + "message/send";
     // 绑定手机号
@@ -12,6 +13,7 @@ public class BaseUrl {
     public final static String HTTP_Get_code_auth = HTTP_ADDRESS + "message/auth";
 
     //以下API的详细使用方法见后端文档
+    public final static String HTTP_Post_Registry = Server_Url + "registry/registry";
     //通过username和phone登录并返回用户信息(登录)
     public final static String HTTP_Get_userinfo = Server_Url + "user/select";
     //获取用户发布过的谜题信息,需要登录状态
