@@ -67,4 +67,9 @@ dependencies {
     implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
     //权限请求
     implementation 'me.weyye.hipermission:library:1.0.7'
+
+    //腾讯QMUI框架
+    implementation 'com.qmuiteam:qmui:1.2.0'
+    implementation 'com.qmuiteam:arch:0.3.1'
+
 }

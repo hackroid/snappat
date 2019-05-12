@@ -37,4 +37,10 @@
     <string name="mine_text">我</string>
     <string name="no_more">没了~~~</string>
     <string name="camera_error">打开摄像头错误</string>
+
+    <string name="start_chatting">开始聊天</string>
+    <string name="hint_message">hint_message</string>
+    <string name="send">send</string>
+
+
 </resources>

@@ -123,6 +123,8 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         Utils.getSpUtils().put("phone_number", mMobilePhone.getText().toString().trim());
         Utils.getSpUtils().put("uid", codeAuthBean.getUid());
         Utils.getSpUtils().put("user_name", mMobilePhone.getText().toString().trim());
+        //发送注册信息到服务器
+        presenter.regestry(mMobilePhone.getText().toString().trim());
         Log.d("Debug", "getCodeAuthDataHttp: "+codeAuthBean.getUid());
 
         hideProgress();

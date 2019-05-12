@@ -6,16 +6,16 @@ package com.seclass.snappat.modules.login;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.lzy.okgo.model.Response;
 import com.seclass.snappat.base.BasePresent;
 import com.seclass.snappat.base.BaseUrl;
 import com.seclass.snappat.bean.CodeAuthBean;
+import com.seclass.snappat.bean.CommonResponse;
 import com.seclass.snappat.bean.ResponseBean;
 import com.seclass.snappat.net.HttpUtils;
 import com.seclass.snappat.net.callbck.JsonCallback;
-
 import java.util.HashMap;
+import org.json.JSONObject;
 
 public class LoginPresenter extends BasePresent<LoginView> {
     private Context mContext;
@@ -34,6 +34,24 @@ public class LoginPresenter extends BasePresent<LoginView> {
                     view.getCodeDataHttp(response.body().message);
                 } else {
                     view.getDataHttpFail(response.body().message);
+                }
+            }
+        });
+    }
+
+    public void regestry(String phone){
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("phone", phone);
+        hashMap.put("username", "新用户");
+        HttpUtils.postRequest(BaseUrl.HTTP_Post_Registry,mContext,hashMap,new JsonCallback<CommonResponse<JSONObject>>() {
+            @Override
+            public void onSuccess(Response<CommonResponse<JSONObject>> response) {
+                Log.d("Debug", "regestry: "+response);
+                Log.d("Debug","datastructure"+response.body());
+                if (response.body().errno == 0) {
+                    Log.d("Succ","注册成功");
+                } else {
+                    Log.d("Succ","注册失败"+response.body());
                 }
             }
         });
