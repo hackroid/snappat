@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.seclass.snappat.modules.CameraActivity;
+package com.seclass.snappat.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -22,7 +22,8 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.seclass.snappat.modules.CameraActivity.Classifier.Recognition;
+import com.seclass.snappat.modules.scan.Classifier.Recognition;
+import com.seclass.snappat.modules.scan.ResultsView;
 
 import java.util.List;
 

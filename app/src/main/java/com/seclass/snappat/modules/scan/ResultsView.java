@@ -13,9 +13,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.seclass.snappat.modules.CameraActivity;
+package com.seclass.snappat.modules.scan;
 
-import com.seclass.snappat.modules.CameraActivity.Classifier.Recognition;
+import com.seclass.snappat.modules.scan.Classifier.Recognition;
 
 import java.util.List;
 

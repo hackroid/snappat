@@ -4,26 +4,19 @@
 
 package com.seclass.snappat.modules.home;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.seclass.snappat.R;
 import com.seclass.snappat.app.ActivityUtils;
 import com.seclass.snappat.base.BaseFragment;
-import com.seclass.snappat.modules.CameraActivity.DetectorActivity;
-import com.seclass.snappat.modules.MainActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.seclass.snappat.modules.scan.DetectorActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implements HomeView {

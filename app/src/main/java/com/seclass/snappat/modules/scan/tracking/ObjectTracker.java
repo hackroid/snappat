@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.seclass.snappat.modules.CameraActivity.tracking;
+package com.seclass.snappat.modules.scan.tracking;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -23,8 +23,8 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 
-import com.seclass.snappat.modules.CameraActivity.env.Logger;
-import com.seclass.snappat.modules.CameraActivity.env.Size;
+import com.seclass.snappat.modules.scan.env.Logger;
+import com.seclass.snappat.modules.scan.env.Size;
 
 import java.util.ArrayList;
 import java.util.HashMap;

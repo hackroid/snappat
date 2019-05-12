@@ -1,4 +1,4 @@
-package com.seclass.snappat.modules.CameraActivity;
+package com.seclass.snappat.modules.scan;
 
 /*
  * Copyright 2017 The TensorFlow Authors. All Rights Reserved.
@@ -31,9 +31,10 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.seclass.snappat.modules.CameraActivity.env.ImageUtils;
-import com.seclass.snappat.modules.CameraActivity.env.Logger;
+import com.seclass.snappat.modules.scan.env.ImageUtils;
+import com.seclass.snappat.modules.scan.env.Logger;
 import com.seclass.snappat.R;
+import com.seclass.snappat.view.AutoFitTextureView;
 
 import java.io.IOException;
 import java.util.List;

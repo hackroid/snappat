@@ -13,14 +13,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.seclass.snappat.modules.CameraActivity;
+package com.seclass.snappat.view;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.os.Trace;
 
-import com.seclass.snappat.modules.CameraActivity.env.Logger;
+import com.seclass.snappat.modules.scan.Classifier;
+import com.seclass.snappat.modules.scan.env.Logger;
 
 import org.tensorflow.Graph;
 import org.tensorflow.Operation;

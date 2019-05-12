@@ -1,5 +1,5 @@
 
-package com.seclass.snappat.modules.CameraActivity;
+package com.seclass.snappat.modules.scan;
 
 import android.Manifest;
 import android.app.Activity;
@@ -26,9 +26,10 @@ import android.view.Surface;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.seclass.snappat.modules.CameraActivity.env.ImageUtils;
-import com.seclass.snappat.modules.CameraActivity.env.Logger;
+import com.seclass.snappat.modules.scan.env.ImageUtils;
+import com.seclass.snappat.modules.scan.env.Logger;
 import com.seclass.snappat.R;
+import com.seclass.snappat.view.OverlayView;
 
 import java.nio.ByteBuffer;
 

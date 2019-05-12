@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.seclass.snappat.modules.CameraActivity;
+package com.seclass.snappat.modules.scan;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -31,11 +31,12 @@ import android.util.Size;
 import android.util.TypedValue;
 import android.widget.Toast;
 
-import com.seclass.snappat.modules.CameraActivity.OverlayView.DrawCallback;
-import com.seclass.snappat.modules.CameraActivity.env.BorderedText;
-import com.seclass.snappat.modules.CameraActivity.env.ImageUtils;
-import com.seclass.snappat.modules.CameraActivity.env.Logger;
-import com.seclass.snappat.modules.CameraActivity.tracking.MultiBoxTracker;
+import com.seclass.snappat.view.OverlayView;
+import com.seclass.snappat.view.OverlayView.DrawCallback;
+import com.seclass.snappat.modules.scan.env.BorderedText;
+import com.seclass.snappat.modules.scan.env.ImageUtils;
+import com.seclass.snappat.modules.scan.env.Logger;
+import com.seclass.snappat.modules.scan.tracking.MultiBoxTracker;
 import com.seclass.snappat.R;
 
 import java.io.IOException;
@@ -131,29 +132,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     tracker = new MultiBoxTracker(this);
 
     int cropSize = TF_OD_API_INPUT_SIZE;
-    if (MODE == DetectorMode.YOLO) {
-      detector =
-          TensorFlowYoloDetector.create(
-              getAssets(),
-              YOLO_MODEL_FILE,
-              YOLO_INPUT_SIZE,
-              YOLO_INPUT_NAME,
-              YOLO_OUTPUT_NAMES,
-              YOLO_BLOCK_SIZE);
-      cropSize = YOLO_INPUT_SIZE;
-    } else if (MODE == DetectorMode.MULTIBOX) {
-      detector =
-          TensorFlowMultiBoxDetector.create(
-              getAssets(),
-              MB_MODEL_FILE,
-              MB_LOCATION_FILE,
-              MB_IMAGE_MEAN,
-              MB_IMAGE_STD,
-              MB_INPUT_NAME,
-              MB_OUTPUT_LOCATIONS_NAME,
-              MB_OUTPUT_SCORES_NAME);
-      cropSize = MB_INPUT_SIZE;
-    } else {
+
       try {
         detector = TensorFlowObjectDetectionAPIModel.create(
             getAssets(), TF_OD_API_MODEL_FILE, TF_OD_API_LABELS_FILE, TF_OD_API_INPUT_SIZE);
@@ -166,7 +145,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         toast.show();
         finish();
       }
-    }
+
 
     previewWidth = size.getWidth();
     previewHeight = size.getHeight();

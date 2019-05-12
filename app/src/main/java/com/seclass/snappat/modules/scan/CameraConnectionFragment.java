@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.seclass.snappat.modules.CameraActivity;
+package com.seclass.snappat.modules.scan;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,7 +24,6 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
@@ -45,7 +43,6 @@ import android.media.ImageReader.OnImageAvailableListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -56,8 +53,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.seclass.snappat.modules.CameraActivity.env.Logger;
+import com.seclass.snappat.modules.scan.env.Logger;
 import com.seclass.snappat.R;
+import com.seclass.snappat.view.AutoFitTextureView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
