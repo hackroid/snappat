@@ -6,10 +6,13 @@ package com.seclass.snappat.modules;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.seclass.snappat.R;
 import com.seclass.snappat.base.BaseActivity;
@@ -26,7 +29,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity<NormalView, NormalPresenter> implements NormalView {
 
-    FrameLayout mContent;
     LinearLayout mLlHome;
     LinearLayout mLlNotify;
     LinearLayout mLlMine;
@@ -40,19 +42,12 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
     private MineFragment mineFragment;
 
     private long exitTime = 0;
-
-
+    
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
-    }
 
     @Override
     public NormalPresenter initPresenter() {
@@ -108,6 +103,20 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
         linearLayout.setSelected(true);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Fragment fragment = homeFragment;
+        fragment.onActivityResult(requestCode, resultCode, data);
+        hideProgress();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
+    }
+
+
 
     private void hideFragment(FragmentTransaction transaction) {
         if (homeFragment != null) {
@@ -120,6 +129,12 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
             transaction.hide(mineFragment);
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     @Override
     protected void initData() {
 
@@ -128,6 +143,29 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
     @Override
     public void initEvent() {
 
+        mLlHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedFragment(0);
+                tabSelected(mLlHome);
+            }
+        });
+
+        mLlNotify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedFragment(1);
+                tabSelected(mLlNotify);
+            }
+        });
+
+        mLlMine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedFragment(2);
+                tabSelected(mLlMine);
+            }
+        });
     }
 
     @Override
@@ -186,4 +224,5 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
         return super.onKeyDown(keyCode, event);
 
     }
+
 }

@@ -242,7 +242,6 @@ public abstract class BaseActivity<V, P extends BasePresent<V>> extends AutoLayo
         super.onResume();
         // 在Activity中初始化P，并且连接V
         presenter.attach((V) activity);
-
     }
 
 }

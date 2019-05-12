@@ -46,7 +46,7 @@
         <ImageView
             android:layout_width="@dimen/dimens_20"
             android:layout_height="@dimen/dimens_20"
-            android:src="@drawable/news_selected"/>
+            android:src="@drawable/friend_list_selected"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
         <ImageView
             android:layout_width="@dimen/dimens_20"
             android:layout_height="@dimen/dimens_20"
-            android:src="@drawable/application_selected"/>
+            android:src="@drawable/news_selected"/>
 
         <TextView
             android:layout_width="wrap_content"
