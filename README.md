@@ -1,5 +1,3 @@
-CS304 Project: Progress Report
-=======
 
 ## Group Info
 
@@ -8,6 +6,13 @@ CS304 Project: Progress Report
 
 | Member |    ID    |
 | ----- | ------ |
+=======
+# Snappat
+
+## Group Members
+
+| Member |    ID    |
+| :----: | :------: |
 | 赵博弘 | 11612706 |
 | 王泽林 | 11612715 |
 | 陈德缘 | 11611310 |
@@ -15,213 +20,110 @@ CS304 Project: Progress Report
 |  王森  | 11612110 |
 | 李可明 | 11612126 |
 
-## Snappat: version 1.0
-
-### Features
-
-We built and implemented 3 features in this iteration's submission, those are:
-
-* Login
-* Object Recognition
-* Back-end Data Structure Construction and Storing
-
-We chose those 3 features as our starting step for the reason that it will help us obtaining more smooth and steady developing progress(rhythm) in the following iterations.
-
-#### Feature1: Login
-
-* Priority: **Most Important**
-* Dependency: **Everything** depends on **Login**
-* Dev degree of difficulty: **Medium**
-* Test degree of difficulty:
-
-Our Android app Snappat is mainly a social oriented software, thus for the whole progress users are using our app (story), an indispensable feature: login is the first step and the gateway to the colorful world in the app.
+## Group name: **Snappat**
 
-####Feature2: Object Recognition
+   It's a compound word created by sur team.
 
-* Priority: **Most Important**
-* Dependency: Main feature of Puzzle Solving depends on **Object Recognition**
-* Dev degree of difficulty: **Hard**
-* Test degree of difficulty: 
+   To introduce our project, here we explain our group name first.
 
-Object Recognition is the main feature used on Puzzle Solving function whenever it's creating or solving a puzzle. For current stage, we have embedded the TensorFlow Lite library to our source and used the demo model to get basic recognition for several kinds of common object in our daily life.
+   > Snap: a snapshot.
+   >
+   > Pat: draw attention to something by tapping it gently.
 
-#### Feature3: Back-end Data Structure Construction and Storing
+   Our project is a novel photo social application by solving puzzles.
 
-- Priority: **Most Important**
-- Dependency: Users' **data** relies on **Back-end**
-- Dev degree of difficulty: **Medium**
-- Test degree of difficulty: 
+   * **A puzzle is a photo with labels.** Users can public a puzzle by taking a photo, and our application will perform **object detection**, thus attaching several labels to this photo.
+   * Once a puzzle has been published, users can **solve this puzzle** accidentally by taking similar photos with same labels. Also, object detection is used in labeling the photos.
+   * For example, when a user takes a photo with five computer in it, another user can solve this "puzzle" by taking another photo with five computers.
 
-Back-end is the infrastructure of the application. We use PHP as back-end server to maintain the database of information which include users' info, puzzle details, solving history and messages. PHP server serve as a handler to make do with request and response between back-end and terminal(devices). The data structure shows as below:
+## Group Formation
 
-##### Users
+> Why do your group select this project? Explain the reason in terms of the criteria below:
 
-![User](https://i.loli.net/2019/04/20/5cba843062264.png)
+### Usefulness
 
-##### Puzzles
+>  What is your target audiences/users for the app?
 
-```json
-[
-  {
-    id:10,													// ID of the puzzle
-    userid:0,												// User's ID to whom the puzzle belongs
-    hint:text, 											// Corresponding hint of the puzzle
-    treasure:'some important msg',	// Message embedded with the puzzle
-    src:"",													// Image url of the puzzle
-    key:{},													// Solution to the puzzle, represented by a dictionary
-    																// containing key-value pairs
-    sdate:'2019-12-10 22:10:03', 		// Date which puzzle released
-    edate:"2019-12-11 10:10:00", 		// Date which puzzle expired
-    coins: 100,											// Bonus the user will obtain when sovled the puzzle
-    decoder:[1], 										// User's id who solved the puzzle
-    favor:0, 												// Count of likes for the puzzle
-    comment:[], 										// Comment of the puzzle
-    view:[], 												// Users' id who have view the puzzle
-  }
-  ,...
-]
-```
+Our application targets at **young people** who like taking photos, exploring the mysteries and having a desire to meet strangers. By using Snappat, young people can enjoy the process of publishing their own photos with puzzles and they can expect others to solve those puzzles. What's more, when taking photos, there may be serendipities to solve a "mystery" and meet its creator.
 
-##### History
+### Use of framework
 
-```json
-[
-  {
-    id:9,												// the id of puzzle which had been solved
-    userid:1,										// the id of user which the puzzle belongs to
-    date:"2019-12-10 22:10:03", // cracking date of the puzzle
-  }
-  ,...
-]
-```
+>  How important is the framework in the app? For regular users, how likely that the framework will be invoked?
 
-##### Message
+We use [Tensorflow Lite](https://www.tensorflow.org/lite)([repo](https://github.com/tensorflow)) as our kernel framework. This key technology is used by our most important feature: Puzzle.
 
-```json
-[
-  {
-    content:"",	// the content of message
-    user:"",		// sender
-    type:1,			//消息类型,可选值有3: 1表示有人favor了你发布的mystery; 2表示有人comment了你的mystery; 3表示有人解开了你的mystery
-    read:1, 		//是否已阅,1为已阅,0为未读
-  }
-  ,...
-]
-```
+An instance of puzzle consist of (which our framework get involved):
 
-### Features Testing Scenarios
+* Initialization
 
-#### Login 
-* postive:
-  login correctly, change activity and show login successfully
-* negative
-  If phone number is not in correct format:
-  	Toast show 'wrong phone number' 
-  If verify code is not in correct format:
-  	Toast show 'wrong phone number' 
+  When user is creating a puzzle, he/she usually seem to have some fantastic ideas of the things around  him/her. Then the user use our app to take photo on these stuff, and followed by the action, our framework could present a well recognization to get these target into camera aperture.
 
-#### Object Recognition
-This part immports lots of google's code, and there are also some places to improve and finish. This part will test later.
+* revelation
 
-#### Server
+  In the discovery page user will tend to looking for some puzzles he/she maybe interested in.  When the user click on that favored one, TF framework step in and start to recognize the things in the scene with the shift of user's motion. Whenever the recognition achieve the goals of the puzzle, at any moment, the user will reach the answer and  get into the answer page.
 
-##### Login
+### Novelty
 
-* Positive: login correctly, return user info
-* Negative: wrong phone or wrong verity code, return failed
+* Q: List at least 3 keywords to summarize the purpose of your app.
 
-##### getMysteryList
+  A: PHOTOGRAPHY, SOCIAL, PUZZLE
 
-* Positive: with right cookie, it can return your mystery list.
-* Negative: wrong cookie or no cookie, it will return failed.
+* Q: Perform a search in [GitHub](https://github.com/). Do similar apps that you propose exist?
 
-##### getHistroyList
+  A: No, our app is quite original and we hope to implement it well.
 
-* Positive:with right cookie, it can return your history list. 
-* Negative:wrong cookie or no cookie, it will return failed.
+* Q: What is the novelty of your project?
 
-##### getMessageList
+  * Q: What is the novelty of your project
 
-* Positive:with right cookie, it can return your message list. 
-* Negative:wrong cookie or no cookie, it will return failed.
+    * better design
 
-##### getUserInfoById
+      Our app is define a new way of social intercourse. People  come into contact with others by puzzle. Someone take photos and publish puzzle with tips, others solve it by take similar photos which contain necessary elements in some positions, they can also commit this puzzle.  People publish and solve puzzles by some karma and get familiar with others in this process.
 
-* Positive:with user_id and right cookie, it can return user info.
-* Negative:wrong cookie or no cookie or user_id doesn't match, it will return failed.
+    * unique features
 
-##### addMystery
+      It’s not only a new social model but also a entertainment method.
 
-* Positive:with right cookie and mystery infomation, it will add new mystery and return success.
-* Negative: lacking of mystery info or unexcepted cookie, it will return failed.
+      It contain newest image segmentation and image recognition technology.
 
-##### updateMystery
+      it has fresh UI and abundant logic.
 
-* Positive: with right cookie and mystery decoder,favor,comment,view info, it will update and return success.
-* Negative: lacking of mystery info  or unexcepted cookie, it will return failed.
+Q:  Is it easy to test the app? Does it require specific location to
+be set? Does it require special inputs/data? Does it require special hardware?
 
-##### crackMystery
+A: Yes, it's easy to test this app since it mainly uses phone's camera and requires no special inputs or hardware.
 
-* Positive: with right cookie and mystery id, it will add crack history and update your coins, return success.
-* Negative: lacking of mystery info or unexcepted cookie, it will return failed.
+### Diversity of team members
 
-### Features Implementation
+First iteration:
 
-#### Feature: Login
+| Name   | Role                   |
+| ------ | ---------------------- |
+| 王森   | Leader & Developer     |
+| 任涛   | Developer              |
+| 李可明 | Developer              |
+| 陈德缘 | Developer              |
+| 赵博弘 | Designer & Developer   |
+| 王泽林 | Tester & Documentation |
 
-![Login](https://i.loli.net/2019/04/20/5cbb196f74151.png)
+### List at least 10 features supported in your App.
 
-#### Feature: Object Recognition
+1. Sign in and Log in
+2. Take photos
+3. Leave comments
+4. Collections
+5. Ranking system
+6. Achievement system
+7. Share the link
+8. Set personal information
+9. Follow users
+10. Likes
+11. Message box
 
-![Recognition](https://i.loli.net/2019/04/20/5cbb1a39b62d8.png)
+### Design the main screen of your app
 
-#### Feature: Back-end
+![屏幕快照 2019-03-30 下午1.59.07](https://ws4.sinaimg.cn/large/006tKfTcgy1g1ks7jkt4uj313c0u04d4.jpg)
 
+![屏幕快照 2019-03-30 下午1.59.23](https://ws4.sinaimg.cn/large/006tKfTcgy1g1ks7ol63vj31830u0gxt.jpg)
 
-
-### Program Debugging and Cleanliness
-
-#### Google Code Style
-
-> com.sustech.snappet.utils is not a source directory, and we currently haven't used it.
->
-> So it won't be covered by the code style check. 
-
-All Java files passed the Google Code Style check.
-
-#### FindBugs
-
-> We met problems with plugin FindBugs itself. So we can't generate any result for this part.
-
-#### PMD
-
-> 706 PMD rule violations were found. See the report at: snappat/tools/pmd.html
-
-No error detected.
-
-### Javadoc
-
-Finished, see the html files in root directory.
-
-### JUnit Test
-
-Finished, for all public methods.
-
-## Schedule
-
-> The plan for the following development
-
-| Week No. | Plan                                |
-| -------- | ----------------------------------- |
-| Week 10  | Take photos                         |
-| Week 11  | Set personal information            |
-| Week 12  | Leave comments                      |
-| Week 13  | Collections & Likes                 |
-| Week 14  | Achievement system & Ranking system |
-| Week 15  | Follow users &  Message box         |
-
-## Code Review Group
-
-Monday: 4.20-6.10pm (Instructor: Hu Chun Feng) 
-
-TA E (5 groups), TA F (5 groups) 
+![屏幕快照 2019-03-30 下午1.59.50](https://ws3.sinaimg.cn/large/006tKfTcgy1g1ks7tjcz8j30xh0u0tlk.jpg)

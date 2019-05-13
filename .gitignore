@@ -43,6 +43,8 @@ captures/
 app/.project
 .DS_Store
 app/.DS_Store
+.vscode/
+.vscode/*
 .settings/
 app/.classpath
 

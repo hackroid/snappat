@@ -14,8 +14,6 @@ import android.os.IBinder;
  * 杀死进程自我重启
  */
 public class KillSelfService extends Service {
-    /**关闭应用后多久重新启动*/
-    private static  long stopDelayed=2000;
     private Handler handler;
     private String PackageName;
     public KillSelfService() {
@@ -24,7 +22,8 @@ public class KillSelfService extends Service {
 
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
-        stopDelayed=intent.getLongExtra("Delayed",10);
+        /*关闭应用后多久重新启动*/
+        long stopDelayed = intent.getLongExtra("Delayed", 10);
         PackageName=intent.getStringExtra("PackageName");
         handler.postDelayed(new Runnable() {
             @Override
@@ -33,7 +32,7 @@ public class KillSelfService extends Service {
                 KillSelfService.this.startActivity(LaunchIntent);
                 KillSelfService.this.stopSelf();
             }
-        },stopDelayed);
+        }, stopDelayed);
         return super.onStartCommand(intent, flags, startId);
     }
 

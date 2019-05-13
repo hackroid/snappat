@@ -17,25 +17,46 @@ import com.seclass.snappat.net.callbck.JsonCallback;
 import java.util.HashMap;
 import org.json.JSONObject;
 
+
+/**
+ * Class {@code LoginPresenter} .
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ */
+
+
 public class LoginPresenter extends BasePresent<LoginView> {
-    private Context mContext;
 
-    public LoginPresenter(Context context) {
-        this.mContext = context;
-    }
+  private Context mContext;
 
-    public void getCodeData(String mobilephone) {
-        HashMap<String, String> hashMap = new HashMap<String, String>();
-        hashMap.put("phoneNum", mobilephone);
-        HttpUtils.postRequest(BaseUrl.HTTP_Get_code, mContext, hashMap, new JsonCallback<ResponseBean<String>>() {
-            @Override
-            public void onSuccess(Response<ResponseBean<String>> response) {
-                if (response.body().code == 0) {
-                    view.getCodeDataHttp(response.body().message);
-                } else {
-                    view.getDataHttpFail(response.body().message);
-                }
+  public LoginPresenter(Context context) {
+    this.mContext = context;
+  }
+
+
+  /**
+   * Get code .
+   *
+   * <p>Get code with phone number from server</p>
+   *
+   * @return {@code UserInfo}
+   * @since 1.0
+   */
+
+  public void getCodeData(String mobilephone) {
+    HashMap<String, String> hashMap = new HashMap<String, String>();
+    hashMap.put("phoneNum", mobilephone);
+    HttpUtils.postRequest(BaseUrl.HTTP_Get_code, mContext, hashMap,
+        new JsonCallback<ResponseBean<String>>() {
+          @Override
+          public void onSuccess(Response<ResponseBean<String>> response) {
+            if (response.body().code == 0) {
+              view.getCodeDataHttp(response.body().message);
+            } else {
+              view.getDataHttpFail(response.body().message);
             }
+          }
         });
     }
 
@@ -73,6 +94,7 @@ public class LoginPresenter extends BasePresent<LoginView> {
                     view.getDataHttpFail(response.body().message);
                 }
             }
+          }
         });
-    }
+  }
 }
