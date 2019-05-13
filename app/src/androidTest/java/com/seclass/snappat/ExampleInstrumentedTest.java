@@ -4,14 +4,13 @@
 
 package com.seclass.snappat;
 
+import static org.junit.Assert.assertEquals;
+
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -25,6 +24,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.seclass.lightningethwallet", appContext.getPackageName());
+        assertEquals("com.seclass.snappat", appContext.getPackageName());
     }
 }
