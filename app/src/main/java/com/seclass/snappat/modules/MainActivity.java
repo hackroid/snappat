@@ -101,6 +101,7 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
         linearLayout.setSelected(true);
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Fragment fragment = homeFragment;
@@ -130,6 +131,7 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
         }
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -142,6 +144,7 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
 
     @Override
     public void initEvent() {
+
 
         mLlHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,5 +226,4 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
         }
         return super.onKeyDown(keyCode, event);
     }
-
 }

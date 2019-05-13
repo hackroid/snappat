@@ -37,6 +37,7 @@
     <string name="mine_text">我</string>
     <string name="no_more">没了~~~</string>
 
+
     <string name="friends_text">好友</string>
     <string name="latest_text">最新</string>
     <string name="hot_text">热榜</string>
@@ -45,6 +46,12 @@
     <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="camera_error">打开摄像头错误</string>
+
+    <string name="start_chatting">开始聊天</string>
+    <string name="hint_message">hint_message</string>
+    <string name="send">send</string>
+
+
 
     <string name="hint_text">提示: </string>
     <string name="enter_hint_text">请输入提示语：</string>

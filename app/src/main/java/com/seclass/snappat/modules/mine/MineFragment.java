@@ -1,15 +1,42 @@
 /*
- * Created by Snooow on 2019/5/10
+ * Created by Snooow on 2019/05/10
+ * Edited by RT on 2019/05/13
  */
 
 package com.seclass.snappat.modules.mine;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import butterknife.BindView;
+import butterknife.OnClick;
 import com.seclass.snappat.R;
 import com.seclass.snappat.base.BaseFragment;
+import com.seclass.snappat.bean.CommonResponse;
+import com.seclass.snappat.bean.CommonResponse.Test;
+import java.util.List;
+import java.util.Map;
+import org.json.JSONObject;
 
 
 public class MineFragment extends BaseFragment<MineView, MinePresenter> implements MineView {
+    protected List<Map<String, Object>>  strArr;
+    @BindView(R.id.info)
+    Button info;
+    @BindView(R.id.username)
+    TextView userText;
+    @BindView(R.id.phone)
+    TextView phone;
+    @BindView(R.id.follower)
+    TextView follower;
+    @BindView(R.id.coin)
+    TextView coin;
+    @BindView(R.id.description)
+    TextView description;
+
     @Override
     public MinePresenter initPresenter() {
         return new MinePresenter(getActivity());
@@ -26,12 +53,67 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
     }
 
     @Override
-    public void initEvent() {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
 
     }
 
     @Override
+    public void initEvent() {
+
+    }
+
+
+    @Override
     protected int getContentViewLayoutID() {
         return R.layout.fragment_mine;
+    }
+
+    @OnClick({R.id.info})
+    public void onViewClicked(View v) {
+        switch(v.getId()){
+            case R.id.info:
+                presenter.getUserInfo();
+                break;
+        }
+    }
+    @Override
+    public void getUserInfoSucc(JSONObject msg){
+        try{
+            //成功
+            String username = msg.getString("username");
+            String phone_number = msg.getString("phone");
+            String des = msg.getString("description");
+            if(des.length()==0){
+                des="这个人很懒,什么都没写";
+            }
+            String c = msg.getString("coin");
+            String fl = msg.getString("follower");
+            if(fl.equals("[]")){
+                fl="";
+            }
+            userText.setText("用户名: "+username);
+            phone.setText("电话: "+phone_number);
+            description.setText("简介:"+des);
+            coin.setText("金币:"+c);
+            follower.setText("关注你的人:"+fl.length());
+        }catch(Exception e){
+            Log.d("Exception",""+e);
+        }
+    }
+    @Override
+    public void getUserInfoFail(CommonResponse<Test> msg){
+        if(msg.errno!=0){
+            Log.d("Errno","Errno when getUserInfo"+msg.errmsg);
+            if(msg.errno==1003){
+                //重新注册一下
+//                presenter.regestry(Utils.getSpUtils().getString("phone"));
+//                presenter.getUserInfo();
+            }
+        }
+        hideProgress();
+        toast(msg.toString());
+
     }
 }

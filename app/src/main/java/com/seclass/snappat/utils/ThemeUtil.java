@@ -7,6 +7,7 @@ package com.seclass.snappat.utils;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
+import android.util.Log;
 import com.seclass.snappat.R;
 
 public class ThemeUtil {

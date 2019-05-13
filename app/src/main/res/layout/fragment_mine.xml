@@ -1,18 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Created by Snooow on 2019/5/10
-  -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.seclass.snappat.modules.mine.MineFragment">
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/white"
+  android:orientation="vertical"
+  tools:context="com.seclass.snappat.modules.mine.MineFragment">
+    <RelativeLayout
+      android:layout_width="200dip"
+      android:layout_height="90dip"
+      android:layout_margin="5dip"
+      android:orientation="horizontal">
+    <Button
+          android:id="@+id/info"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="我的信息"/>
+    </RelativeLayout>
+    <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+        <TextView
+          android:id="@+id/username"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/text_19"
+          android:layout_gravity="center_horizontal"
+          android:text="用户名:"/>
     <TextView
-        android:id="@+id/mine_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="@string/mine_text"/>
-
+      android:id="@+id/phone"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/text_19"
+      android:layout_gravity="center_horizontal"
+      android:text="电话:"/>
+        <TextView
+          android:id="@+id/description"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/text_19"
+          android:layout_gravity="center_horizontal"
+          android:text="个人简介:无."/>
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal">
+    <TextView
+      android:id="@+id/coin"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/text_19"
+      android:layout_gravity="center_horizontal"
+      android:text="金币:0"/>
+            <TextView
+              android:id="@+id/follower"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_margin="@dimen/text_19"
+              android:layout_gravity="center_horizontal"
+              android:text="关注:0"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
