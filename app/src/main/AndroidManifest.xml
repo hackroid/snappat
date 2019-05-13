@@ -10,8 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name="com.seclass.snappat.modules.welcome.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash">
@@ -25,7 +28,6 @@
         <activity android:name="com.seclass.snappat.modules.login.LoginActivity" />
         <activity android:name="com.seclass.snappat.modules.scan.DetectorActivity" />
         <activity android:name=".modules.publish.PubActivity" />
-
         <meta-data
             android:name="design_width"
             android:value="375">

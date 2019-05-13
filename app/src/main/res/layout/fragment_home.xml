@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Created by Snooow on 2019/5/10
   -->
@@ -7,8 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:focusableInTouchMode="true"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:src="@mipmap/person_bg">
 
     <ImageView
@@ -21,10 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <!--<include-->
-          <!--layout="@layout/tab_top"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="@dimen/dimens_49"/>-->
 
         <RelativeLayout
             android:id="@+id/title"
@@ -106,4 +101,9 @@
         android:src="@mipmap/ic_add_white_48dp" />
 
 
+  <ImageView
+    android:id="@+id/iv_scan"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:srcCompat="@mipmap/import_go_scan_code"/>
 </FrameLayout>
