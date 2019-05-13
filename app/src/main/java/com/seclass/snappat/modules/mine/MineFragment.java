@@ -103,6 +103,24 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
         }
     }
     @Override
+    public void getHistoryInfoSucc(JSONObject msg){
+        try{
+            //成功
+
+        }catch(Exception e){
+            Log.d("Exception",""+e);
+        }
+    }
+    @Override
+    public void getHistoryInfoFail(CommonResponse<Test> msg){
+        if(msg.errno!=0){
+            Log.d("Errno","Errno when getUserInfo"+msg.errmsg);
+        }
+        hideProgress();
+        toast(msg.toString());
+
+    }
+    @Override
     public void getUserInfoFail(CommonResponse<Test> msg){
         if(msg.errno!=0){
             Log.d("Errno","Errno when getUserInfo"+msg.errmsg);

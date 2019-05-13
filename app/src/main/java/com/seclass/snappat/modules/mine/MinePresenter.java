@@ -44,6 +44,26 @@ public class MinePresenter  extends BasePresent<MineView> {
             }
         });
     }
+    public void getHistoryInfo() {
+        String phone_number=Utils.getSpUtils().getString("phone_number");
+        String username = Utils.getSpUtils().getString("user_name");
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("phone", phone_number);
+        hashMap.put("username", username);
+        Log.d("DataTest",phone_number);
+        Log.d("DataTest",username);
+        HttpUtils.postRequest(BaseUrl.HTTP_Get_history, mContext, hashMap, new JsonCallback<CommonResponse<CommonResponse.Test>>() {
+            @Override
+            public void onSuccess(Response<CommonResponse<CommonResponse.Test>> response) {
+                Log.d("Debug", "getUserInfo Response: "+response);
+                if (response.body().errno == 0) {
+                    view.getHistoryInfoSucc(response.body().data.getData());
+                } else {
+                    view.getHistoryInfoFail(response.body());
+                }
+            }
+        });
+    }
     public void regestry(String phone){
         String phone_number=Utils.getSpUtils().getString("phone_number");
         String username=Utils.getSpUtils().getString("user_name");

@@ -13,4 +13,8 @@ public interface MineView extends BaseView {
   void getUserInfoSucc(JSONObject msg);
 
   void getUserInfoFail(CommonResponse<CommonResponse.Test> msg);
+
+  void getHistoryInfoSucc(JSONObject msg);
+
+  void getHistoryInfoFail(CommonResponse<CommonResponse.Test> msg);
 }
