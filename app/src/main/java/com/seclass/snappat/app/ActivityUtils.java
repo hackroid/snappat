@@ -12,8 +12,14 @@ import com.seclass.snappat.R;
 
 
 /**
- * Created by pocketEos on 2017/11/23.
- */
+ * Class {@code ActivityUtils} manage activity switch.
+ *
+ * <p>Activity switch will call the function in this class</p>
+ * <p>Implement switch to next activity with some animation</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ **/
 
 public class ActivityUtils {
     /**
