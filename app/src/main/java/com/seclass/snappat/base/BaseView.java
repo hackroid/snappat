@@ -4,6 +4,15 @@
 
 package com.seclass.snappat.base;
 
+/**
+ * Interface {@code BaseView}.
+ *
+ * <p>Basic interface for all activity view.
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ */
+
 public interface BaseView {
     /**
      * 显示loading框

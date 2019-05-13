@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Snooow on 2019/5/10
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:gravity="center_vertical"
+  android:background="@color/mediumseagreen"
+  android:orientation="horizontal">
+
+  <LinearLayout
+    android:id="@+id/tab_top_friends"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="3dp"
+      android:text="@string/friends_text"
+      android:textSize="@dimen/dimens_15"
+      android:textColor="@color/white"/>
+  </LinearLayout>
+
+
+  <LinearLayout
+    android:id="@+id/tab_top_latest"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="3dp"
+      android:text="@string/latest_text"
+      android:textSize="@dimen/dimens_15"
+      android:textColor="@color/white"/>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/tab_top_hot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="3dp"
+      android:text="@string/hot_text"
+      android:textSize="@dimen/dimens_15"
+      android:textColor="@color/white"/>
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/tab_top_reward"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="3dp"
+      android:text="@string/reward_text"
+      android:textSize="@dimen/dimens_15"
+      android:textColor="@color/white"/>
+  </LinearLayout>
+</LinearLayout>
