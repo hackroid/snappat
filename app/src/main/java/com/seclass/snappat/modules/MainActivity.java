@@ -8,23 +8,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.seclass.snappat.R;
 import com.seclass.snappat.base.BaseActivity;
 import com.seclass.snappat.modules.home.HomeFragment;
+import com.seclass.snappat.modules.mine.MineFragment;
 import com.seclass.snappat.modules.normal.NormalPresenter;
 import com.seclass.snappat.modules.normal.NormalView;
 import com.seclass.snappat.modules.notify.NotifyFragment;
-import com.seclass.snappat.modules.mine.MineFragment;
 import com.seclass.snappat.utils.ToastUtils;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity<NormalView, NormalPresenter> implements NormalView {
 
@@ -113,6 +110,8 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
 
