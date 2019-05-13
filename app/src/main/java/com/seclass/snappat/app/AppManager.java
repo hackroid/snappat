@@ -11,8 +11,15 @@ import android.content.Context;
 import java.util.Stack;
 
 /**
- * 应用程序Activity管理类：用于Activity管理和应用程序退出
- */
+ * Class {@code AppManager} manage activity and App.
+ *
+ * <p>App activity manager class</p>
+ * <p>Manager App exit</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ **/
+
 public class AppManager {
     private static Stack<Activity> activityStack;
     private static AppManager instance;
@@ -22,7 +29,7 @@ public class AppManager {
     }
 
     /**
-     * 单一实例
+     * get single instance
      */
     public static AppManager getAppManager() {
         if (instance == null) {
@@ -32,7 +39,9 @@ public class AppManager {
     }
 
     /**
-     * 添加Activity到堆栈
+     * add activity to stack
+     *
+     * @param activity the new activity
      */
     public void addActivity(Activity activity) {
         if (activityStack == null) {
@@ -42,7 +51,9 @@ public class AppManager {
     }
 
     /**
-     * 获取当前Activity（堆栈中最后一个压入的）
+     * get current activity (the last one of stack)
+     *
+     * @return current activity
      */
     public Activity currentActivity() {
         Activity activity = activityStack.lastElement();
@@ -50,7 +61,7 @@ public class AppManager {
     }
 
     /**
-     * 结束当前Activity（堆栈中最后一个压入的）
+     * finish current activity
      */
     public void finishActivity() {
         if (activityStack != null && activityStack.size() > 0) {
@@ -60,7 +71,7 @@ public class AppManager {
     }
 
     /**
-     * 结束指定的Activity
+     * finish given activity
      */
     public void finishActivity(Activity activity) {
         if (activity != null) {
@@ -71,7 +82,8 @@ public class AppManager {
     }
 
     /**
-     * 结束指定类名的Activity
+     * finish activity with given class name
+     * @param cls class name
      */
     public void finishActivity(Class<?> cls) {
         if (activityStack != null && activityStack.size() > 0) {
@@ -85,7 +97,7 @@ public class AppManager {
     }
 
     /**
-     * 结束所有Activity
+     * finish all activity
      */
     public void finishAllActivity() {
         if (activityStack != null && activityStack.size() > 0) {
@@ -99,7 +111,7 @@ public class AppManager {
     }
 
     /**
-     * 退出应用程序
+     * exit application
      */
     @SuppressWarnings("deprecation")
     public void AppExit(Context context) {
