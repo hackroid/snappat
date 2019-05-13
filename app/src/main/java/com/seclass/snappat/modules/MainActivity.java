@@ -222,7 +222,6 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
             return true;
         }
         return super.onKeyDown(keyCode, event);
-
     }
 
 }
