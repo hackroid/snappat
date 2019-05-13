@@ -41,6 +41,8 @@
             android:name="design_height"
             android:value="667">
         </meta-data>
+
+        <service android:name=".service.KillSelfService" />
     </application>
 
 </manifest>
