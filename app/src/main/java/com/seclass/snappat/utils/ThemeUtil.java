@@ -14,7 +14,7 @@ public class ThemeUtil {
     }
 
     public static void setTheme(@NonNull Activity activity) {
-        activity.setTheme(Utils.getSpUtils().getString("loginmode") != null ? R.style.ThemeLight : R.style.ThemeDark);
+        activity.setTheme(Utils.getSpUtils().getString("loginmode") == null ? R.style.ThemeLight : R.style.ThemeDark);
     }
 
     public static void reCreate(@NonNull final Activity activity) {

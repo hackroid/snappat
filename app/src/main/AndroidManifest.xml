@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.seclass.snappat">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,6 +31,8 @@
         <activity android:name="com.seclass.snappat.modules.MainActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.seclass.snappat.modules.login.LoginActivity" />
+        <activity android:name="com.seclass.snappat.modules.scan.DetectorActivity" />
+
         <meta-data
             android:name="design_width"
             android:value="375">
@@ -38,6 +41,8 @@
             android:name="design_height"
             android:value="667">
         </meta-data>
+
+        <service android:name=".service.KillSelfService" />
     </application>
 
 </manifest>
