@@ -23,11 +23,15 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_1"
             android:background="@color/line"/>
+
+
+
         <include
             layout="@layout/tab_bottom"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_49"/>
 
     </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
