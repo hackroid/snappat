@@ -9,20 +9,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
+import android.widget.LinearLayout;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import com.seclass.snappat.R;
 import com.seclass.snappat.app.ActivityUtils;
 import com.seclass.snappat.base.BaseFragment;
 import com.seclass.snappat.modules.scan.DetectorActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implements HomeView {
 
     @BindView(R.id.iv_scan)
     ImageView scan;
+
+    LinearLayout homeFriends;
+    LinearLayout homeLatest;
+    LinearLayout homeHot;
+    LinearLayout homoeReward;
 
     Unbinder unbinder;
 
@@ -65,9 +69,9 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
         return rootView;
     }
 
-    @Override
-    public void onDestroyView() {
+      @Override
+      public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
+      }
 }

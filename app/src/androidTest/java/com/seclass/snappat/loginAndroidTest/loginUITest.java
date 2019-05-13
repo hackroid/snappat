@@ -40,8 +40,6 @@
 //  @Test
 //  public void loginSuccessTest() {
 //
-//    System.out.println("");
-//    System.out.println("##########################");
 //    onView(withId(R.id.mobile_phone))
 //        .check(matches((isDisplayed())));
 //

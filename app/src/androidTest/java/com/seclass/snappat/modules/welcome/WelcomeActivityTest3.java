@@ -6,9 +6,11 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,63 +29,53 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class WelcomeActivityTest {
+public class WelcomeActivityTest3 {
 
   @Rule
   public ActivityTestRule<WelcomeActivity> mActivityTestRule = new ActivityTestRule<>(
       WelcomeActivity.class);
 
   @Test
-  public void welcomeActivityTest() {
+  public void welcomeActivityTest3() {
     ViewInteraction clearEditText = onView(
-        allOf(withId(R.id.mobile_phone), withText("13028871392"),
+        allOf(withId(R.id.sms_password),
+            childAtPosition(
+                childAtPosition(
+                    withClassName(is("com.zhy.autolayout.AutoLinearLayout")),
+                    5),
+                0),
+            isDisplayed()));
+    clearEditText.perform(replaceText("3"), closeSoftKeyboard());
+
+    ViewInteraction appCompatButton = onView(
+        allOf(withId(R.id.create_account), withText("登录"),
             childAtPosition(
                 childAtPosition(
                     withId(android.R.id.content),
                     0),
-                2),
+                8),
             isDisplayed()));
-    clearEditText.perform(replaceText("1302887139"));
+    appCompatButton.perform(click());
 
     ViewInteraction clearEditText2 = onView(
-        allOf(withId(R.id.mobile_phone), withText("1302887139"),
+        allOf(withId(R.id.sms_password), withText("3"),
             childAtPosition(
                 childAtPosition(
-                    withId(android.R.id.content),
-                    0),
-                2),
+                    withClassName(is("com.zhy.autolayout.AutoLinearLayout")),
+                    5),
+                0),
             isDisplayed()));
-    clearEditText2.perform(closeSoftKeyboard());
+    clearEditText2.perform(replaceText("33"));
 
     ViewInteraction clearEditText3 = onView(
-        allOf(withId(R.id.mobile_phone),
+        allOf(withId(R.id.sms_password), withText("33"),
             childAtPosition(
                 childAtPosition(
-                    withId(android.R.id.content),
-                    0),
-                2),
+                    withClassName(is("com.zhy.autolayout.AutoLinearLayout")),
+                    5),
+                0),
             isDisplayed()));
-    clearEditText3.perform(click());
-
-    ViewInteraction clearEditText4 = onView(
-        allOf(withId(R.id.mobile_phone),
-            childAtPosition(
-                childAtPosition(
-                    withId(android.R.id.content),
-                    0),
-                2),
-            isDisplayed()));
-    clearEditText4.perform(click());
-
-    ViewInteraction clearEditText5 = onView(
-        allOf(withId(R.id.mobile_phone),
-            childAtPosition(
-                childAtPosition(
-                    withId(android.R.id.content),
-                    0),
-                2),
-            isDisplayed()));
-    clearEditText5.perform(click());
+    clearEditText3.perform(closeSoftKeyboard());
   }
 
   private static Matcher<View> childAtPosition(

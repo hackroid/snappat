@@ -162,7 +162,7 @@
     <dimen name="dimens_190">190px</dimen>
     <dimen name="dimens_460">460px</dimen>
     <dimen name="dimens_280">280px</dimen>
-  <dimen name="text_margin">16dp</dimen>
-
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="intrinsic_padding">8dp</dimen>
 
 </resources>

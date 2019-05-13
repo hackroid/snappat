@@ -15,7 +15,6 @@ public class ThemeUtil {
     }
 
     public static void setTheme(@NonNull Activity activity) {
-        Log.e("------Utils", Utils.TString());
         activity.setTheme(Utils.getSpUtils().getString("loginmode") == null ? R.style.ThemeLight : R.style.ThemeDark);
     }
 
