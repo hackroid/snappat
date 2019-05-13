@@ -17,7 +17,6 @@ import com.seclass.snappat.R;
 import com.seclass.snappat.base.BaseFragment;
 import com.seclass.snappat.bean.CommonResponse;
 import com.seclass.snappat.bean.CommonResponse.Test;
-import com.seclass.snappat.utils.Utils;
 import java.util.List;
 import java.util.Map;
 import org.json.JSONObject;
@@ -90,7 +89,7 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
             Log.d("Errno","Errno when getUserInfo"+msg.errmsg);
             if(msg.errno==1003){
                 //重新注册一下
-                presenter.regestry(Utils.getSpUtils().getString("phone"));
+//                presenter.regestry(Utils.getSpUtils().getString("phone"));
 //                presenter.getUserInfo();
             }
         }
