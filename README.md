@@ -1,12 +1,3 @@
-
-## Group Info
-
-* Group Name: **Snappat**
-* Member:
-
-| Member |    ID    |
-| ----- | ------ |
-=======
 # Snappat
 
 ## Group Members
