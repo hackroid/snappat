@@ -45,4 +45,13 @@
     <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="camera_error">打开摄像头错误</string>
+
+    <string name="hint_text">提示: </string>
+    <string name="enter_hint_text">请输入提示语：</string>
+    <string name="award_hint_text">奖励金额: </string>
+    <string name="location">是否展示地点？</string>
+    <string name="award_value_hint_text">1~999</string>
+    <string name="user_message">Say whatever you want to tell people who solve your mystery!</string>
+    <string name="btn_publish">发布</string>
+
 </resources>
