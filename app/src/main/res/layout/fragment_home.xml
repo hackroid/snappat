@@ -20,6 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <include
+          layout="@layout/tab_top"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/dimens_49"/>
 
         <RelativeLayout
             android:id="@+id/title"
