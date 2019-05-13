@@ -1,13 +1,15 @@
 package com.seclass.snappat.bean;
 
+import android.util.Log;
 import java.io.Serializable;
+import org.json.JSONObject;
 
 
-public class CommonResponse<JSONObject> implements Serializable {
+public class CommonResponse<T> implements Serializable {
 
   public int errno;
   public String errmsg;
-  public JSONObject data = null;
+  public T data;
   public int getCode() {
     return errno;
   }
@@ -16,8 +18,22 @@ public class CommonResponse<JSONObject> implements Serializable {
   }
   public void setErrmsg(String errmsg){this.errmsg = errmsg;}
   public String getErrmsg(){return this.errmsg;}
-  public JSONObject getData(){return data;};
-  public void setData(JSONObject data) {
+  public T getData(){return data;};
+  public void setData(T data) {
     this.data = data;
+  }
+  public String string(){return this.data.toString();}
+  public static class Test{
+    public String dataString;
+    public JSONObject getData(){
+      JSONObject jsonObject=null;
+      try {
+        jsonObject = new JSONObject(this.dataString);
+        return jsonObject;
+      }catch(Exception e){
+        Log.d("Exception",""+e);
+      }
+    return jsonObject;
+    }
   }
 }

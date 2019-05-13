@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 public interface MineView extends BaseView {
 
-  void getUserInfoSucc(CommonResponse<JSONObject> msg);
+  void getUserInfoSucc(JSONObject msg);
 
-  void getUserInfoFail(CommonResponse<JSONObject> msg);
+  void getUserInfoFail(CommonResponse<CommonResponse.Test> msg);
 }

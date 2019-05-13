@@ -16,6 +16,7 @@ import butterknife.OnClick;
 import com.seclass.snappat.R;
 import com.seclass.snappat.base.BaseFragment;
 import com.seclass.snappat.bean.CommonResponse;
+import com.seclass.snappat.bean.CommonResponse.Test;
 import com.seclass.snappat.utils.Utils;
 import java.util.List;
 import java.util.Map;
@@ -72,18 +73,19 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
         }
     }
     @Override
-    public void getUserInfoSucc(CommonResponse<JSONObject> msg){
-        Log.d("Debug", "getUserInfo: "+msg);
+    public void getUserInfoSucc(JSONObject msg){
         try{
             //成功
-            Log.d("Errno","Good when getUserInfo"+msg.data);
-            userText.setText(msg.data.getString("username"));
+            String username = msg.getString("username");
+            String phone_number = msg.getString("phone");
+            userText.setText(username);
+            phone.setText(phone_number);
         }catch(Exception e){
             Log.d("Exception",""+e);
         }
     }
     @Override
-    public void getUserInfoFail(CommonResponse<JSONObject> msg){
+    public void getUserInfoFail(CommonResponse<Test> msg){
         if(msg.errno!=0){
             Log.d("Errno","Errno when getUserInfo"+msg.errmsg);
             if(msg.errno==1003){

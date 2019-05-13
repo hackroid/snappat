@@ -15,7 +15,7 @@ import com.seclass.snappat.net.HttpUtils;
 import com.seclass.snappat.net.callbck.JsonCallback;
 import com.seclass.snappat.utils.Utils;
 import java.util.HashMap;
-import org.json.JSONObject;
+
 
 public class MinePresenter  extends BasePresent<MineView> {
     private Context mContext;
@@ -32,15 +32,12 @@ public class MinePresenter  extends BasePresent<MineView> {
         hashMap.put("username", username);
         Log.d("DataTest",phone_number);
         Log.d("DataTest",username);
-        HttpUtils.postRequest(BaseUrl.HTTP_Get_userinfo, mContext, hashMap, new JsonCallback<CommonResponse<JSONObject>>() {
+        HttpUtils.postRequest(BaseUrl.HTTP_Get_userinfo, mContext, hashMap, new JsonCallback<CommonResponse<CommonResponse.Test>>() {
             @Override
-            public void onSuccess(Response<CommonResponse<JSONObject>> response) {
+            public void onSuccess(Response<CommonResponse<CommonResponse.Test>> response) {
                 Log.d("Debug", "getUserInfo Response: "+response);
-                Log.d("Debug", "getUserInfo CommonResponse: "+response.body().errmsg);
-                Log.d("Debug", "getUserInfo CommonResponse: "+response.body().data);
-                Log.d("Debug", "getUserInfo CommonResponse: "+response.body().errno);
                 if (response.body().errno == 0) {
-                    view.getUserInfoSucc(response.body());
+                    view.getUserInfoSucc(response.body().data.getData());
                 } else {
                     view.getUserInfoFail(response.body());
                 }
@@ -53,9 +50,9 @@ public class MinePresenter  extends BasePresent<MineView> {
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("phone", phone_number);
         hashMap.put("username",username);
-        HttpUtils.postRequest(BaseUrl.HTTP_Post_Registry,mContext,hashMap,new JsonCallback<CommonResponse<JSONObject>>() {
+        HttpUtils.postRequest(BaseUrl.HTTP_Post_Registry,mContext,hashMap,new JsonCallback<CommonResponse<String>>() {
             @Override
-            public void onSuccess(Response<CommonResponse<JSONObject>> response) {
+            public void onSuccess(Response<CommonResponse<String>> response) {
                 Log.d("Debug", "regestry: "+response);
                 Log.d("Debug","datastructure"+response.body());
                 if (response.body().errno == 0) {
