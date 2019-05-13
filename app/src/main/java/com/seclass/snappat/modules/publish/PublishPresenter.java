@@ -28,16 +28,16 @@ public class PublishPresenter extends BasePresent<PublishView> {
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("phone", phone_number);
         hashMap.put("username", username);
-        HttpUtils.postRequest(BaseUrl.HTTP_ADDRESS, mContext, hashMap, new JsonCallback<ResponseBean<JSONObject>>() {
-            @Override
-            public void onSuccess(Response<ResponseBean<JSONObject>> response) {
-                if (response.body().code == 0) {
-
-                } else {
-
-                }
-            }
-        });
+//        HttpUtils.postRequest(BaseUrl.HTTP_Post_addMystery, mContext, hashMap, new JsonCallback<ResponseBean<JSONObject>>() {
+//            @Override
+//            public void onSuccess(Response<ResponseBean<JSONObject>> response) {
+//                if (response.body().code == 0) {
+//
+//                } else {
+//
+//                }
+//            }
+//        });
 
 
     }
