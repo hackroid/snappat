@@ -7,6 +7,7 @@ package com.seclass.snappat.utils;
 import android.content.Context;
 import android.content.Intent;
 
+import android.util.Log;
 import com.seclass.snappat.R;
 import com.seclass.snappat.service.KillSelfService;
 
@@ -24,6 +25,9 @@ public final class Utils {
   private static Context context;
   private static SPUtils spUtils;
 
+  public static String TString(){
+    return "222233333";
+  }
 
   private Utils() {
     throw new UnsupportedOperationException("...");
@@ -37,6 +41,7 @@ public final class Utils {
   public static void init(Context context) {
     Utils.context = context.getApplicationContext();
     spUtils = new SPUtils("USER");
+    System.out.println("spUtils after init: " + spUtils);
   }
 
   /**
@@ -57,6 +62,8 @@ public final class Utils {
    * @return the sp utils
    */
   public static SPUtils getSpUtils() {
+    System.out.println("System.out.println(spUtils)");
+    System.out.println(spUtils);
     return spUtils;
   }
 
