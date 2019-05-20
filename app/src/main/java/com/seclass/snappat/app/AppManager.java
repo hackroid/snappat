@@ -30,6 +30,7 @@ public class AppManager {
 
     /**
      * get single instance
+     * @return instance
      */
     public static AppManager getAppManager() {
         if (instance == null) {
@@ -72,6 +73,8 @@ public class AppManager {
 
     /**
      * finish given activity
+     * @param activity {@code Activity}
+     * @Nullable activity
      */
     public void finishActivity(Activity activity) {
         if (activity != null) {
@@ -112,6 +115,7 @@ public class AppManager {
 
     /**
      * exit application
+     * @param context {@code Context}
      */
     @SuppressWarnings("deprecation")
     public void AppExit(Context context) {
