@@ -114,7 +114,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
    * create account click .
    *
    * <p>create a new account</p>
-   *
+   * @param v {@code View}
    * @since 2.0
    */
 
@@ -134,6 +134,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
       default:
         break;
     }
+  }
 
     @Override
     protected void initImmersionBar() {

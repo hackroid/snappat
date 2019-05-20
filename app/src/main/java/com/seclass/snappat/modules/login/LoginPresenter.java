@@ -30,6 +30,12 @@ public class LoginPresenter extends BasePresent<LoginView> {
 
   private Context mContext;
 
+  /**
+   * record Login Presenter .
+   * @param context {@code Context}
+   * @since 1.0
+   */
+
   public LoginPresenter(Context context) {
     this.mContext = context;
   }
@@ -39,8 +45,7 @@ public class LoginPresenter extends BasePresent<LoginView> {
    * Get code .
    *
    * <p>Get code with phone number from server</p>
-   *
-   * @return {@code UserInfo}
+   * @param mobilephone {@code String}
    * @since 1.0
    */
 
@@ -60,6 +65,13 @@ public class LoginPresenter extends BasePresent<LoginView> {
         });
     }
 
+  /**
+   * regestry .
+   *
+   * <p>regestry</p>
+   * @param phone {@code String}
+   * @since 1.0
+   */
     public void regestry(String phone){
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("phone", phone);
@@ -78,6 +90,15 @@ public class LoginPresenter extends BasePresent<LoginView> {
         });
     }
 
+    /**
+     * Get codeAuthData .
+     *
+     * <p>Get codeAuthData with phone number and code from server</p>
+     * @param mobilephone {@code String}
+     * @param code {@code String}
+     * @since 1.0
+     */
+
     public void getcodeAuthData(String mobilephone, String code) {
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("phoneNum", mobilephone);
@@ -94,7 +115,7 @@ public class LoginPresenter extends BasePresent<LoginView> {
                     view.getDataHttpFail(response.body().message);
                 }
             }
-          }
+
         });
   }
 }
