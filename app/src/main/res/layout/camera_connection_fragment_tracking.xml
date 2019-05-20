@@ -31,4 +31,18 @@
           android:id="@+id/debug_overlay"
           android:layout_width="match_parent"
           android:layout_height="match_parent"/>
+      <LinearLayout
+          android:layout_width="@dimen/dimens_200"
+          android:layout_height="@dimen/dimens_200"
+          android:gravity="center"
+          android:layout_gravity="bottom|center"
+          android:orientation="vertical"
+          android:layout_marginBottom="@dimen/dimens_200">
+
+            <ImageButton
+                android:id="@+id/snap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/oct" />
+      </LinearLayout>
 </FrameLayout>

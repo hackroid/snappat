@@ -26,11 +26,17 @@ import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Size;
 import android.util.TypedValue;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.seclass.snappat.app.ActivityUtils;
+import com.seclass.snappat.modules.publish.PubActivity;
+import com.seclass.snappat.utils.ToastUtils;
 import com.seclass.snappat.view.OverlayView;
 import com.seclass.snappat.view.OverlayView.DrawCallback;
 import com.seclass.snappat.modules.scan.env.BorderedText;
@@ -39,6 +45,7 @@ import com.seclass.snappat.modules.scan.env.Logger;
 import com.seclass.snappat.modules.scan.tracking.MultiBoxTracker;
 import com.seclass.snappat.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -85,8 +92,27 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   private BorderedText borderedText;
 
+  private ImageButton snap_btn;
+
+
   @Override
   public void onPreviewSizeChosen(final Size size, final int rotation) {
+    snap_btn = findViewById(R.id.snap);
+    if (isDebug()) {
+      snap_btn.setVisibility(View.INVISIBLE);
+    } else {
+      snap_btn.setVisibility(View.VISIBLE);
+    }
+    snap_btn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        ToastUtils.showShortToast("Snap!");
+        Bundle bundle = new Bundle();
+        bundle.putByteArray("img",Bitmap2Bytes(cropCopyBitmap));
+        ActivityUtils.next(DetectorActivity.this, PubActivity.class, bundle, true);
+      }
+    });
+
     final float textSizePx =
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
@@ -174,11 +200,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
               }
             }
             lines.add("");
-
-            lines.add("Frame: " + previewWidth + "x" + previewHeight);
-            lines.add("Crop: " + copy.getWidth() + "x" + copy.getHeight());
-            lines.add("View: " + canvas.getWidth() + "x" + canvas.getHeight());
-            lines.add("Rotation: " + sensorOrientation);
             lines.add("Inference time: " + lastProcessingTimeMs + "ms");
 
             borderedText.drawLines(canvas, 10, canvas.getHeight() - 10, lines);
@@ -279,4 +300,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   public void onSetDebug(final boolean debug) {
     detector.enableStatLogging(debug);
   }
+
+  public byte[] Bitmap2Bytes(Bitmap bm) {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+    return baos.toByteArray();
+  }
+
 }

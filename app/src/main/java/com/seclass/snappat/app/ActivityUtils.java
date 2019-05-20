@@ -22,20 +22,22 @@ import com.seclass.snappat.R;
  **/
 
 public class ActivityUtils {
+
     /**
      * 跳转到下一个页面
      *
-     * @param curActivity
-     * @param nextActivity
+     * @param curActivity {@code Activity}
+     * @param nextActivity {@code nextActivity}
      */
     public static void next(Activity curActivity, Class<?> nextActivity) {
         next(curActivity, nextActivity, null, -1, -1, R.anim.in_from_right, R.anim.out_to_left, false);
     }
+
     /**
      * 跳转到下一个页面
      *
-     * @param curActivity
-     * @param nextActivity
+     * @param curActivity {@code Activity}
+     * @param nextActivity {@code nextActivity}
      */
     public static void nextSeach(Activity curActivity, Class<?> nextActivity) {
         next(curActivity, nextActivity, null, -1, -1, R.anim.fade_in, R.anim.fade_out, false);
@@ -185,13 +187,15 @@ public class ActivityUtils {
     /**
      * 跳转到下一个页面
      *
-     * @param curActivity
-     * @param nextActivity
-     * @param extras
-     * @param reqCode
-     * @param inAnimId 入场动画
-     * @param outAnimId 退场动画
-     * @param isFinish 当前activity是否finish掉
+     * @param curActivity {@code Activity}
+     * @param nextActivity {@code Class}
+     * @param extras {@code Bundle}
+     * @param reqCode {@code int}
+     * @param inAnimId 入场动画 {@code int}
+     * @param outAnimId 退场动画 {@code int}
+     * @param isFinish 当前activity是否finish掉 {@code boolean}
+     * @Nullable extras
+     * @Nullable nextActivity
      */
     public static void next(Activity curActivity, Class<?> nextActivity, Bundle extras, int reqCode, int flag, int inAnimId, int outAnimId, boolean isFinish) {
         Intent intent = new Intent(curActivity, nextActivity);

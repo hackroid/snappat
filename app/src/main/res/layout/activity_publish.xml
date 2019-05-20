@@ -14,7 +14,7 @@
         android:padding="@dimen/dimens_40">
 
         <ImageView
-            android:id="@+id/picture"
+            android:id="@+id/pub_img_view"
             android:layout_width="200dp"
             android:layout_height="300dp"
             android:layout_centerHorizontal="true"

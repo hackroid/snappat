@@ -23,12 +23,15 @@ import android.os.Trace;
 import android.util.Size;
 import android.view.KeyEvent;
 import android.view.Surface;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.seclass.snappat.modules.scan.env.ImageUtils;
 import com.seclass.snappat.modules.scan.env.Logger;
 import com.seclass.snappat.R;
+import com.seclass.snappat.utils.ToastUtils;
 import com.seclass.snappat.view.OverlayView;
 
 import java.nio.ByteBuffer;
@@ -58,6 +61,10 @@ public abstract class CameraActivity extends Activity
     private Runnable postInferenceCallback;
     private Runnable imageConverter;
 
+    public boolean isScan;
+
+
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         LOGGER.d("onCreate " + this);
@@ -65,12 +72,23 @@ public abstract class CameraActivity extends Activity
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.activity_camera);
-
+        isScan = getIntent().getBooleanExtra("isScan", false);
         if (hasPermission()) {
             setFragment();
         } else {
             requestPermission();
         }
+
+
+        if (isScan) {
+            ToastUtils.showShortToast("开始扫描匹配");
+            debug = true;
+
+        } else {
+            ToastUtils.showShortToast("扫描以创建谜题");
+            debug = false;
+        }
+
     }
 
     private byte[] lastPreviewFrame;

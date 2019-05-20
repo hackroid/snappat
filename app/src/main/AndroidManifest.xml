@@ -26,6 +26,8 @@
         <activity android:name="com.seclass.snappat.modules.MainActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.seclass.snappat.modules.login.LoginActivity" />
+        <activity android:name="com.seclass.snappat.modules.scan.DetectorActivity" />
+        <activity android:name=".modules.publish.PubActivity" />
         <meta-data
             android:name="design_width"
             android:value="375">

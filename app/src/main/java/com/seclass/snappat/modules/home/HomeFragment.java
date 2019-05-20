@@ -5,6 +5,7 @@
 package com.seclass.snappat.modules.home;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +17,19 @@ import butterknife.Unbinder;
 import com.seclass.snappat.R;
 import com.seclass.snappat.app.ActivityUtils;
 import com.seclass.snappat.base.BaseFragment;
+import com.seclass.snappat.modules.MainActivity;
 import com.seclass.snappat.modules.scan.DetectorActivity;
 
 public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implements HomeView {
 
     @BindView(R.id.iv_scan)
     ImageView scan;
-
-    LinearLayout homeFriends;
-    LinearLayout homeLatest;
-    LinearLayout homeHot;
-    LinearLayout homoeReward;
+//    LinearLayout homeFriends;
+//    LinearLayout homeLatest;
+//    LinearLayout homeHot;
+//    LinearLayout homoeReward;
+    @BindView(R.id.addNew)
+    FloatingActionButton addNew_btn;
 
     Unbinder unbinder;
 
@@ -51,7 +54,18 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityUtils.next(getActivity(), DetectorActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isScan", true);
+                ActivityUtils.next(getActivity(), DetectorActivity.class, bundle);
+            }
+        });
+
+        addNew_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isScan", false);
+                ActivityUtils.next(getActivity(), DetectorActivity.class, bundle);
             }
         });
     }
