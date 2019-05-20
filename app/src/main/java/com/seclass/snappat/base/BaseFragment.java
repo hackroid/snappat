@@ -1,5 +1,4 @@
 package com.seclass.snappat.base;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +19,6 @@ public abstract class BaseFragment<V, P extends BasePresent<V>> extends Fragment
     protected P presenter;
     protected ImmersionBar mImmersionBar;
     private View mView;  //缓存Fragment view
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
