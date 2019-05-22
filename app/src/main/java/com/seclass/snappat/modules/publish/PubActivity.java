@@ -46,6 +46,7 @@ public class PubActivity extends BaseActivity<PubView, PubPresenter> implements 
     @Override
     protected void initData() {
         byte[] img = getIntent().getByteArrayExtra("img");
+        String[] result = getIntent().getStringArrayExtra("result");
         pub_img.setImageBitmap(Bytes2Bimap(img));
     }
 

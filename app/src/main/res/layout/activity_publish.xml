@@ -9,11 +9,21 @@
         android:layout_marginTop="@dimen/dimens_200"
         android:layout_marginBottom="@dimen/dimens_200"
         android:gravity="center"
+        android:orientation="vertical"
         android:maxWidth="350dp"
         android:maxHeight="350dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/pub_img_view"/>
+
+        <TextView
+            android:id="@+id/reg_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dimens_20"
+            android:gravity="center"
+            android:text="hahahaaaa" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
