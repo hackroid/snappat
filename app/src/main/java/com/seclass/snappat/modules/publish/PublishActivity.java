@@ -1,12 +1,21 @@
 package com.seclass.snappat.modules.publish;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.seclass.snappat.R;
 import com.seclass.snappat.base.BaseActivity;
+import com.seclass.snappat.bean.CommonResponse;
+import com.seclass.snappat.bean.CommonResponse.Test;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,6 +30,16 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
     EditText muser_message;
     @BindView(R.id.publish_btn)
     Button mpub_btn;
+    @BindView(R.id.pub_img_view)
+    ImageView pub_img;
+
+    public Bitmap Bytes2Bimap(byte[] b) {
+        if (b.length != 0) {
+            return BitmapFactory.decodeByteArray(b, 0, b.length);
+        } else {
+            return null;
+        }
+    }
 
     @Override
     protected int getLayoutId() {
@@ -39,7 +58,8 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
 
     @Override
     protected void initData(){
-
+//        byte[] img = getIntent().getByteArrayExtra("img");
+//        pub_img.setImageBitmap(Bytes2Bimap(img));
     }
 
     @Override
@@ -49,17 +69,35 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
 
     @OnClick({R.id.publish_btn})
     public void onViewClicked(View v) {
-        switch (v.getId()) {
+        switch(v.getId()){
             case R.id.publish_btn:
-                    String message = muser_message.getText().toString().trim();
-                    String award = maward.getText().toString().trim();
-                    String hint = mhint.getText().toString().trim();
-                    presenter.getMesteryData(hint, award, message);
-
-                    break;
-            default:
+                presenter.addMystery();
                 break;
         }
     }
 
+    @Override
+    public void postMysterySucc(JSONObject msg){
+        try{
+            //
+            //成功
+            //跳转到我的谜题
+            finish();
+        }catch(Exception e){
+            Log.d("Exception",""+e);
+        }
+    }
+
+    @Override
+    public void postMysteryFail(CommonResponse<Test> msg){
+        if(msg.errno!=0){
+            Log.d("Errno","Errno when getUserInfo"+msg.errmsg);
+            if(msg.errno==1003){
+                //重新注册一下
+            }
+        }
+        hideProgress();
+        toast(msg.toString());
+
+    }
 }

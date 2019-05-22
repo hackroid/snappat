@@ -10,25 +10,25 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="800px"
+        android:layout_height="wrap_content"
         android:padding="@dimen/dimens_40">
 
         <ImageView
             android:id="@+id/pub_img_view"
-            android:layout_width="200dp"
-            android:layout_height="300dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimens_130"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="86dp"/>
+            android:layout_marginStart="@dimen/dimens_20"
+            android:layout_marginTop="@dimen/dimens_20"
+            android:layout_marginEnd="@dimen/dimens_20"/>
 
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimens_100"
-        android:layout_marginLeft="@dimen/dimens_50"
+        android:layout_marginTop="@dimen/dimens_20"
+        android:layout_marginLeft="@dimen/dimens_20"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -58,7 +58,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimens_50"
+        android:layout_margin="@dimen/dimens_20"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -73,7 +73,7 @@
                 android:id="@+id/award_value"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimens_25"
+                android:layout_marginLeft="@dimen/dimens_20"
                 android:background="@drawable/bg_edittext_selector"
                 android:hint="@string/award_value_hint_text"
                 android:inputType="number"
@@ -86,7 +86,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimens_50"
+        android:layout_margin="@dimen/dimens_20"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -99,7 +99,7 @@
 
         <Switch
             android:id="@+id/loc_switch"
-            android:layout_marginLeft="@dimen/dimens_25"
+            android:layout_marginLeft="@dimen/dimens_20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dip" />
@@ -110,7 +110,7 @@
             android:id="@+id/user_message"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_margin="@dimen/dimens_50"
+            android:layout_margin="@dimen/dimens_20"
             android:autofillHints="@null"
             android:gravity="top"
             android:hint="@string/user_message"
@@ -125,9 +125,9 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:layout_marginTop="@dimen/dimens_30"
-            android:layout_marginLeft="@dimen/dimens_50"
-            android:layout_marginRight="@dimen/dimens_50"
+            android:layout_marginTop="@dimen/dimens_20"
+            android:layout_marginLeft="@dimen/dimens_20"
+            android:layout_marginRight="@dimen/dimens_20"
             android:background="@color/mediumaquamarine"
             android:text="@string/btn_publish" />
 

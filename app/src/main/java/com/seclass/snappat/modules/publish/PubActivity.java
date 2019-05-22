@@ -17,8 +17,8 @@ import butterknife.BindView;
 
 public class PubActivity extends BaseActivity<PubView, PubPresenter> implements PubView {
 
-    @BindView(R.id.pub_img_view)
-    ImageView pub_img;
+//    @BindView(R.id.pub_img_view)
+//    ImageView pub_img;
 
     public Bitmap Bytes2Bimap(byte[] b) {
         if (b.length != 0) {
@@ -45,8 +45,8 @@ public class PubActivity extends BaseActivity<PubView, PubPresenter> implements 
 
     @Override
     protected void initData() {
-        byte[] img = getIntent().getByteArrayExtra("img");
-        pub_img.setImageBitmap(Bytes2Bimap(img));
+//        byte[] img = getIntent().getByteArrayExtra("img");
+//        pub_img.setImageBitmap(Bytes2Bimap(img));
     }
 
     @Override

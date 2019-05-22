@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import butterknife.BindView;
@@ -18,6 +19,7 @@ import com.seclass.snappat.R;
 import com.seclass.snappat.app.ActivityUtils;
 import com.seclass.snappat.base.BaseFragment;
 import com.seclass.snappat.modules.MainActivity;
+import com.seclass.snappat.modules.publish.PublishActivity;
 import com.seclass.snappat.modules.scan.DetectorActivity;
 
 public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implements HomeView {
@@ -33,7 +35,8 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
     Unbinder unbinder;
 
-
+    @BindView(R.id.pub_btn)
+    Button publish_button;
     @Override
     public HomePresenter initPresenter() {
         return new HomePresenter(getActivity());
@@ -66,6 +69,13 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("isScan", false);
                 ActivityUtils.next(getActivity(), DetectorActivity.class, bundle);
+            }
+        });
+        publish_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                ActivityUtils.next(getActivity(), PublishActivity.class, bundle);
             }
         });
     }
