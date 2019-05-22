@@ -93,7 +93,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   private BorderedText borderedText;
 
   private ImageButton snap_btn;
-
+  private volatile String[] reg_result;
 
   @Override
   public void onPreviewSizeChosen(final Size size, final int rotation) {
@@ -109,6 +109,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         ToastUtils.showShortToast("Snap!");
         Bundle bundle = new Bundle();
         bundle.putByteArray("img",Bitmap2Bytes(cropCopyBitmap));
+        bundle.putStringArray("result", reg_result);
         ActivityUtils.next(DetectorActivity.this, PubActivity.class, bundle, true);
       }
     });
@@ -266,6 +267,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             final List<Classifier.Recognition> mappedRecognitions =
                 new LinkedList<Classifier.Recognition>();
 
+
             for (final Classifier.Recognition result : results) {
               final RectF location = result.getLocation();
               if (location != null && result.getConfidence() >= MINIMUM_CONFIDENCE_TF_OD_API) {
@@ -275,6 +277,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 result.setLocation(location);
                 mappedRecognitions.add(result);
               }
+            }
+
+            reg_result = new String[mappedRecognitions.size()];
+            for (int i = 0; i < mappedRecognitions.size(); ++i) {
+              reg_result[i] = ((LinkedList<Classifier.Recognition>) mappedRecognitions).pop().getTitle();
             }
 
             tracker.trackResults(mappedRecognitions, luminanceCopy, currTimestamp);
