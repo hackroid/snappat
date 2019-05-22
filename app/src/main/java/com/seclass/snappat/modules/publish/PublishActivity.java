@@ -33,6 +33,9 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
     @BindView(R.id.pub_img_view)
     ImageView pub_img;
 
+    String[] result={};
+    byte[] img;
+
     public Bitmap Bytes2Bimap(byte[] b) {
         if (b.length != 0) {
             return BitmapFactory.decodeByteArray(b, 0, b.length);
@@ -58,8 +61,9 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
 
     @Override
     protected void initData(){
-//        byte[] img = getIntent().getByteArrayExtra("img");
-//        pub_img.setImageBitmap(Bytes2Bimap(img));
+        img = getIntent().getByteArrayExtra("img");
+        result = getIntent().getStringArrayExtra("result");
+        pub_img.setImageBitmap(Bytes2Bimap(img));
     }
 
     @Override
@@ -71,7 +75,7 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
     public void onViewClicked(View v) {
         switch(v.getId()){
             case R.id.publish_btn:
-                presenter.addMystery();
+                presenter.addMystery(mhint.getText().toString(), maward.getText().toString(), muser_message.getText().toString(), result);
                 break;
         }
     }
@@ -79,9 +83,7 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
     @Override
     public void postMysterySucc(JSONObject msg){
         try{
-            //
-            //成功
-            //跳转到我的谜题
+            toast("Published!");
             finish();
         }catch(Exception e){
             Log.d("Exception",""+e);

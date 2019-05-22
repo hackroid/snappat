@@ -1,26 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".modules.publish.PublishActivity">
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dimens_40">
+        android:layout_height="@dimen/dimens_48"
+        android:orientation="horizontal"
+        android:background="@color/mediumaquamarine">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            app:srcCompat="@mipmap/back"
+            android:layout_marginTop="@dimen/dimens_5"
+            android:layout_marginLeft="@dimen/dimens_10"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            android:text="@string/add_mystery_title"
+            android:layout_marginTop="@dimen/dimens_5"
+            android:layout_marginRight="@dimen/dimens_10"
+             />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="150px"
+        android:layout_height="200px"
+        android:padding="@dimen/dimens_0">
 
         <ImageView
             android:id="@+id/pub_img_view"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimens_130"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="@dimen/dimens_20"
-            android:layout_marginTop="@dimen/dimens_20"
-            android:layout_marginEnd="@dimen/dimens_20"/>
+            android:layout_marginStart="@dimen/dimens_0"
+            android:layout_marginTop="@dimen/dimens_0"
+            android:layout_marginEnd="@dimen/dimens_0"/>
 
     </RelativeLayout>
 
@@ -80,29 +108,6 @@
                 android:padding="4dip"
                 android:textAlignment="center"
                 android:textSize="14sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimens_20"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/location"
-            android:padding="4dip"
-            android:textSize="14sp" />
-
-        <Switch
-            android:id="@+id/loc_switch"
-            android:layout_marginLeft="@dimen/dimens_20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dip" />
 
     </LinearLayout>
 
