@@ -6,27 +6,21 @@ package com.seclass.snappat.modules;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.seclass.snappat.R;
-import com.seclass.snappat.app.ActivityUtils;
 import com.seclass.snappat.base.BaseActivity;
 import com.seclass.snappat.modules.home.HomeFragment;
 import com.seclass.snappat.modules.mine.MineFragment;
 import com.seclass.snappat.modules.normal.NormalPresenter;
 import com.seclass.snappat.modules.normal.NormalView;
 import com.seclass.snappat.modules.notify.NotifyFragment;
-import com.seclass.snappat.modules.scan.DetectorActivity;
 import com.seclass.snappat.utils.ToastUtils;
 
 public class MainActivity extends BaseActivity<NormalView, NormalPresenter> implements NormalView {
@@ -74,7 +68,7 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
             case 0:
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment();
-                    transaction.add(R.id.content, homeFragment);
+                    transaction.add(R.id.item_content, homeFragment);
                 } else {
                     transaction.show(homeFragment);
                 }
@@ -82,7 +76,7 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
             case 1:
                 if (notifyFragment == null) {
                     notifyFragment = new NotifyFragment();
-                    transaction.add(R.id.content, notifyFragment);
+                    transaction.add(R.id.item_content, notifyFragment);
                 } else {
                     transaction.show(notifyFragment);
                 }
@@ -90,7 +84,7 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
             case 2:
                 if (mineFragment == null) {
                     mineFragment = new MineFragment();
-                    transaction.add(R.id.content, mineFragment);
+                    transaction.add(R.id.item_content, mineFragment);
                 } else {
                     transaction.show(mineFragment);
                 }
@@ -117,6 +111,8 @@ public class MainActivity extends BaseActivity<NormalView, NormalPresenter> impl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
         ButterKnife.bind(this);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //            WindowManager.LayoutParams.FLAG_FULLSCREEN);

@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/content"
+            android:id="@+id/item_content"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
