@@ -24,8 +24,6 @@ import org.json.JSONObject;
  * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
  * @since 2.0
  */
-
-
 public class LoginPresenter extends BasePresent<LoginView> {
 
   private Context mContext;
