@@ -1,5 +1,13 @@
 package com.seclass.snappat.base;
 
+/**
+ * Class {@code BaseUrl} internet communication url class;
+ *
+ * <p>record all url needed in this app</p>
+ *
+ * @author <a href="11612717@mail.sustech.edu.cn">Tao Ren</a>
+ * @since 3.0
+ */
 public class BaseUrl {
     // 验证服务器
     public final static String HTTP_ADDRESS = "https://api.pocketeos.top/api_oc_personal/v1.0.0/";

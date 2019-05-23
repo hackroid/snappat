@@ -22,7 +22,17 @@ import com.seclass.snappat.modules.normal.NormalPresenter;
 import com.seclass.snappat.modules.normal.NormalView;
 import com.seclass.snappat.modules.notify.NotifyFragment;
 import com.seclass.snappat.utils.ToastUtils;
-
+/**
+ * Class {@code MainActivity}.
+ *
+ * <p>Login view.
+ * <p>All Implemented Interfaces:</p>
+ * <p>{@link NormalView}</p>
+ * <p>All extends class:</p>
+ *  <p>{@link BaseActivity<NormalView, NormalPresenter>}</p>
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ */
 public class MainActivity extends BaseActivity<NormalView, NormalPresenter> implements NormalView {
 
     LinearLayout mLlHome;

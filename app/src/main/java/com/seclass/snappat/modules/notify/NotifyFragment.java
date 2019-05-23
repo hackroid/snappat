@@ -11,6 +11,17 @@ import com.seclass.snappat.R;
 import com.seclass.snappat.base.BaseFragment;
 import com.seclass.snappat.bean.ResponseBean;
 
+/**
+ * class {@code NotifyFragment}.
+ *
+ * <p>base notify fragment.</p>
+ * <p> all implements</p>
+ * <p>{@link NotifyView}</p>
+ * <p>extends {@link BaseFragment<NotifyView, NotifyPresenter>}</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ */
 public class NotifyFragment extends BaseFragment<NotifyView, NotifyPresenter> implements NotifyView {
 
     @Override

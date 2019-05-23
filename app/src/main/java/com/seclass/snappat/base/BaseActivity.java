@@ -24,6 +24,18 @@ import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
 
+/**
+ * abstract class {@code BaseActivity}.
+ *
+ * <p>Each activity will extends this activity.</p>
+ * <p>All Implemented Interfaces:</p>
+ * <p>{@link BaseView}</p>
+ * <p>All extends class:</p>
+ * <p>{@link AutoLayoutActivity}</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ */
 public abstract class BaseActivity<V, P extends BasePresent<V>> extends AutoLayoutActivity implements BaseView {
 
     protected P presenter;
@@ -59,6 +71,12 @@ public abstract class BaseActivity<V, P extends BasePresent<V>> extends AutoLayo
 
     protected abstract int getLayoutId();
 
+    /**
+     * init Presenter.
+     * <p>init Presenter</p>
+     * @return null
+     * @since 2.0
+     */
     public abstract P initPresenter();
 
     protected void initBind() {
@@ -69,6 +87,11 @@ public abstract class BaseActivity<V, P extends BasePresent<V>> extends AutoLayo
 
     protected abstract void initData();
 
+    /**
+     * init event.
+     * <p>init event</p>
+     * @since 2.0
+     */
     public abstract void initEvent();
 
     /**

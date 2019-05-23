@@ -34,6 +34,19 @@ import java.util.logging.Level;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
+/**
+ * class {@code WelcomeActivity}.
+ *
+ * <p>WelcomeActivity class.</p>
+ * <p>All Implemented Interfaces:</p>
+ * <p>{@link NormalView<NormalView, NormalPresenter>}</p>
+ * <p>extends class:</p>
+ * <p>{@link BaseActivity}</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ */
+
 public class WelcomeActivity extends BaseActivity<NormalView, NormalPresenter> implements NormalView {
     private static final int TIME = 500;
     private static final int GO_HOME = 200;
@@ -112,6 +125,12 @@ public class WelcomeActivity extends BaseActivity<NormalView, NormalPresenter> i
         ActivityUtils.next(WelcomeActivity.this, LoginActivity.class, true);
     }
 
+    /**
+     * init base.
+     * <p>init Presenter</p>
+     * @throws IOException IOException
+     * @since 2.0
+     */
     public void initOkGo() throws IOException {
         mSPCookieStore = new SPCookieStore(this);
         HttpHeaders headers  = new HttpHeaders();

@@ -36,6 +36,15 @@ import com.seclass.snappat.view.OverlayView;
 
 import java.nio.ByteBuffer;
 
+/**
+ * class {@code CameraActivity}.
+ *
+ * <p>camera activity.</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ */
+
 public abstract class CameraActivity extends Activity
         implements OnImageAvailableListener, Camera.PreviewCallback {
     private static final Logger LOGGER = new Logger();

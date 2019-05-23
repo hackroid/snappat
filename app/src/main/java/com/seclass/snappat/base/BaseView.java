@@ -24,6 +24,9 @@ public interface BaseView {
      */
     void hideProgress();
 
+    /**
+     * show toast
+     */
     void toast(CharSequence s);
 
     /**
@@ -41,5 +44,8 @@ public interface BaseView {
      */
     void showErrorLayout();
 
+    /**
+     * 隐藏异常布局
+     */
     void hideErrorLayout();
 }
