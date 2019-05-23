@@ -83,6 +83,7 @@ public class WelcomeActivity extends BaseActivity<NormalView, NormalPresenter> i
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         Utils.init(getApplicationContext());
         AutoLayoutConifg.getInstance().useDeviceSize();
         OkHttpClient.Builder builder = new OkHttpClient.Builder();

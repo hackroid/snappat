@@ -7,6 +7,7 @@ package com.seclass.snappat.utils;
 import android.content.Context;
 import android.content.Intent;
 
+import android.util.Log;
 import com.seclass.snappat.R;
 import com.seclass.snappat.service.KillSelfService;
 

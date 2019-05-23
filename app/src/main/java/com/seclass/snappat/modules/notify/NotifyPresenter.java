@@ -14,5 +14,4 @@ public class NotifyPresenter extends BasePresent<NotifyView> {
     public NotifyPresenter(Context context) {
         this.mContext = context;
     }
-
 }
