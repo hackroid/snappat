@@ -35,7 +35,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.seclass.snappat.app.ActivityUtils;
-import com.seclass.snappat.modules.publish.PubActivity;
+import com.seclass.snappat.modules.publish.PublishActivity;
 import com.seclass.snappat.modules.scanresult.ResActivity;
 import com.seclass.snappat.utils.ToastUtils;
 import com.seclass.snappat.view.OverlayView;
@@ -168,7 +168,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         Bundle bundle = new Bundle();
         bundle.putByteArray("img",Bitmap2Bytes(cropCopyBitmap));
         bundle.putStringArray("result", reg_result);
-        ActivityUtils.next(DetectorActivity.this, PubActivity.class, bundle, true);
+        ActivityUtils.next(DetectorActivity.this, PublishActivity.class, bundle, true);
       }
     });
 
