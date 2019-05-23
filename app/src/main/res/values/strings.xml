@@ -50,6 +50,11 @@
     <string name="start_chatting">开始聊天</string>
     <string name="hint_message">hint_message</string>
     <string name="send">send</string>
+  <string name="top_bar_bg">bar_background</string>
+    <string name="main_page_scanner">main_page_scanner</string>
+  <string name="puzzle_text">谜面</string>
+    <string name="favorite_text">赞</string>
+    <string name="solve_text">解谜</string>
 
 
 </resources>

@@ -10,7 +10,8 @@
     app:cardMaxElevation="@dimen/dimens_15"
     app:cardCornerRadius="@dimen/dimens_10"
     app:cardElevation="@dimen/dimens_5"
-    android:layout_margin="@dimen/dimens_10"
+    android:layout_marginTop="@dimen/dimens_10"
+    android:layout_marginBottom="@dimen/dimens_10"
     android:padding="@dimen/dimens_10"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -26,9 +27,9 @@
         android:orientation="horizontal">
         <de.hdodenhof.circleimageview.CircleImageView
           android:id="@+id/circle_profile"
-          android:layout_width="@dimen/dimens_120"
-          android:layout_height="@dimen/dimens_120"
-          android:layout_margin="@dimen/dimens_40"
+          android:layout_width="@dimen/dimens_40"
+          android:layout_height="@dimen/dimens_40"
+          android:layout_margin="@dimen/dimens_10"
           android:src="@drawable/bg_slide_lock"/>
         <TextView
           android:layout_width="wrap_content"
@@ -36,12 +37,12 @@
           android:layout_gravity="center_vertical"
           android:layout_margin="@dimen/dimens_10"
           android:text="Username"
-          android:textSize="20sp"
+          android:textSize="15sp"
           />
       </LinearLayout>
       <View
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/dimens_2"
+        android:layout_height="@dimen/dimens_1"
         android:background="@color/gray_color"/>
       <LinearLayout
         android:layout_width="wrap_content"
@@ -53,9 +54,9 @@
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/text_margin"
           android:textColor="@color/black"
-          android:text="谜面"/>
+          android:text="@string/puzzle_text"/>
         <View
-          android:layout_width="2px"
+          android:layout_width="1dp"
           android:layout_height="match_parent"
           android:layout_marginTop="@dimen/dimens_20"
           android:layout_marginBottom="@dimen/dimens_20"
@@ -64,33 +65,31 @@
           android:id="@+id/item_number"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_margin="@dimen/text_margin"
-          android:textAppearance="?attr/textAppearanceListItem"/>
+          android:layout_margin="@dimen/text_margin"/>
         <TextView
-          android:id="@+id/content"
+          android:id="@+id/item_content"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_margin="@dimen/text_margin"
-          android:textAppearance="?attr/textAppearanceListItem"/>
+          android:layout_margin="@dimen/text_margin"/>
       </LinearLayout>
       <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <android.support.design.button.MaterialButton
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_margin="@dimen/dimens_30"
-          android:padding="@dimen/dimens_10"
-          app:cornerRadius="@dimen/dimens_10"
-          android:text="解谜"/>
-        <android.support.design.button.MaterialButton
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_margin="@dimen/dimens_30"
-          android:padding="@dimen/dimens_20"
-          app:cornerRadius="@dimen/dimens_10"
-          android:text="赞"/>
+        <!--<android.support.design.button.MaterialButton-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:layout_margin="@dimen/dimens_30"-->
+          <!--android:padding="@dimen/dimens_10"-->
+          <!--app:cornerRadius="@dimen/dimens_10"-->
+          <!--android:text="@string/solve_text"/>-->
+        <!--<android.support.design.button.MaterialButton-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:layout_margin="@dimen/dimens_30"-->
+          <!--android:padding="@dimen/dimens_20"-->
+          <!--app:cornerRadius="@dimen/dimens_10"-->
+          <!--android:text="@string/favorite_text"/>-->
       </LinearLayout>
 
     </LinearLayout>

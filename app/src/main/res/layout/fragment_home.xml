@@ -1,109 +1,58 @@
-<!--
-  ~ Created by Snooow on 2019/5/10
-  -->
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusableInTouchMode="true"
-    android:src="@mipmap/person_bg">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimens_400"
-        android:scaleType="fitXY"
-        android:src="@mipmap/person_bg"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_80"
-            android:gravity="center_vertical">
-
-            <LinearLayout
-                android:id="@+id/home_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/home_title1"
-                    android:layout_width="@dimen/dimens_50"
-                    android:layout_height="@dimen/dimens_50"
-                    android:scaleType="center"
-                    android:src="@mipmap/home_title1"/>
-
-                <ImageView
-                    android:id="@+id/home_title2"
-                    android:layout_width="@dimen/dimens_50"
-                    android:layout_height="@dimen/dimens_50"
-                    android:scaleType="center"
-                    android:src="@mipmap/home_title2"/>
-
-                <ImageView
-                    android:id="@+id/home_title3"
-                    android:layout_width="@dimen/dimens_50"
-                    android:layout_height="@dimen/dimens_50"
-                    android:scaleType="center"
-                    android:src="@mipmap/home_title3"/>
-            </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_19"
-                android:textStyle="bold"/>
-
-            <ImageView
-                android:id="@+id/iv_message"
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/iv_scan"
-                android:scaleType="center"
-                android:src="@mipmap/home_message"
-                android:visibility="gone"/>
-
-            <ImageView
-                android:id="@+id/iv_scan"
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:scaleType="center"
-                android:src="@mipmap/home_scan"/>
-        </RelativeLayout>
-
-    </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="@dimen/dimens_16"
-        android:clickable="true"
-        app:rippleColor="@color/black"
-        android:src="@mipmap/ic_add_white_48dp" />
-
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:focusableInTouchMode="true"
+  android:orientation="vertical"
+  android:src="@mipmap/person_bg">
 
   <ImageView
-    android:id="@+id/iv_scan"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimens_60"
+    android:contentDescription="@string/top_bar_bg"
+    android:scaleType="fitXY"
+    android:src="@mipmap/person_bg"/>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+      android:id="@+id/title"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dimens_60"
+      android:gravity="center_vertical">
+
+      <TextView
+        android:id="@+id/name"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_19"/>
+      <ImageView
+        android:id="@+id/iv_scan"
+        android:layout_width="@dimen/dimens_50"
+        android:layout_height="@dimen/dimens_50"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/main_page_scanner"
+        android:scaleType="center"
+        android:src="@mipmap/home_scan"/>
+    </RelativeLayout>
+    <include layout="@layout/fragment_card_list"/>
+  </LinearLayout>
+  <android.support.design.widget.FloatingActionButton
+    android:id="@+id/addNew"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:srcCompat="@mipmap/import_go_scan_code"/>
+    android:layout_margin="@dimen/dimens_16"
+    android:layout_gravity="bottom|end"
+    android:clickable="true"
+    android:src="@mipmap/ic_add_white_48dp"
+    app:rippleColor="@color/black"/>
+
 </FrameLayout>
