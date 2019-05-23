@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import com.seclass.snappat.app.ActivityUtils;
 import com.seclass.snappat.modules.publish.PubActivity;
+import com.seclass.snappat.modules.scanresult.ResActivity;
 import com.seclass.snappat.utils.ToastUtils;
 import com.seclass.snappat.view.OverlayView;
 import com.seclass.snappat.view.OverlayView.DrawCallback;
@@ -94,6 +95,63 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   private ImageButton snap_btn;
   private volatile String[] reg_result;
+
+  public class ScanThread implements Runnable {
+
+    private String[][] targets;
+
+    public ScanThread(String[][] target_list) {
+      this.targets = target_list;
+    }
+
+    private boolean stringListEqual(String[] s1, String[] s2) {
+      if (s1==null || s2==null) return false;
+      if (s1.length != s2.length) return false;
+      for (int i = 0; i < s1.length; ++i) {
+        if (s1[i]==null || s2[i]==null) return false;
+        if (!s1[i].equals(s2[i])){
+          return false;
+        }
+      }
+      return true;
+    }
+
+    @Override
+    public void run() {
+      while (true) {
+        boolean flag = true;
+        if (reg_result==null) {
+          try {
+            Thread.sleep(100);
+          } catch (InterruptedException e) {
+            continue;
+          }
+        }
+        for (int i = 0; i < targets.length; ++i) {
+          if (stringListEqual(reg_result, targets[i])) {
+            flag = false;
+            break;
+          }
+        }
+        if (!flag) break;
+      }
+      Bundle bundle = new Bundle();
+      bundle.putByteArray("img",Bitmap2Bytes(cropCopyBitmap));
+      bundle.putStringArray("result", reg_result);
+      ActivityUtils.next(DetectorActivity.this, ResActivity.class, bundle, true);
+    }
+  }
+
+  @Override
+  void startScanThread(){
+    String[][] scan_targets = fetch_scan();
+    new Thread(new ScanThread(scan_targets)).start();
+  }
+
+  private String[][] fetch_scan() {
+    String[][] test_data = {{"电视","键盘"},{"键盘"},{"电视"},{"笔记本电脑"},{"人"},{"人","人"},{"人","人","人"}};
+    return test_data;
+  }
 
   @Override
   public void onPreviewSizeChosen(final Size size, final int rotation) {
