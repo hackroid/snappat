@@ -83,13 +83,15 @@ public abstract class CameraActivity extends Activity
         if (isScan) {
             ToastUtils.showShortToast("开始扫描匹配");
             debug = true;
-
+            startScanThread();
         } else {
             ToastUtils.showShortToast("扫描以创建谜题");
             debug = false;
         }
 
     }
+
+    abstract void startScanThread();
 
     private byte[] lastPreviewFrame;
 
