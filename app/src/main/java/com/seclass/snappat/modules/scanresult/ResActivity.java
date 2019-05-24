@@ -17,6 +17,8 @@ import com.seclass.snappat.app.ActivityUtils;
 import com.seclass.snappat.base.BaseActivity;
 import com.seclass.snappat.utils.ToastUtils;
 
+import java.util.Arrays;
+
 import butterknife.BindView;
 
 /**
@@ -39,6 +41,11 @@ public class ResActivity extends BaseActivity<ResView, ResPresenter> implements 
     TextView award_result_text;
     @BindView(R.id.back_imageView)
     ImageView back_img;
+    @BindView(R.id.treasure_result_str)
+    TextView treasure_result_str;
+    String[] result;
+    String treasure;
+    String coins;
     /**
      * change bytes to bitmap.
      * @param b Byte array
@@ -65,16 +72,15 @@ public class ResActivity extends BaseActivity<ResView, ResPresenter> implements 
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-        scan_result_text.setText("扫描结果:"+"人~");
-        award_result_text.setText("获得金币"+1000+"coins");
+
     }
 
     @Override
     protected void initData() {
         byte[] img = getIntent().getByteArrayExtra("img");
-        String[] result = getIntent().getStringArrayExtra("result");
-        String treasure = getIntent().getStringExtra("treasure");
-        String coins = getIntent().getStringExtra("coins");
+        result = getIntent().getStringArrayExtra("result");
+        treasure = getIntent().getStringExtra("treasure");
+        coins = getIntent().getStringExtra("coins");
 
         StringBuilder sb = new StringBuilder();
         if(result!=null){
@@ -84,6 +90,9 @@ public class ResActivity extends BaseActivity<ResView, ResPresenter> implements 
             }
             ToastUtils.showShortToast(sb.toString()+"\n"+treasure+"\n"+coins);
             pub_img.setImageBitmap(Bytes2Bimap(img));
+            scan_result_text.setText("扫描结果: "+ Arrays.toString(result));
+            award_result_text.setText("获得金币: "+ coins +" coins");
+            treasure_result_str.setText("对方给你的留言：" + treasure);
         }
 
     }
