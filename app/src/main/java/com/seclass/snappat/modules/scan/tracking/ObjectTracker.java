@@ -36,19 +36,19 @@ import java.util.Vector;
 import javax.microedition.khronos.opengles.GL10;
 
 /**
- * True object detector/tracker class that tracks objects across consecutive preview frames.
- * It provides a simplified Java interface to the analogous native object defined by
+ * True object detector/tracker class that tracks objects across consecutive preview frames. It
+ * provides a simplified Java interface to the analogous native object defined by
  * jni/client_vision/tracking/object_tracker.*.
  *
- * Currently, the ObjectTracker is a singleton due to native code restrictions, and so must
- * be allocated by ObjectTracker.getInstance(). In addition, release() should be called
- * as soon as the ObjectTracker is no longer needed, and before a new one is created.
+ * <p>Currently, the ObjectTracker is a singleton due to native code restrictions, and so must be
+ * allocated by ObjectTracker.getInstance(). In addition, release() should be called as soon as the
+ * ObjectTracker is no longer needed, and before a new one is created.
  *
- * nextFrame() should be called as new frames become available, preferably as often as possible.
+ * <p>nextFrame() should be called as new frames become available, preferably as often as possible.
  *
- * After allocation, new TrackedObjects may be instantiated via trackObject(). TrackedObjects
- * are associated with the ObjectTracker that created them, and are only valid while that
- * ObjectTracker still exists.
+ * <p>After allocation, new TrackedObjects may be instantiated via trackObject(). TrackedObjects are
+ * associated with the ObjectTracker that created them, and are only valid while that ObjectTracker
+ * still exists.
  */
 public class ObjectTracker {
   private static final Logger LOGGER = new Logger();
@@ -66,16 +66,13 @@ public class ObjectTracker {
 
   private static final boolean DRAW_TEXT = false;
 
-  /**
-   * How many history points to keep track of and draw in the red history line.
-   */
+  /** How many history points to keep track of and draw in the red history line. */
   private static final int MAX_DEBUG_HISTORY_SIZE = 30;
 
   /**
-   * How many frames of optical flow deltas to record.
-   * TODO(andrewharp): Push this down to the native level so it can be polled
-   * efficiently into a an array for upload, instead of keeping a duplicate
-   * copy in Java.
+   * How many frames of optical flow deltas to record. TODO(andrewharp): Push this down to the
+   * native level so it can be polled efficiently into a an array for upload, instead of keeping a
+   * duplicate copy in Java.
    */
   private static final int MAX_FRAME_HISTORY_SIZE = 200;
 
@@ -111,9 +108,8 @@ public class ObjectTracker {
   }
 
   /**
-   * A simple class that records keypoint information, which includes
-   * local location, score and msgType. This will be used in calculating
-   * FrameChange.
+   * A simple class that records keypoint information, which includes local location, score and
+   * msgType. This will be used in calculating FrameChange.
    */
   public static class Keypoint {
     public final float x;
@@ -141,9 +137,8 @@ public class ObjectTracker {
   }
 
   /**
-   * A simple class that could calculate Keypoint delta.
-   * This class will be used in calculating frame translation delta
-   * for optical flow.
+   * A simple class that could calculate Keypoint delta. This class will be used in calculating
+   * frame translation delta for optical flow.
    */
   public static class PointChange {
     public final Keypoint keypointA;
@@ -151,10 +146,14 @@ public class ObjectTracker {
     Keypoint pointDelta;
     private final boolean wasFound;
 
-    public PointChange(final float x1, final float y1,
-                       final float x2, final float y2,
-                       final float score, final int type,
-                       final boolean wasFound) {
+    public PointChange(
+        final float x1,
+        final float y1,
+        final float x2,
+        final float y2,
+        final float score,
+        final int type,
+        final boolean wasFound) {
       this.wasFound = wasFound;
 
       keypointA = new Keypoint(x1, y1, score, type);
@@ -262,8 +261,8 @@ public class ObjectTracker {
   private long downsampledTimestamp;
 
   @SuppressWarnings("unused")
-  public synchronized void drawOverlay(final GL10 gl,
-      final Size cameraViewSize, final Matrix matrix) {
+  public synchronized void drawOverlay(
+      final GL10 gl, final Size cameraViewSize, final Matrix matrix) {
     final Matrix tempMatrix = new Matrix(matrix);
     tempMatrix.preScale(DOWNSAMPLE_FACTOR, DOWNSAMPLE_FACTOR);
     tempMatrix.getValues(matrixValues);
@@ -271,8 +270,10 @@ public class ObjectTracker {
   }
 
   public synchronized void nextFrame(
-      final byte[] frameData, final byte[] uvData,
-      final long timestamp, final float[] transformationMatrix,
+      final byte[] frameData,
+      final byte[] uvData,
+      final long timestamp,
+      final float[] transformationMatrix,
       final boolean updateDebugInfo) {
     if (downsampledTimestamp != timestamp) {
       ObjectTracker.downsampleImageNative(
@@ -357,28 +358,33 @@ public class ObjectTracker {
 
     for (final PointChange keypoint : lastKeypoints.pointDeltas) {
       if (keypoint.wasFound) {
-        final int r =
-            floatToChar((keypoint.keypointA.score - minScore) / (maxScore - minScore));
+        final int r = floatToChar((keypoint.keypointA.score - minScore) / (maxScore - minScore));
         final int b =
             floatToChar(1.0f - (keypoint.keypointA.score - minScore) / (maxScore - minScore));
 
         final int color = 0xFF000000 | (r << 16) | b;
         p.setColor(color);
 
-        final float[] screenPoints = {keypoint.keypointA.x, keypoint.keypointA.y,
-                                      keypoint.keypointB.x, keypoint.keypointB.y};
-        canvas.drawRect(screenPoints[2] - keypointSize,
-                        screenPoints[3] - keypointSize,
-                        screenPoints[2] + keypointSize,
-                        screenPoints[3] + keypointSize, p);
+        final float[] screenPoints = {
+          keypoint.keypointA.x, keypoint.keypointA.y,
+          keypoint.keypointB.x, keypoint.keypointB.y
+        };
+        canvas.drawRect(
+            screenPoints[2] - keypointSize,
+            screenPoints[3] - keypointSize,
+            screenPoints[2] + keypointSize,
+            screenPoints[3] + keypointSize,
+            p);
         p.setColor(Color.CYAN);
-        canvas.drawLine(screenPoints[2], screenPoints[3],
-                        screenPoints[0], screenPoints[1], p);
+        canvas.drawLine(screenPoints[2], screenPoints[3], screenPoints[0], screenPoints[1], p);
 
         if (DRAW_TEXT) {
           p.setColor(Color.WHITE);
-          canvas.drawText(keypoint.keypointA.type + ": " + keypoint.keypointA.score,
-              keypoint.keypointA.x, keypoint.keypointA.y, p);
+          canvas.drawText(
+              keypoint.keypointA.type + ": " + keypoint.keypointA.score,
+              keypoint.keypointA.x,
+              keypoint.keypointA.y,
+              p);
         }
       } else {
         p.setColor(Color.YELLOW);
@@ -388,20 +394,27 @@ public class ObjectTracker {
     }
   }
 
-  private synchronized PointF getAccumulatedDelta(final long timestamp, final float positionX,
-                                                  final float positionY, final float radius) {
-    final RectF currPosition = getCurrentPosition(timestamp,
-        new RectF(positionX - radius, positionY - radius, positionX + radius, positionY + radius));
+  private synchronized PointF getAccumulatedDelta(
+      final long timestamp, final float positionX, final float positionY, final float radius) {
+    final RectF currPosition =
+        getCurrentPosition(
+            timestamp,
+            new RectF(
+                positionX - radius, positionY - radius, positionX + radius, positionY + radius));
     return new PointF(currPosition.centerX() - positionX, currPosition.centerY() - positionY);
   }
 
-  private synchronized RectF getCurrentPosition(final long timestamp, final RectF
-      oldPosition) {
+  private synchronized RectF getCurrentPosition(final long timestamp, final RectF oldPosition) {
     final RectF downscaledFrameRect = downscaleRect(oldPosition);
 
     final float[] delta = new float[4];
-    getCurrentPositionNative(timestamp, downscaledFrameRect.left, downscaledFrameRect.top,
-        downscaledFrameRect.right, downscaledFrameRect.bottom, delta);
+    getCurrentPositionNative(
+        timestamp,
+        downscaledFrameRect.left,
+        downscaledFrameRect.top,
+        downscaledFrameRect.right,
+        downscaledFrameRect.bottom,
+        delta);
 
     final RectF newPosition = new RectF(delta[0], delta[1], delta[2], delta[3]);
 
@@ -482,10 +495,10 @@ public class ObjectTracker {
   }
 
   /**
-   * A TrackedObject represents a native TrackedObject, and provides access to the
-   * relevant native tracking information available after every frame update. They may
-   * be safely passed around and accessed externally, but will become invalid after
-   * stopTracking() is called or the related creating ObjectTracker is deactivated.
+   * A TrackedObject represents a native TrackedObject, and provides access to the relevant native
+   * tracking information available after every frame update. They may be safely passed around and
+   * accessed externally, but will become invalid after stopTracking() is called or the related
+   * creating ObjectTracker is deactivated.
    *
    * @author andrewharp@google.com (Andrew Harp)
    */
@@ -530,10 +543,13 @@ public class ObjectTracker {
 
     void registerInitialAppearance(final RectF position, final byte[] data) {
       final RectF externalPosition = downscaleRect(position);
-      registerNewObjectWithAppearanceNative(id,
-            externalPosition.left, externalPosition.top,
-            externalPosition.right, externalPosition.bottom,
-            data);
+      registerNewObjectWithAppearanceNative(
+          id,
+          externalPosition.left,
+          externalPosition.top,
+          externalPosition.right,
+          externalPosition.bottom,
+          data);
     }
 
     synchronized void setPreviousPosition(final RectF position, final long timestamp) {
@@ -546,9 +562,12 @@ public class ObjectTracker {
         final RectF externalPosition = downscaleRect(position);
         lastExternalPositionTime = timestamp;
 
-        setPreviousPositionNative(id,
-            externalPosition.left, externalPosition.top,
-            externalPosition.right, externalPosition.bottom,
+        setPreviousPositionNative(
+            id,
+            externalPosition.left,
+            externalPosition.top,
+            externalPosition.right,
+            externalPosition.bottom,
             lastExternalPositionTime);
 
         updateTrackedPosition();
@@ -559,9 +578,12 @@ public class ObjectTracker {
       checkValidObject();
       final RectF downsampledPosition = downscaleRect(position);
       synchronized (ObjectTracker.this) {
-        setCurrentPositionNative(id,
-            downsampledPosition.left, downsampledPosition.top,
-            downsampledPosition.right, downsampledPosition.bottom);
+        setCurrentPositionNative(
+            id,
+            downsampledPosition.left,
+            downsampledPosition.top,
+            downsampledPosition.right,
+            downsampledPosition.bottom);
       }
     }
 
@@ -602,7 +624,7 @@ public class ObjectTracker {
   }
 
   public synchronized TrackedObject trackObject(
-          final RectF position, final long timestamp, final byte[] frameData) {
+      final RectF position, final long timestamp, final byte[] frameData) {
     if (downsampledTimestamp != timestamp) {
       ObjectTracker.downsampleImageNative(
           frameWidth, frameHeight, rowStride, frameData, DOWNSAMPLE_FACTOR, downsampledFrame);
@@ -623,20 +645,22 @@ public class ObjectTracker {
   private native void initNative(int imageWidth, int imageHeight, boolean alwaysTrack);
 
   protected native void registerNewObjectWithAppearanceNative(
-          String objectId, float x1, float y1, float x2, float y2, byte[] data);
+      String objectId, float x1, float y1, float x2, float y2, byte[] data);
 
   protected native void setPreviousPositionNative(
-          String objectId, float x1, float y1, float x2, float y2, long timestamp);
+      String objectId, float x1, float y1, float x2, float y2, long timestamp);
 
   protected native void setCurrentPositionNative(
-          String objectId, float x1, float y1, float x2, float y2);
+      String objectId, float x1, float y1, float x2, float y2);
 
   protected native void forgetNative(String key);
 
   protected native String getModelIdNative(String key);
 
   protected native boolean haveObject(String key);
+
   protected native boolean isObjectVisible(String key);
+
   protected native float getCurrentCorrelation(String key);
 
   protected native float getMatchScore(String key);
@@ -648,9 +672,12 @@ public class ObjectTracker {
 
   protected native void releaseMemoryNative();
 
-  protected native void getCurrentPositionNative(long timestamp,
-      final float positionX1, final float positionY1,
-      final float positionX2, final float positionY2,
+  protected native void getCurrentPositionNative(
+      long timestamp,
+      final float positionX1,
+      final float positionY1,
+      final float positionX2,
+      final float positionY2,
       final float[] delta);
 
   protected native byte[] getKeypointsPacked(float scaleFactor);

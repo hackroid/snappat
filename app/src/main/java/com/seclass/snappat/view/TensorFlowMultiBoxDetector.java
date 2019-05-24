@@ -136,7 +136,7 @@ public class TensorFlowMultiBoxDetector implements Classifier {
   private TensorFlowMultiBoxDetector() {}
 
   private void loadCoderOptions(
-          final AssetManager assetManager, final String locationFilename, final float[] boxPriors)
+      final AssetManager assetManager, final String locationFilename, final float[] boxPriors)
       throws IOException {
     // Try to be intelligent about opening from assets or sdcard depending on prefix.
     final String assetPrefix = "file:///android_asset/";

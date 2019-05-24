@@ -23,6 +23,7 @@ public class CommonResponse<T> implements Serializable {
 
   /**
    * record Login Presenter .
+   *
    * @return errno
    * @since 1.0
    */

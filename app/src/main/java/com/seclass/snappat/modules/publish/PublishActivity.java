@@ -137,7 +137,7 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
       case R.id.publish_btn:
         Integer money = 0;
         try {
-           money = Integer.parseInt(maward.getText().toString());
+          money = Integer.parseInt(maward.getText().toString());
         } catch (Exception e) {
           toast("错误格式，请输入数字！");
           break;

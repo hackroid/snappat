@@ -9,13 +9,11 @@ import com.seclass.snappat.base.BaseView;
 /**
  * interface {@code ResPresenter}.
  *
- * <p>result presenter.</p>
- * <p>extend class: {@link BaseView>}</p>
+ * <p>result presenter.
+ *
+ * <p>extend class: {@link BaseView>}
  *
  * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
  * @since 2.0
  */
-
-public interface ResView extends BaseView {
-
-}
+public interface ResView extends BaseView {}

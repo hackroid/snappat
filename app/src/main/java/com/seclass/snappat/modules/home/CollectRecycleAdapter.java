@@ -102,12 +102,13 @@ public class CollectRecycleAdapter
               }
             }
           });
-      likeButton.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          Toast.makeText(context,"点击了zan",Toast.LENGTH_SHORT).show();
-        }
-      });
+      likeButton.setOnClickListener(
+          new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Toast.makeText(context, "点击了zan", Toast.LENGTH_SHORT).show();
+            }
+          });
     }
   }
 

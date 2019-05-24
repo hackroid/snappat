@@ -20,13 +20,9 @@ import android.graphics.RectF;
 
 import java.util.List;
 
-/**
- * Generic interface for interacting with different recognition engines.
- */
+/** Generic interface for interacting with different recognition engines. */
 public interface Classifier {
-  /**
-   * An immutable result returned by a Classifier describing what was recognized.
-   */
+  /** An immutable result returned by a Classifier describing what was recognized. */
   public class Recognition {
     /**
      * A unique identifier for what has been recognized. Specific to the class, not the instance of
@@ -34,9 +30,7 @@ public interface Classifier {
      */
     private final String id;
 
-    /**
-     * Display name for the recognition.
-     */
+    /** Display name for the recognition. */
     private final String title;
 
     /**
@@ -48,7 +42,7 @@ public interface Classifier {
     private RectF location;
 
     public Recognition(
-            final String id, final String title, final Float confidence, final RectF location) {
+        final String id, final String title, final Float confidence, final RectF location) {
       this.id = id;
       this.title = title;
       this.confidence = confidence;

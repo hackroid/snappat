@@ -1,23 +1,22 @@
 package com.seclass.snappat.base;
 
-
 /**
  * Abstract Class {@code BasePresent}.
  *
- * <p>Implement the attach and detach of activity and view</p>
+ * <p>Implement the attach and detach of activity and view
  *
  * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
  * @since 2.0
  */
-
 public abstract class BasePresent<T> {
-
 
   public T view;
 
   /**
    * attach view
-   * <p> attach new activity</p>
+   *
+   * <p>attach new activity
+   *
    * @param view {@code view}
    * @since 3.0
    */
@@ -27,7 +26,9 @@ public abstract class BasePresent<T> {
 
   /**
    * detach view
-   * <p> detach new activity</p>
+   *
+   * <p>detach new activity
+   *
    * @since 3.0
    */
   public void detach() {

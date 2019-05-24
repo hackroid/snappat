@@ -60,10 +60,21 @@ public class MultiBoxTracker {
   private static final float MIN_CORRELATION = 0.3f;
 
   private static final int[] COLORS = {
-    Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.CYAN, Color.MAGENTA, Color.WHITE,
-    Color.parseColor("#55FF55"), Color.parseColor("#FFA500"), Color.parseColor("#FF8888"),
-    Color.parseColor("#AAAAFF"), Color.parseColor("#FFFFAA"), Color.parseColor("#55AAAA"),
-    Color.parseColor("#AA33AA"), Color.parseColor("#0D0068")
+    Color.BLUE,
+    Color.RED,
+    Color.GREEN,
+    Color.YELLOW,
+    Color.CYAN,
+    Color.MAGENTA,
+    Color.WHITE,
+    Color.parseColor("#55FF55"),
+    Color.parseColor("#FFA500"),
+    Color.parseColor("#FF8888"),
+    Color.parseColor("#AAAAFF"),
+    Color.parseColor("#FFFFAA"),
+    Color.parseColor("#55AAAA"),
+    Color.parseColor("#AA33AA"),
+    Color.parseColor("#0D0068")
   };
 
   private final Queue<Integer> availableColors = new LinkedList<Integer>();
@@ -156,7 +167,7 @@ public class MultiBoxTracker {
   }
 
   public synchronized void trackResults(
-          final List<Recognition> results, final byte[] frame, final long timestamp) {
+      final List<Recognition> results, final byte[] frame, final long timestamp) {
     logger.i("Processing %d results from %d", results.size(), timestamp);
     processResults(timestamp, results, frame);
   }
@@ -164,8 +175,9 @@ public class MultiBoxTracker {
   public synchronized void draw(final Canvas canvas) {
     final boolean rotated = sensorOrientation % 180 == 90;
     final float multiplier =
-        Math.min(canvas.getHeight() / (float) (rotated ? frameWidth : frameHeight),
-                 canvas.getWidth() / (float) (rotated ? frameHeight : frameWidth));
+        Math.min(
+            canvas.getHeight() / (float) (rotated ? frameWidth : frameHeight),
+            canvas.getWidth() / (float) (rotated ? frameHeight : frameWidth));
     frameToCanvasMatrix =
         ImageUtils.getTransformationMatrix(
             frameWidth,
@@ -213,13 +225,13 @@ public class MultiBoxTracker {
       this.sensorOrientation = sensorOrientation;
       initialized = true;
 
-//      if (objectTracker == null) {
-//        String message =
-//            "Object tracking support not found. "
-//                + "See tensorflow/examples/android/README.md for details.";
-//        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-//        logger.e(message);
-//      }
+      //      if (objectTracker == null) {
+      //        String message =
+      //            "Object tracking support not found. "
+      //                + "See tensorflow/examples/android/README.md for details.";
+      //        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+      //        logger.e(message);
+      //      }
     }
 
     if (objectTracker == null) {
@@ -245,7 +257,7 @@ public class MultiBoxTracker {
   }
 
   private void processResults(
-          final long timestamp, final List<Recognition> results, final byte[] originalFrame) {
+      final long timestamp, final List<Recognition> results, final byte[] originalFrame) {
     final List<Pair<Float, Recognition>> rectsToTrack = new LinkedList<Pair<Float, Recognition>>();
 
     screenRects.clear();

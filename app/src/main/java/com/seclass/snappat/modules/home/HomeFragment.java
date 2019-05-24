@@ -100,7 +100,9 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
   /**
    * initialize RecyclerView
-   * <p>initialize RecyclerView for the Entity list.</p>
+   *
+   * <p>initialize RecyclerView for the Entity list.
+   *
    * @since 3.0
    */
   private void initRecyclerView() {
@@ -130,7 +132,9 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
   /**
    * initialize Event
-   * <p>initialize Event for the fragment.</p>
+   *
+   * <p>initialize Event for the fragment.
+   *
    * @since 3.0
    */
   @Override
@@ -169,7 +173,9 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
   /**
    * get layout id
-   * <p>get layout id of current fragment.</p>
+   *
+   * <p>get layout id of current fragment.
+   *
    * @return id of current fragment
    * @since 3.0
    */
@@ -180,7 +186,8 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
   /**
    * create view
-   * <p>Create view for fragment, initialize inner function and data.</p>
+   *
+   * <p>Create view for fragment, initialize inner function and data.
    *
    * @param inflater {@code LayoutInflater}
    * @param container {@code ViewGroup}
@@ -190,7 +197,9 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
    */
   @Override
   public View onCreateView(
-      @NonNull LayoutInflater inflater, @NonNull ViewGroup container, @NonNull Bundle savedInstanceState) {
+      @NonNull LayoutInflater inflater,
+      @NonNull ViewGroup container,
+      @NonNull Bundle savedInstanceState) {
     rootView = super.onCreateView(inflater, container, savedInstanceState);
     assert rootView != null;
     unbinder = ButterKnife.bind(this, rootView);
@@ -201,7 +210,8 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
   /**
    * destroy view
-   * <p>Destroy current view, clean up.</p>
+   *
+   * <p>Destroy current view, clean up.
    *
    * @since 3.0
    */
@@ -213,7 +223,8 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
   /**
    * implement puzzle info
-   * <p>Set up data after refresh, and then notify the RecycleView.</p>
+   *
+   * <p>Set up data after refresh, and then notify the RecycleView.
    *
    * @param msg {@code JSONArray}
    * @since 3.0
@@ -242,7 +253,8 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
 
   /**
    * implement puzzle info failure
-   * <p>Toast message when failed getting puzzle info.</p>
+   *
+   * <p>Toast message when failed getting puzzle info.
    *
    * @param msg {@code CommonResponse<Test>}
    * @since 3.0

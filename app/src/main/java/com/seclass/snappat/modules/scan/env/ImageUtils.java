@@ -22,9 +22,7 @@ import android.os.Environment;
 import java.io.File;
 import java.io.FileOutputStream;
 
-/**
- * Utility class for manipulating images.
- **/
+/** Utility class for manipulating images. */
 public class ImageUtils {
   @SuppressWarnings("unused")
   private static final Logger LOGGER = new Logger();
@@ -38,8 +36,8 @@ public class ImageUtils {
   }
 
   /**
-   * Utility method to compute the allocated size in bytes of a YUV420SP image
-   * of the given dimensions.
+   * Utility method to compute the allocated size in bytes of a YUV420SP image of the given
+   * dimensions.
    */
   public static int getYUVByteSize(final int width, final int height) {
     // The luminance plane requires 1 byte per pixel.
@@ -99,11 +97,7 @@ public class ImageUtils {
   // Always prefer the native implementation if available.
   private static boolean useNativeConversion = true;
 
-  public static void convertYUV420SPToARGB8888(
-      byte[] input,
-      int width,
-      int height,
-      int[] output) {
+  public static void convertYUV420SPToARGB8888(byte[] input, int width, int height, int[] output) {
     if (useNativeConversion) {
       try {
         ImageUtils.convertYUV420SPToARGB8888(input, output, width, height, false);
@@ -158,7 +152,6 @@ public class ImageUtils {
     return 0xff000000 | ((r << 6) & 0xff0000) | ((g >> 2) & 0xff00) | ((b >> 10) & 0xff);
   }
 
-
   public static void convertYUV420ToARGB8888(
       byte[] yData,
       byte[] uData,
@@ -189,14 +182,10 @@ public class ImageUtils {
       for (int i = 0; i < width; i++) {
         int uv_offset = pUV + (i >> 1) * uvPixelStride;
 
-        out[yp++] = YUV2RGB(
-            0xff & yData[pY + i],
-            0xff & uData[uv_offset],
-            0xff & vData[uv_offset]);
+        out[yp++] = YUV2RGB(0xff & yData[pY + i], 0xff & uData[uv_offset], 0xff & vData[uv_offset]);
       }
     }
   }
-
 
   /**
    * Converts YUV420 semi-planar data to ARGB 8888 data using the supplied width and height. The
@@ -213,9 +202,9 @@ public class ImageUtils {
       byte[] input, int[] output, int width, int height, boolean halfSize);
 
   /**
-   * Converts YUV420 semi-planar data to ARGB 8888 data using the supplied width
-   * and height. The input and output must already be allocated and non-null.
-   * For efficiency, no error checking is performed.
+   * Converts YUV420 semi-planar data to ARGB 8888 data using the supplied width and height. The
+   * input and output must already be allocated and non-null. For efficiency, no error checking is
+   * performed.
    *
    * @param y
    * @param u
@@ -239,9 +228,9 @@ public class ImageUtils {
       boolean halfSize);
 
   /**
-   * Converts YUV420 semi-planar data to RGB 565 data using the supplied width
-   * and height. The input and output must already be allocated and non-null.
-   * For efficiency, no error checking is performed.
+   * Converts YUV420 semi-planar data to RGB 565 data using the supplied width and height. The input
+   * and output must already be allocated and non-null. For efficiency, no error checking is
+   * performed.
    *
    * @param input The array of YUV 4:2:0 input data.
    * @param output A pre-allocated array for the RGB 5:6:5 output data.
@@ -252,9 +241,8 @@ public class ImageUtils {
       byte[] input, byte[] output, int width, int height);
 
   /**
-   * Converts 32-bit ARGB8888 image data to YUV420SP data.  This is useful, for
-   * instance, in creating data to feed the classes that rely on raw camera
-   * preview frames.
+   * Converts 32-bit ARGB8888 image data to YUV420SP data. This is useful, for instance, in creating
+   * data to feed the classes that rely on raw camera preview frames.
    *
    * @param input An array of input pixels in ARGB8888 format.
    * @param output A pre-allocated array for the YUV420SP output data.
@@ -265,9 +253,8 @@ public class ImageUtils {
       int[] input, byte[] output, int width, int height);
 
   /**
-   * Converts 16-bit RGB565 image data to YUV420SP data.  This is useful, for
-   * instance, in creating data to feed the classes that rely on raw camera
-   * preview frames.
+   * Converts 16-bit RGB565 image data to YUV420SP data. This is useful, for instance, in creating
+   * data to feed the classes that rely on raw camera preview frames.
    *
    * @param input An array of input pixels in RGB565 format.
    * @param output A pre-allocated array for the YUV420SP output data.
@@ -278,17 +265,17 @@ public class ImageUtils {
       byte[] input, byte[] output, int width, int height);
 
   /**
-   * Returns a transformation matrix from one reference frame into another.
-   * Handles cropping (if maintaining aspect ratio is desired) and rotation.
+   * Returns a transformation matrix from one reference frame into another. Handles cropping (if
+   * maintaining aspect ratio is desired) and rotation.
    *
    * @param srcWidth Width of source frame.
    * @param srcHeight Height of source frame.
    * @param dstWidth Width of destination frame.
    * @param dstHeight Height of destination frame.
-   * @param applyRotation Amount of rotation to apply from one frame to another.
-   *  Must be a multiple of 90.
+   * @param applyRotation Amount of rotation to apply from one frame to another. Must be a multiple
+   *     of 90.
    * @param maintainAspectRatio If true, will ensure that scaling in x and y remains constant,
-   * cropping the image if necessary.
+   *     cropping the image if necessary.
    * @return The transformation fulfilling the desired requirements.
    */
   public static Matrix getTransformationMatrix(

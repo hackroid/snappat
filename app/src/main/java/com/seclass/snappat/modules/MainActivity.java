@@ -26,216 +26,199 @@ import com.seclass.snappat.utils.ToastUtils;
  * Class {@code MainActivity}.
  *
  * <p>Login view.
- * <p>All Implemented Interfaces:</p>
- * <p>{@link NormalView}</p>
- * <p>All extends class:</p>
- *  <p>{@link BaseActivity<NormalView, NormalPresenter>}</p>
+ *
+ * <p>All Implemented Interfaces:
+ *
+ * <p>{@link NormalView}
+ *
+ * <p>All extends class:
+ *
+ * <p>{@link BaseActivity<NormalView, NormalPresenter>}
+ *
  * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
  * @since 2.0
  */
 public class MainActivity extends BaseActivity<NormalView, NormalPresenter> implements NormalView {
 
-    LinearLayout mLlHome;
-    LinearLayout mLlNotify;
-    LinearLayout mLlMine;
+  LinearLayout mLlHome;
+  LinearLayout mLlNotify;
+  LinearLayout mLlMine;
 
-    @BindView(R.id.activity_main)
-    LinearLayout mActivityMain;
+  @BindView(R.id.activity_main)
+  LinearLayout mActivityMain;
 
+  private HomeFragment homeFragment;
+  private NotifyFragment notifyFragment;
+  private MineFragment mineFragment;
 
-    private HomeFragment homeFragment;
-    private NotifyFragment notifyFragment;
-    private MineFragment mineFragment;
+  private long exitTime = 0;
 
-    private long exitTime = 0;
+  @Override
+  protected int getLayoutId() {
+    return R.layout.activity_main;
+  }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
-    }
+  @Override
+  public NormalPresenter initPresenter() {
+    return new NormalPresenter();
+  }
 
+  @Override
+  protected void initViews(Bundle savedInstanceState) {
+    mLlHome = getId(R.id.ll_home);
+    mLlNotify = getId(R.id.ll_notify);
+    mLlMine = getId(R.id.ll_mine);
 
-    @Override
-    public NormalPresenter initPresenter() {
-        return new NormalPresenter();
-    }
+    selectedFragment(0);
+    tabSelected(mLlHome);
+  }
 
-    @Override
-    protected void initViews(Bundle savedInstanceState) {
-        mLlHome = getId(R.id.ll_home);
-        mLlNotify = getId(R.id.ll_notify);
-        mLlMine = getId(R.id.ll_mine);
-
-        selectedFragment(0);
-        tabSelected(mLlHome);
-
-    }
-
-    private void selectedFragment(int position) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        hideFragment(transaction);
-        switch (position) {
-            case 0:
-                if (homeFragment == null) {
-                    homeFragment = new HomeFragment();
-                    transaction.add(R.id.item_content, homeFragment);
-                } else {
-                    transaction.show(homeFragment);
-                }
-                break;
-            case 1:
-                if (notifyFragment == null) {
-                    notifyFragment = new NotifyFragment();
-                    transaction.add(R.id.item_content, notifyFragment);
-                } else {
-                    transaction.show(notifyFragment);
-                }
-                break;
-            case 2:
-                if (mineFragment == null) {
-                    mineFragment = new MineFragment();
-                    transaction.add(R.id.item_content, mineFragment);
-                } else {
-                    transaction.show(mineFragment);
-                }
-                break;
+  private void selectedFragment(int position) {
+    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    hideFragment(transaction);
+    switch (position) {
+      case 0:
+        if (homeFragment == null) {
+          homeFragment = new HomeFragment();
+          transaction.add(R.id.item_content, homeFragment);
+        } else {
+          transaction.show(homeFragment);
         }
-        transaction.commit();
-    }
-
-    private void tabSelected(LinearLayout linearLayout) {
-        mLlHome.setSelected(false);
-        mLlNotify.setSelected(false);
-        mLlMine.setSelected(false);
-        linearLayout.setSelected(true);
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Fragment fragment = homeFragment;
-        fragment.onActivityResult(requestCode, resultCode, data);
-        hideProgress();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        ButterKnife.bind(this);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//            WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    }
-
-
-
-    private void hideFragment(FragmentTransaction transaction) {
-        if (homeFragment != null) {
-            transaction.hide(homeFragment);
+        break;
+      case 1:
+        if (notifyFragment == null) {
+          notifyFragment = new NotifyFragment();
+          transaction.add(R.id.item_content, notifyFragment);
+        } else {
+          transaction.show(notifyFragment);
         }
-        if (notifyFragment != null) {
-            transaction.hide(notifyFragment);
+        break;
+      case 2:
+        if (mineFragment == null) {
+          mineFragment = new MineFragment();
+          transaction.add(R.id.item_content, mineFragment);
+        } else {
+          transaction.show(mineFragment);
         }
-        if (mineFragment != null) {
-            transaction.hide(mineFragment);
-        }
+        break;
     }
+    transaction.commit();
+  }
 
+  private void tabSelected(LinearLayout linearLayout) {
+    mLlHome.setSelected(false);
+    mLlNotify.setSelected(false);
+    mLlMine.setSelected(false);
+    linearLayout.setSelected(true);
+  }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    Fragment fragment = homeFragment;
+    fragment.onActivityResult(requestCode, resultCode, data);
+    hideProgress();
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    getWindow()
+        .setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    ButterKnife.bind(this);
+    //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+    //            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+  }
+
+  private void hideFragment(FragmentTransaction transaction) {
+    if (homeFragment != null) {
+      transaction.hide(homeFragment);
     }
-
-    @Override
-    protected void initData() {
-
+    if (notifyFragment != null) {
+      transaction.hide(notifyFragment);
     }
+    if (mineFragment != null) {
+      transaction.hide(mineFragment);
+    }
+  }
 
-    @Override
-    public void initEvent() {
+  @Override
+  public void onResume() {
+    super.onResume();
+  }
 
+  @Override
+  protected void initData() {}
 
-        mLlHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedFragment(0);
-                tabSelected(mLlHome);
-            }
+  @Override
+  public void initEvent() {
+
+    mLlHome.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            selectedFragment(0);
+            tabSelected(mLlHome);
+          }
         });
 
-        mLlNotify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedFragment(1);
-                tabSelected(mLlNotify);
-            }
+    mLlNotify.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            selectedFragment(1);
+            tabSelected(mLlNotify);
+          }
         });
 
-        mLlMine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedFragment(2);
-                tabSelected(mLlMine);
-            }
+    mLlMine.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            selectedFragment(2);
+            tabSelected(mLlMine);
+          }
         });
+  }
 
+  @Override
+  public void showProgress() {}
+
+  @Override
+  public void hideProgress() {}
+
+  @Override
+  public void toast(CharSequence s) {}
+
+  @Override
+  public void showNullLayout() {}
+
+  @Override
+  public void hideNullLayout() {}
+
+  @Override
+  public void showErrorLayout() {}
+
+  @Override
+  public void hideErrorLayout() {}
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+      // 判断间隔时间 大于2秒就退出应用
+      if ((System.currentTimeMillis() - exitTime) > 2000) {
+        String msg1 = getString(R.string.drop_two_to_home);
+        ToastUtils.showLongToast(msg1);
+        // 计算两次返回键按下的时间差
+        exitTime = System.currentTimeMillis();
+      } else {
+        // 返回桌面操作
+        Intent home = new Intent(Intent.ACTION_MAIN);
+        home.addCategory(Intent.CATEGORY_HOME);
+        startActivity(home);
+      }
+      return true;
     }
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
-
-    }
-
-    @Override
-    public void toast(CharSequence s) {
-
-    }
-
-    @Override
-    public void showNullLayout() {
-
-    }
-
-    @Override
-    public void hideNullLayout() {
-
-    }
-
-    @Override
-    public void showErrorLayout() {
-
-    }
-
-    @Override
-    public void hideErrorLayout() {
-
-    }
-
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            // 判断间隔时间 大于2秒就退出应用
-            if ((System.currentTimeMillis() - exitTime) > 2000) {
-                String msg1 = getString(R.string.drop_two_to_home);
-                ToastUtils.showLongToast(msg1);
-                // 计算两次返回键按下的时间差
-                exitTime = System.currentTimeMillis();
-            } else {
-                // 返回桌面操作
-                Intent home = new Intent(Intent.ACTION_MAIN);
-                home.addCategory(Intent.CATEGORY_HOME);
-                startActivity(home);
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+    return super.onKeyDown(keyCode, event);
+  }
 }

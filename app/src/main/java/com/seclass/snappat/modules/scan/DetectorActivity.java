@@ -61,7 +61,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -78,7 +77,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   private static final Logger LOGGER = new Logger();
 
   private static final int TF_OD_API_INPUT_SIZE = 300;
-  private static final String TF_OD_API_MODEL_FILE = "file:///android_asset/ssd_mobilenet_v1_android_export.pb";
+  private static final String TF_OD_API_MODEL_FILE =
+      "file:///android_asset/ssd_mobilenet_v1_android_export.pb";
   private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/coco_labels_list.txt";
 
   // Minimum detection confidence to track a detection.
@@ -123,10 +123,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     }
 
     private boolean stringListEqual(String[] s1, String[] s2) {
-      if (s1==null || s2==null || s1.length == 0) return false;
+      if (s1 == null || s2 == null || s1.length == 0) return false;
       for (int i = 0; i < s1.length; i++) {
         Log.d("Debug", "comparison for str: " + s1[i] + " and " + s2[i]);
-        if ((s1[i] != null && s2[i]!=null && !s1[i].equals(s2[i])) || s1[i] == null || s2[i]==null){
+        if ((s1[i] != null && s2[i] != null && !s1[i].equals(s2[i]))
+            || s1[i] == null
+            || s2[i] == null) {
           return false;
         }
       }
@@ -138,7 +140,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
       Bundle bundle = new Bundle();
       while (true) {
         boolean flag = true;
-        if (reg_result==null) {
+        if (reg_result == null) {
           try {
             Thread.sleep(100);
           } catch (InterruptedException e) {
@@ -146,24 +148,26 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
           }
         }
 
-        if(targets!=null){
+        if (targets != null) {
           Log.d("targets", "targets!=null");
           Log.d("reg_result", Arrays.toString(reg_result));
           for (int i = 0; i < targets.length; ++i) {
-            if(targets[i]!=null){
+            if (targets[i] != null) {
               Log.d("targets[i]", i + Arrays.toString(targets[i]));
             }
-            if (targets[i]!=null && cropCopyBitmap!=null && stringListEqual(reg_result, targets[i]) && Bitmap2Bytes(cropCopyBitmap) != null ) {
-              bundle.putByteArray("img",Bitmap2Bytes(cropCopyBitmap));
+            if (targets[i] != null
+                && cropCopyBitmap != null
+                && stringListEqual(reg_result, targets[i])
+                && Bitmap2Bytes(cropCopyBitmap) != null) {
+              bundle.putByteArray("img", Bitmap2Bytes(cropCopyBitmap));
               bundle.putStringArray("result", reg_result);
               bundle.putString("treasure", treasure[i]);
               bundle.putString("coins", coins[i]);
-              Log.d("reg_result", "judge: "+ Arrays.toString(reg_result));
+              Log.d("reg_result", "judge: " + Arrays.toString(reg_result));
               ActivityUtils.next(DetectorActivity.this, ResActivity.class, bundle, true);
               flag = false;
               break;
             }
-
           }
         }
         if (!flag) break;
@@ -172,8 +176,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   }
 
   @Override
-  void startScanThread(){
-//    String[][] scan_targets = fetch_scan();
+  void startScanThread() {
+    //    String[][] scan_targets = fetch_scan();
     fetch_scan();
     new Thread(new ScanThread(test_data)).start();
   }
@@ -182,65 +186,68 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   String[] treasure = new String[100];
   String[] coins = new String[100];
 
-  public void getPuzzleSucc(JSONArray objects){
+  public void getPuzzleSucc(JSONArray objects) {
     Log.i("ingetPuzzleSucc", "start getPuzzleSucc method");
     Log.d("Debug", "getPuzzleInfo Response Class:" + objects.toString());
     try {
-        for (int i = 0; i < objects.length(); i++){
-          JSONObject goodsEntityObject = objects.getJSONObject(i);
-          String key = goodsEntityObject.getString("key");
-          Log.d("key", key);
-          String[] key_words = key.split(" ");
-          if(key_words.length!=0){
-            for(int j = 0; j < key_words.length; j++){
-              test_data[i][j] = key_words[j];
-              if(key_words[j]!=null){
-                Log.d("key_words", key_words[j]);
-              }
+      for (int i = 0; i < objects.length(); i++) {
+        JSONObject goodsEntityObject = objects.getJSONObject(i);
+        String key = goodsEntityObject.getString("key");
+        Log.d("key", key);
+        String[] key_words = key.split(" ");
+        if (key_words.length != 0) {
+          for (int j = 0; j < key_words.length; j++) {
+            test_data[i][j] = key_words[j];
+            if (key_words[j] != null) {
+              Log.d("key_words", key_words[j]);
             }
-            treasure[i] = goodsEntityObject.getString("treasure");
-            coins[i] = goodsEntityObject.getString("coins");
           }
+          treasure[i] = goodsEntityObject.getString("treasure");
+          coins[i] = goodsEntityObject.getString("coins");
         }
-    }catch (Exception e){
-        Log.d("Exception", "getPuzzleSucc" + e);
+      }
+    } catch (Exception e) {
+      Log.d("Exception", "getPuzzleSucc" + e);
     }
   }
 
   public void getPuzzleInfo() {
-    String phone_number= Utils.getSpUtils().getString("phone_number");
+    String phone_number = Utils.getSpUtils().getString("phone_number");
     String username = Utils.getSpUtils().getString("user_name");
     HashMap<String, String> hashMap = new HashMap<String, String>();
     hashMap.put("phone", phone_number);
     hashMap.put("username", username);
-    Log.d("DataTest",phone_number);
-    Log.d("DataTest",username);
-    HttpUtils.postRequest(BaseUrl.HTTP_Get_mystery, DetectorActivity.this, hashMap, new JsonCallback<CommonResponse<CommonResponse.Test>>() {
-      @Override
-      public void onSuccess(Response<CommonResponse<CommonResponse.Test>> response) {
-        JSONArray puzzleResponseList = new JSONArray();
-        Log.d("Debug", "getPuzzleInfo Response: "+response);
-        if (response.body().errno == 0) {
-          try{
-            puzzleResponseList = new JSONArray(response.body().getData().dataString);
-            Log.d("Debug", "getPuzzleInfo Response Class:" + puzzleResponseList.toString());
-          } catch (Exception e) {
-            Log.d("Exception", "getPuzzleInfo Response: null object reference" + e);
+    Log.d("DataTest", phone_number);
+    Log.d("DataTest", username);
+    HttpUtils.postRequest(
+        BaseUrl.HTTP_Get_mystery,
+        DetectorActivity.this,
+        hashMap,
+        new JsonCallback<CommonResponse<CommonResponse.Test>>() {
+          @Override
+          public void onSuccess(Response<CommonResponse<CommonResponse.Test>> response) {
+            JSONArray puzzleResponseList = new JSONArray();
+            Log.d("Debug", "getPuzzleInfo Response: " + response);
+            if (response.body().errno == 0) {
+              try {
+                puzzleResponseList = new JSONArray(response.body().getData().dataString);
+                Log.d("Debug", "getPuzzleInfo Response Class:" + puzzleResponseList.toString());
+              } catch (Exception e) {
+                Log.d("Exception", "getPuzzleInfo Response: null object reference" + e);
+              }
+
+              // Success
+              getPuzzleSucc(puzzleResponseList);
+
+            } else {
+              Log.d("Errno", "Errno when get keywords list" + response.body().errmsg);
+            }
           }
-
-          //Success
-          getPuzzleSucc(puzzleResponseList);
-
-        }else{
-          Log.d("Errno","Errno when get keywords list"+response.body().errmsg);
-        }
-      }
-    });
+        });
   }
 
   private void fetch_scan() {
-     getPuzzleInfo();
-
+    getPuzzleInfo();
   }
 
   @Override
@@ -251,16 +258,17 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     } else {
       snap_btn.setVisibility(View.VISIBLE);
     }
-    snap_btn.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        ToastUtils.showShortToast("Snap!");
-        Bundle bundle = new Bundle();
-        bundle.putByteArray("img",Bitmap2Bytes(cropCopyBitmap));
-        bundle.putStringArray("result", reg_result);
-        ActivityUtils.next(DetectorActivity.this, PublishActivity.class, bundle, true);
-      }
-    });
+    snap_btn.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            ToastUtils.showShortToast("Snap!");
+            Bundle bundle = new Bundle();
+            bundle.putByteArray("img", Bitmap2Bytes(cropCopyBitmap));
+            bundle.putStringArray("result", reg_result);
+            ActivityUtils.next(DetectorActivity.this, PublishActivity.class, bundle, true);
+          }
+        });
 
     final float textSizePx =
         TypedValue.applyDimension(
@@ -273,8 +281,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     int cropSize = TF_OD_API_INPUT_SIZE;
 
     try {
-      detector = TensorFlowObjectDetectionAPIModel.create(
-          getAssets(), TF_OD_API_MODEL_FILE, TF_OD_API_LABELS_FILE, TF_OD_API_INPUT_SIZE);
+      detector =
+          TensorFlowObjectDetectionAPIModel.create(
+              getAssets(), TF_OD_API_MODEL_FILE, TF_OD_API_LABELS_FILE, TF_OD_API_INPUT_SIZE);
       cropSize = TF_OD_API_INPUT_SIZE;
     } catch (final IOException e) {
       LOGGER.e("Exception initializing classifier!", e);
@@ -284,7 +293,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
       toast.show();
       finish();
     }
-
 
     previewWidth = size.getWidth();
     previewHeight = size.getHeight();
@@ -411,10 +419,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             paint.setStyle(Style.STROKE);
             paint.setStrokeWidth(2.0f);
 
-
             final List<Classifier.Recognition> mappedRecognitions =
                 new LinkedList<Classifier.Recognition>();
-
 
             for (final Classifier.Recognition result : results) {
               final RectF location = result.getLocation();
@@ -429,7 +435,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
             reg_result = new String[mappedRecognitions.size()];
             for (int i = 0; i < mappedRecognitions.size(); ++i) {
-              reg_result[i] = ((LinkedList<Classifier.Recognition>) mappedRecognitions).pop().getTitle();
+              reg_result[i] =
+                  ((LinkedList<Classifier.Recognition>) mappedRecognitions).pop().getTitle();
             }
 
             tracker.trackResults(mappedRecognitions, luminanceCopy, currTimestamp);
@@ -457,10 +464,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   }
 
   public byte[] Bitmap2Bytes(Bitmap bm) {
-    if (bm==null) return null;
+    if (bm == null) return null;
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
     return baos.toByteArray();
   }
-
 }

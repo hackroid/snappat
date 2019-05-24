@@ -75,7 +75,8 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
       final AssetManager assetManager,
       final String modelFilename,
       final String labelFilename,
-      final int inputSize) throws IOException {
+      final int inputSize)
+      throws IOException {
     final TensorFlowObjectDetectionAPIModel d = new TensorFlowObjectDetectionAPIModel();
 
     InputStream labelsInput = null;
@@ -89,7 +90,6 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
       d.labels.add(line);
     }
     br.close();
-
 
     d.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);
 
@@ -121,8 +121,11 @@ public class TensorFlowObjectDetectionAPIModel implements Classifier {
     }
 
     // Pre-allocate buffers.
-    d.outputNames = new String[] {"detection_boxes", "detection_scores",
-                                  "detection_classes", "num_detections"};
+    d.outputNames =
+        new String[] {
+          "detection_boxes", "detection_scores",
+          "detection_classes", "num_detections"
+        };
     d.intValues = new int[d.inputSize * d.inputSize];
     d.byteValues = new byte[d.inputSize * d.inputSize * 3];
     d.outputScores = new float[MAX_RESULTS];
