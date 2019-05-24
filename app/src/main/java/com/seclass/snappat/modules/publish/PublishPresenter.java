@@ -51,11 +51,13 @@ public class PublishPresenter extends BasePresent<PublishView> {
         String phone_number= Utils.getSpUtils().getString("phone_number");
         String username= Utils.getSpUtils().getString("user_name");
         StringBuffer keyBuffer = new StringBuffer();
-        for (String s: results){
-            if (!s.equals("")){
-                keyBuffer.append(s);
+        if(results!=null){
+            for (String s: results){
+                if (s!=null && !s.equals("")){
+                    keyBuffer.append(s);
+                }
+                keyBuffer.append(" ");
             }
-            keyBuffer.append(" ");
         }
         String key = keyBuffer.toString();
         Log.i("test key", key);
