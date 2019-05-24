@@ -28,16 +28,23 @@ import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.lzy.okgo.model.Response;
 import com.seclass.snappat.app.ActivityUtils;
+import com.seclass.snappat.base.BaseUrl;
+import com.seclass.snappat.bean.CommonResponse;
 import com.seclass.snappat.modules.publish.PublishActivity;
 import com.seclass.snappat.modules.scanresult.ResActivity;
+import com.seclass.snappat.net.HttpUtils;
+import com.seclass.snappat.net.callbck.JsonCallback;
 import com.seclass.snappat.utils.ToastUtils;
+import com.seclass.snappat.utils.Utils;
 import com.seclass.snappat.view.OverlayView;
 import com.seclass.snappat.view.OverlayView.DrawCallback;
 import com.seclass.snappat.modules.scan.env.BorderedText;
@@ -46,8 +53,11 @@ import com.seclass.snappat.modules.scan.env.Logger;
 import com.seclass.snappat.modules.scan.tracking.MultiBoxTracker;
 import com.seclass.snappat.R;
 
+import org.json.JSONArray;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
@@ -118,6 +128,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     @Override
     public void run() {
+      Bundle bundle = new Bundle();
       while (true) {
         boolean flag = true;
         if (reg_result==null) {
@@ -128,16 +139,15 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
           }
         }
         for (int i = 0; i < targets.length; ++i) {
-          if (stringListEqual(reg_result, targets[i])) {
+          if (cropCopyBitmap!=null && stringListEqual(reg_result, targets[i]) && Bitmap2Bytes(cropCopyBitmap) != null ) {
+            bundle.putByteArray("img",Bitmap2Bytes(cropCopyBitmap));
+            bundle.putStringArray("result", reg_result);
             flag = false;
             break;
           }
         }
         if (!flag) break;
       }
-      Bundle bundle = new Bundle();
-      bundle.putByteArray("img",Bitmap2Bytes(cropCopyBitmap));
-      bundle.putStringArray("result", reg_result);
       ActivityUtils.next(DetectorActivity.this, ResActivity.class, bundle, true);
     }
   }
@@ -147,7 +157,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     String[][] scan_targets = fetch_scan();
     new Thread(new ScanThread(scan_targets)).start();
   }
-
+  
   private String[][] fetch_scan() {
     String[][] test_data = {{"电视","键盘"},{"键盘"},{"电视"},{"笔记本电脑"},{"人"},{"人","人"},{"人","人","人"}};
     return test_data;
@@ -367,6 +377,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   }
 
   public byte[] Bitmap2Bytes(Bitmap bm) {
+    if (bm==null) return null;
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
     return baos.toByteArray();
