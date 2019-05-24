@@ -1,11 +1,15 @@
 package com.seclass.snappat.modules.home;
 
 import android.content.Context;
+import android.support.design.button.MaterialButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.seclass.snappat.R;
 import java.util.ArrayList;
 
@@ -74,12 +78,16 @@ public class CollectRecycleAdapter
     private TextView mItemGoodsUsername;
     private TextView mItemGoodsPrice;
     private TextView mItemGoodsHint;
+    private Button solveButton;
+    private Button likeButton;
 
     public myViewHodler(View itemView) {
       super(itemView);
       mItemGoodsUsername = (TextView) itemView.findViewById(R.id.card_username);
       mItemGoodsPrice = (TextView) itemView.findViewById(R.id.card_price);
       mItemGoodsHint = (TextView) itemView.findViewById(R.id.card_hint);
+      solveButton = (Button) itemView.findViewById(R.id.solve_button);
+      likeButton = (Button) itemView.findViewById(R.id.like_button);
       // 点击事件放在adapter中使用，也可以写个接口在activity中调用
       // 方法一：在adapter中设置点击事件
       itemView.setOnClickListener(
@@ -94,6 +102,12 @@ public class CollectRecycleAdapter
               }
             }
           });
+      likeButton.setOnClickListener(new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          Toast.makeText(context,"点击了zan",Toast.LENGTH_SHORT).show();
+        }
+      });
     }
   }
 

@@ -69,4 +69,5 @@
   <string name="notification_title_text">Notification</string>
   <string name="rewards_text">奖励</string>
     <string name="return_page">返回</string>
+  <string name="mine_en_text">Mine</string>
 </resources>

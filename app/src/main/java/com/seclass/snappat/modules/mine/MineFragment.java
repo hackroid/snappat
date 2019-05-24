@@ -18,7 +18,18 @@ import java.util.List;
 import java.util.Map;
 import org.json.JSONObject;
 
-
+/**
+ * class {@code MineFragment}.
+ *
+ * <p>Self Information Page fragment.</p>
+ * <p>All Implemented Interfaces:</p>
+ * <p>{@link MineView}</p>
+ * <p>extends class:</p>
+ * <p>{@link BaseFragment<MineView, MinePresenter>}</p>
+ *
+ * @author <a href="11612717@mail.sustech.edu.com">Tao Ren</a>
+ * @since 3.0
+ */
 public class MineFragment extends BaseFragment<MineView, MinePresenter> implements MineView {
     protected List<Map<String, Object>>  strArr;
     @BindView(R.id.username)
@@ -65,14 +76,7 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
         return R.layout.fragment_mine;
     }
 
-    //    @OnClick({R.id.info})
-//    public void onViewClicked(View v) {
-//        switch(v.getId()){
-//            case R.id.info:
-//
-//                break;
-//        }
-//    }
+
     @Override
     public void getUserInfoSucc(JSONObject msg){
         try{
@@ -98,6 +102,7 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
             Log.d("Exception",""+e);
         }
     }
+
     @Override
     public void getHistoryInfoSucc(JSONObject msg){
         try{
@@ -107,6 +112,7 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
             Log.d("Exception",""+e);
         }
     }
+
     @Override
     public void getHistoryInfoFail(CommonResponse<Test> msg){
         if(msg.errno!=0){
@@ -116,6 +122,7 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
         toast(msg.toString());
 
     }
+
     @Override
     public void getUserInfoFail(CommonResponse<Test> msg){
         if(msg.errno!=0){
@@ -128,6 +135,5 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
         }
         hideProgress();
         toast(msg.toString());
-
     }
 }

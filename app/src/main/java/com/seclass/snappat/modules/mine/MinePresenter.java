@@ -16,14 +16,34 @@ import com.seclass.snappat.net.callbck.JsonCallback;
 import com.seclass.snappat.utils.Utils;
 import java.util.HashMap;
 
-
+/**
+ * class {@code MinePresenter}.
+ *
+ * <p>Mine fragment presenter.</p>
+ * <p>extends class:</p>
+ * <p>{@link BasePresent<MineView>}</p>
+ *
+ * @author <a href="11612717@mail.sustech.edu.com">Tao Ren</a>
+ * @since 3.0
+ */
 public class MinePresenter  extends BasePresent<MineView> {
     private Context mContext;
 
+
+    /**
+     * MinePresenter constructor
+     *
+     * @param context {@link Context}
+     * @since 3.0
+     */
     public MinePresenter(Context context) {
         this.mContext = context;
     }
 
+    /**
+     * get userInfo from server by post
+     * @since 3.0
+     */
     public void getUserInfo() {
         String phone_number=Utils.getSpUtils().getString("phone_number");
         String username = Utils.getSpUtils().getString("user_name");
@@ -44,6 +64,11 @@ public class MinePresenter  extends BasePresent<MineView> {
             }
         });
     }
+
+    /**
+     * get history information from server by post
+     * @since 3.0
+     */
     public void getHistoryInfo() {
         String phone_number=Utils.getSpUtils().getString("phone_number");
         String username = Utils.getSpUtils().getString("user_name");
@@ -64,6 +89,12 @@ public class MinePresenter  extends BasePresent<MineView> {
             }
         });
     }
+
+    /**
+     * regestry and send to server by post
+     * @param phone {@link String}
+     * @since 3.0
+     */
     public void regestry(String phone){
         String phone_number=Utils.getSpUtils().getString("phone_number");
         String username=Utils.getSpUtils().getString("user_name");
