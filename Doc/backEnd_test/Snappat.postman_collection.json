@@ -1,0 +1,961 @@
+{
+	"info": {
+		"_postman_id": "3f7a6008-e56f-42f3-89bb-de7e508b4d65",
+		"name": "Snappat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "registry",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "108589b3-1cd4-4ff2-bb91-3ca3554399a0",
+						"exec": [
+							"pm.test(\"registry\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(0);",
+							"    pm.expect(res.data).to.be.a('number');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone",
+							"value": "13530519760",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "13530519760",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/registry/registry",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"registry",
+						"registry"
+					]
+				},
+				"description": "注册"
+			},
+			"response": []
+		},
+		{
+			"name": "registryAgain",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a64949d-235f-4ad3-8cff-b650690f93e3",
+						"exec": [
+							"pm.test(\"registryAgain\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(1001);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone",
+							"value": "13530520003",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "服务器工具人5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/registry/registry",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"registry",
+						"registry"
+					]
+				},
+				"description": "注册成功后再次注册"
+			},
+			"response": []
+		},
+		{
+			"name": "selectUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "40280501-c3e1-4a2e-90d8-4b2f1cacc5b2",
+						"exec": [
+							"pm.test(\"selectUser\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(0);",
+							"    pm.expect(res.data).to.a(\"object\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "18537247015",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "18537247015",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/select",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"select"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "获取用户信息"
+			},
+			"response": []
+		},
+		{
+			"name": "selectUserDonnotExit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "61b7252a-c048-47e1-a8d4-a991524582e1",
+						"exec": [
+							"pm.test(\"selectUserDonnotExit\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(0);",
+							"    pm.expect(res.data).to.eql({});",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "22222",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "22222",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/select",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"select"
+					]
+				},
+				"description": "获取不存在用户的信息"
+			},
+			"response": []
+		},
+		{
+			"name": "selectMystery",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "56aa1fbb-6172-44ee-bc30-7e5daedc63b6",
+						"exec": [
+							"pm.test(\"selectMystery\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(0);",
+							"    pm.expect(res.data).to.be.an(\"object\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone",
+							"value": "17620412037",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "17620412037",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/selectMystery",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"selectMystery"
+					]
+				},
+				"description": "获取谜题"
+			},
+			"response": []
+		},
+		{
+			"name": "selectMsteryWIthNotExitUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ecd52a10-24b1-4bbd-994b-1df3f83907a1",
+						"exec": [
+							"pm.test(\"selectMysteryWithNotExitUser\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(1000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone",
+							"value": "1111111",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "22222222",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/selectMystery",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"selectMystery"
+					]
+				},
+				"description": "获取不存在用户的谜题"
+			},
+			"response": []
+		},
+		{
+			"name": "selectHistory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "08f0f8c5-7ad6-4694-ab18-9c5565796fbf",
+						"exec": [
+							"pm.test(\"selectHistory\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(0);",
+							"    pm.expect(res.data).to.be.a(\"object\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "未命名",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "18537247015",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/selectHistory",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"selectHistory"
+					]
+				},
+				"description": "获取历史记录"
+			},
+			"response": []
+		},
+		{
+			"name": "selectHistoryWithWrongParameter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b13cde78-bbe2-466a-82f0-6abd23ffbee4",
+						"exec": [
+							"tests[\"selectHistoryWithWrongParameter\"] = responseBody.has(\"Internal Server Error\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/selectHistory?username=22222",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"selectHistory"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "22222"
+						}
+					]
+				},
+				"description": "获取谜题时参数错误"
+			},
+			"response": []
+		},
+		{
+			"name": "selectMessage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6daed61b-e68d-48e8-9b82-7a6b60accd67",
+						"exec": [
+							"pm.test(\"selectMessage\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(0);",
+							"    pm.expect(res.data).to.be.a(\"object\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "phone",
+							"value": "18537247015",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "18537247015",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/selectMessage",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"selectMessage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "selectMessageWithWrongParam",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "950a082c-ccfe-4cc0-bc66-765c8cc4fcbe",
+						"exec": [
+							"tests[\"selectMessageWithWrongParameter\"] = responseBody.has(\"Internal Server Error\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/selectMessage?phone=232222&ssss=xssss",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"selectMessage"
+					],
+					"query": [
+						{
+							"key": "phone",
+							"value": "232222"
+						},
+						{
+							"key": "ssss",
+							"value": "xssss"
+						}
+					]
+				},
+				"description": "查询信息参数错误"
+			},
+			"response": []
+		},
+		{
+			"name": "selectUser_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "40419cb5-5399-45be-94ef-ecad677d94fd",
+						"exec": [
+							"pm.test(\"selectUser\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(0);",
+							"    pm.expect(res.data).to.be.a(\"object\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "select_id",
+							"value": "26",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "18537247015",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "18537247015",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/selectUser",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"selectUser"
+					]
+				},
+				"description": "根据userid获取userInfo"
+			},
+			"response": []
+		},
+		{
+			"name": "selectUnexitUser_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e2112d5b-6ff9-4969-9014-7c002501807c",
+						"exec": [
+							"pm.test(\"selectUserDonnotExit\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(0);",
+							"    pm.expect(res.data.dataString).to.eql('[]');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "select_id",
+							"value": "9999999",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "11111111",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "11111111",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/selectUser",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"selectUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addMyster",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fdda2533-cd43-4d25-96b7-a855003bbfeb",
+						"exec": [
+							"pm.test(\"addMystery\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.include.any.members([0,1002]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "mystery",
+							"value": "{\"coins\":100}",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "18537247015",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "18537247015",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/addMystery",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"addMystery"
+					]
+				},
+				"description": "创建谜题"
+			},
+			"response": []
+		},
+		{
+			"name": "addMsterWithWrongCoins",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e47a5c30-4d9b-45e6-9dcb-7d25bad06775",
+						"exec": [
+							"pm.test(\"selectUserDonnotExit\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(0);",
+							"    pm.expect(res.data.dataString).to.eql('{}');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "mystery",
+							"value": "{\"coins\":-5}",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "18537247015",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "18537247015",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/addMystery",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"addMystery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "selectHotestMystery",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "18537247015",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "18537247015",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/selectHotestMystery",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"selectHotestMystery"
+					]
+				},
+				"description": "取得100条最热解密信息"
+			},
+			"response": []
+		},
+		{
+			"name": "selectHotestMysteryWithWrongParam",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e3ee0090-5944-43a7-9cc3-11250c0886f3",
+						"exec": [
+							"tests[\"selectHotestMysteryWrongParameter\"] = responseBody.has(\"Internal Server Error\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "222222",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "222222",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://cn1.hackroid.com:8888/user/selectHotestMystery",
+					"protocol": "http",
+					"host": [
+						"cn1",
+						"hackroid",
+						"com"
+					],
+					"port": "8888",
+					"path": [
+						"user",
+						"selectHotestMystery"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
