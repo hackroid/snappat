@@ -52,11 +52,13 @@ public class PublishPresenter extends BasePresent<PublishView> {
         String username= Utils.getSpUtils().getString("user_name");
         StringBuffer keyBuffer = new StringBuffer();
         for (String s: results){
-            keyBuffer.append(s);
+            if (!s.equals("")){
+                keyBuffer.append(s);
+            }
+            keyBuffer.append(" ");
         }
         String key = keyBuffer.toString();
-        System.out.println("key: "+key);
-
+        Log.i("test key", key);
         HashMap<String, String> hashMap = new HashMap<String, String>();
 
         HashMap<String, String> postdata = new HashMap<String, String>();

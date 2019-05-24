@@ -8,6 +8,13 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".modules.publish.PublishActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimens_48"
@@ -15,14 +22,14 @@
         android:background="@color/mediumaquamarine">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/back_to_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_gravity="center"
             app:srcCompat="@mipmap/back"
-            android:layout_marginTop="@dimen/dimens_5"
-            android:layout_marginLeft="@dimen/dimens_10"
+            android:layout_marginTop="@dimen/dimens_10"
+            android:layout_marginStart="@dimen/dimens_20"
             />
 
         <TextView
@@ -31,27 +38,54 @@
             android:gravity="center_horizontal"
             android:layout_gravity="center"
             android:text="@string/add_mystery_title"
-            android:layout_marginTop="@dimen/dimens_5"
-            android:layout_marginRight="@dimen/dimens_10"
+            android:layout_marginTop="@dimen/dimens_10"
+            android:layout_marginEnd="@dimen/dimens_20"
             />
 
     </LinearLayout>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200px"
-        android:padding="@dimen/dimens_0">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/pub_img_view"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="@dimen/dimens_5"
+            android:layout_height="@dimen/dimens_150"
+            android:layout_width="@dimen/dimens_100"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="@dimen/dimens_2"
             />
 
-    </RelativeLayout>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_10"
+        android:layout_marginLeft="@dimen/dimens_20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dip"
+            android:text="@string/key_words"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/key_words_res"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="@dimen/dimens_25"
+            android:inputType="text"
+            android:padding="4dip"
+            android:singleLine="true"
+            android:textAlignment="viewStart"
+            android:textSize="14sp" />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -136,5 +170,7 @@
         android:background="@color/mediumaquamarine"
         android:text="@string/btn_publish" />
 
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

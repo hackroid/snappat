@@ -57,6 +57,8 @@
     <string name="solve_text">解谜</string>
 
     <string name="hint_text">提示: </string>
+    <string name="key_words">解谜词: </string>
+    <string name="key_words_res"></string>
     <string name="enter_hint_text">请输入提示语：</string>
     <string name="award_hint_text">奖励金额: </string>
     <string name="add_mystery_title">添加谜题</string>

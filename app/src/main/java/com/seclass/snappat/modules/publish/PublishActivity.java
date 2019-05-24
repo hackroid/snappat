@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.seclass.snappat.R;
 import com.seclass.snappat.base.BaseActivity;
@@ -17,6 +18,8 @@ import com.seclass.snappat.bean.CommonResponse.Test;
 import org.checkerframework.checker.nullness.compatqual.NonNullType;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.json.JSONObject;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -44,6 +47,10 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
     Button mpub_btn;
     @BindView(R.id.pub_img_view)
     ImageView pub_img;
+    @BindView(R.id.key_words_res)
+    TextView keyWords;
+    @BindView(R.id.back_to_home)
+    ImageView back_to_home;
 
     String[] result={};
     byte[] img;
@@ -92,6 +99,16 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
         img = getIntent().getByteArrayExtra("img");
         result = getIntent().getStringArrayExtra("result");
         pub_img.setImageBitmap(Bytes2Bimap(img));
+        String keys = "";
+        for(int i=0; i<result.length; i++){
+            if (result[i]!=null){
+                keys += result[i];
+            }
+            if(i!=result.length-1)
+            keys += " ";
+        }
+        Log.d("keywords: ", keys);
+        keyWords.setText(keys);
     }
 
     @Override
@@ -105,11 +122,25 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
      * @param v {@code View}
      * @since 3.0
      */
-    @OnClick({R.id.publish_btn})
+    @OnClick({R.id.publish_btn, R.id.back_to_home})
     public void onViewClicked(View v) {
         switch(v.getId()){
             case R.id.publish_btn:
-                presenter.addMystery(mhint.getText().toString(), maward.getText().toString(), muser_message.getText().toString(), result);
+                String my_hint = "";
+                my_hint = mhint.getText().toString();
+                String my_award = "";
+                my_award = maward.getText().toString();
+                String my_user_message = "";
+                muser_message.getText().toString();
+                if(my_hint.equals("") || my_award.equals("") || my_user_message.equals("")){
+                    toast("请输入信息！");
+                }
+                else{
+                    presenter.addMystery(mhint.getText().toString(), maward.getText().toString(), muser_message.getText().toString(), result);
+                }
+                break;
+            case R.id.back_to_home:
+                finish();
                 break;
         }
     }
@@ -146,5 +177,6 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
         }
         hideProgress();
         toast("发布错误，请完整填写！");
+
     }
 }
