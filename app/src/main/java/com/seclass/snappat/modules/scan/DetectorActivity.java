@@ -118,6 +118,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     @Override
     public void run() {
+      Bundle bundle = new Bundle();
       while (true) {
         boolean flag = true;
         if (reg_result==null) {
@@ -128,16 +129,15 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
           }
         }
         for (int i = 0; i < targets.length; ++i) {
-          if (stringListEqual(reg_result, targets[i])) {
+          if (cropCopyBitmap!=null && stringListEqual(reg_result, targets[i]) && Bitmap2Bytes(cropCopyBitmap) != null ) {
+            bundle.putByteArray("img",Bitmap2Bytes(cropCopyBitmap));
+            bundle.putStringArray("result", reg_result);
             flag = false;
             break;
           }
         }
         if (!flag) break;
       }
-      Bundle bundle = new Bundle();
-      bundle.putByteArray("img",Bitmap2Bytes(cropCopyBitmap));
-      bundle.putStringArray("result", reg_result);
       ActivityUtils.next(DetectorActivity.this, ResActivity.class, bundle, true);
     }
   }
@@ -367,6 +367,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   }
 
   public byte[] Bitmap2Bytes(Bitmap bm) {
+    if (bm==null) return null;
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
     return baos.toByteArray();
