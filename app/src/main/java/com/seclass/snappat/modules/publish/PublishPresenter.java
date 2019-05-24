@@ -11,19 +11,41 @@ import com.seclass.snappat.net.HttpUtils;
 import com.seclass.snappat.net.callbck.JsonCallback;
 import com.seclass.snappat.utils.Utils;
 
+import org.greenrobot.greendao.annotation.NotNull;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
+/**
+ * Class {@code PublishPresenter} presenter of publish activity.
+ * <p>Aextends class:</p>
+ *  <p>{@link BasePresent<PublishView>}</p>
+ * @author <a href="11611310@mail.sustech.edu.cn">Deyuan Chen</a>
+ * @since 2.0
+ */
 public class PublishPresenter extends BasePresent<PublishView> {
 
     private Context mContext;
 
-    public PublishPresenter(Context context) {
+    /**
+     * publish presenter
+     * <p> initialize presenter of publish activity</p>
+     * @param context {@code Context}
+     * @since 3.0
+     */
+    public PublishPresenter(@NotNull Context context) {
         this.mContext = context;
     }
 
-
+    /**
+     * add Mystery
+     * <p> add a new mystery ,post to server and get result</p>
+     * @param hint {@code String}
+     * @param coins {@code String}
+     * @param treasure {@code String}
+     * @param results {@code String}
+     * @since 3.0
+     */
     public void addMystery(String hint, String coins, String treasure, String[] results) {
 
         String phone_number= Utils.getSpUtils().getString("phone_number");

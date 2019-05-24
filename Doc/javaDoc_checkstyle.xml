@@ -5,7 +5,6 @@
 <module name="Checker">
 	<module name="TreeWalker">
 		<module name="JavadocMethod">
-			<property name="scope" value="package" />
 			<property name="allowMissingParamTags" value="false" />
 			<property name="allowMissingThrowsTags" value="false" />
 			<property name="allowMissingReturnTag" value="false" />
@@ -13,6 +12,7 @@
 			<property name="allowUndeclaredRTE" value="false" />
 			<property name="allowMissingPropertyJavadoc" value="false" />
 			<property name="severity" value="error" />
+			<property name="scope" value="public"/>
 		</module>
 		<module name="JavadocType">
 			<property name="scope" value="package" />

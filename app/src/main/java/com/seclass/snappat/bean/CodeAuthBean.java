@@ -5,6 +5,16 @@
 package com.seclass.snappat.bean;
 
 
+import javax.annotation.Nullable;
+
+/**
+ * class {@code CodeAuthBean}.
+ *
+ * <p>code auth class.</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ */
 public class CodeAuthBean {
 
     /**
@@ -17,30 +27,64 @@ public class CodeAuthBean {
     private String message;
     private DataBean data;
 
+    /**
+     * get code.
+     * @return code
+     * @since 2.0
+     */
     public int getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    /**
+     * set code.
+     * @param code {@code int}
+     * @since 2.0
+     */
+    public void setCode(@Nullable int code) {
         this.code = code;
     }
 
+    /**
+     * get Message.
+     * @return message {@code String}
+     * @since 2.0
+     */
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    /**
+     * set message.
+     * @param message {@code String}
+     * @since 2.0
+     */
+    public void setMessage(@Nullable String message) {
         this.message = message;
     }
 
+    /**
+     * data bean.
+     * @return data
+     * @since 2.0
+     */
     public DataBean getData() {
         return data;
     }
 
-    public void setData(DataBean data) {
+    /**
+     * set data.
+     * @param data {@code DataBean}
+     * @since 2.0
+     */
+    public void setData(@Nullable DataBean data) {
         this.data = data;
     }
 
+    /**
+     * static class DataBean.
+     * @since 2.0
+     */
     public static class DataBean {
         /**
          * uid : d553e2e94b9b888341fe1d572b6720b5
@@ -48,11 +92,21 @@ public class CodeAuthBean {
 
         private String uid;
 
+        /**
+         * get uid.
+         * @return uid {@code String}
+         * @since 2.0
+         */
         public String getUid() {
             return uid == null ? "" : uid;
         }
 
-        public void setUid(String uid) {
+        /**
+         * get uid.
+         * @param uid {@code Stringn}
+         * @since 2.0
+         */
+        public void setUid(@Nullable String uid) {
             this.uid = uid;
         }
     }

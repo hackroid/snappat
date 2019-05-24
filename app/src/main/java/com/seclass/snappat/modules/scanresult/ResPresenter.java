@@ -8,9 +8,24 @@ import android.content.Context;
 
 import com.seclass.snappat.base.BasePresent;
 
+/**
+ * class {@code ResPresenter}.
+ *
+ * <p>result presenter.</p>
+ * <p>extend class: {@link BasePresent<ResView>}</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ */
 public class ResPresenter extends BasePresent<ResView> {
     private Context mContext;
 
+    /**
+     * ResPresenter.
+     * constructor
+     * @param context {@link Context}
+     * @since 2.0
+     */
     public ResPresenter(Context context) {
         this.mContext = context;
     }

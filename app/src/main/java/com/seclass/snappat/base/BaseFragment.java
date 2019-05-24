@@ -13,7 +13,20 @@ import com.lzy.okgo.OkGo;
 import com.seclass.snappat.R;
 import com.seclass.snappat.utils.ToastUtils;
 import butterknife.ButterKnife;
+import com.zhy.autolayout.AutoLayoutActivity;
 
+/**
+ * abstract class {@code BaseFragment}.
+ *
+ * <p>Each fragment will extends this activity.</p>
+ * <p>All Implemented Interfaces:</p>
+ * <p>{@link BaseView}</p>
+ * <p>All extends Interfaces:</p>
+ * <p>{@link Fragment}</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ */
 public abstract class BaseFragment<V, P extends BasePresent<V>> extends Fragment implements BaseView {
 
     protected P presenter;
@@ -68,12 +81,23 @@ public abstract class BaseFragment<V, P extends BasePresent<V>> extends Fragment
         }
     }
 
+    /**
+     * init Presenter.
+     * <p>init Presenter</p>
+     * @return null
+     * @since 2.0
+     */
     public abstract P initPresenter();
 
     protected abstract void initViews(Bundle savedInstanceState);
 
     protected abstract void initData();
 
+    /**
+     * init event.
+     * <p>init event</p>
+     * @since 2.0
+     */
     public abstract void initEvent();
 
     /**

@@ -15,12 +15,25 @@ import com.seclass.snappat.utils.ToastUtils;
 
 import butterknife.BindView;
 
-
+/**
+ * class {@code ResActivity}.
+ *
+ * <p>scan result activity.</p>
+ *
+ * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
+ * @since 2.0
+ */
 public class ResActivity extends BaseActivity<ResView, ResPresenter> implements ResView {
 
     @BindView(R.id.scan_img_result)
     ImageView pub_img;
 
+    /**
+     * change bytes to bitmap.
+     * @param b Byte array
+     * @return bitmap {@code Bitmap} if b is not empty else null
+     * @since 2.0
+     */
     public Bitmap Bytes2Bimap(byte[] b) {
         if (b.length != 0) {
             return BitmapFactory.decodeByteArray(b, 0, b.length);

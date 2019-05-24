@@ -12,12 +12,24 @@ package com.seclass.snappat.base;
 
 public abstract class BasePresent<T> {
 
+
   public T view;
 
+  /**
+   * attach view
+   * <p> attach new activity</p>
+   * @param view {@code view}
+   * @since 3.0
+   */
   public void attach(T view) {
     this.view = view;
   }
 
+  /**
+   * detach view
+   * <p> detach new activity</p>
+   * @since 3.0
+   */
   public void detach() {
     this.view = null;
   }
