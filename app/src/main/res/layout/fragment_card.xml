@@ -92,20 +92,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <!--<android.support.design.button.MaterialButton-->
-          <!--android:layout_width="wrap_content"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:layout_margin="@dimen/dimens_30"-->
-          <!--android:padding="@dimen/dimens_10"-->
-          <!--app:cornerRadius="@dimen/dimens_10"-->
-          <!--android:text="@string/solve_text"/>-->
-        <!--<android.support.design.button.MaterialButton-->
-          <!--android:layout_width="wrap_content"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:layout_margin="@dimen/dimens_30"-->
-          <!--android:padding="@dimen/dimens_20"-->
-          <!--app:cornerRadius="@dimen/dimens_10"-->
-          <!--android:text="@string/favorite_text"/>-->
+        <Button
+          android:id="@+id/solve_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/dimens_10"
+          android:padding="@dimen/dimens_10"
+          android:text="@string/solve_text"/>
+        <Button
+          android:id="@+id/like_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/dimens_10"
+          android:padding="@dimen/dimens_10"
+          android:text="@string/favorite_text"/>
       </LinearLayout>
 
     </LinearLayout>

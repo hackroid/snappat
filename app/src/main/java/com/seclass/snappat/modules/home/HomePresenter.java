@@ -54,4 +54,8 @@ public class HomePresenter extends BasePresent<HomeView> {
         });
     }
 
+    public void pushLikePuzzle (){
+
+    }
+
 }
