@@ -28,16 +28,23 @@ import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.lzy.okgo.model.Response;
 import com.seclass.snappat.app.ActivityUtils;
+import com.seclass.snappat.base.BaseUrl;
+import com.seclass.snappat.bean.CommonResponse;
 import com.seclass.snappat.modules.publish.PublishActivity;
 import com.seclass.snappat.modules.scanresult.ResActivity;
+import com.seclass.snappat.net.HttpUtils;
+import com.seclass.snappat.net.callbck.JsonCallback;
 import com.seclass.snappat.utils.ToastUtils;
+import com.seclass.snappat.utils.Utils;
 import com.seclass.snappat.view.OverlayView;
 import com.seclass.snappat.view.OverlayView.DrawCallback;
 import com.seclass.snappat.modules.scan.env.BorderedText;
@@ -46,8 +53,11 @@ import com.seclass.snappat.modules.scan.env.Logger;
 import com.seclass.snappat.modules.scan.tracking.MultiBoxTracker;
 import com.seclass.snappat.R;
 
+import org.json.JSONArray;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
@@ -147,7 +157,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     String[][] scan_targets = fetch_scan();
     new Thread(new ScanThread(scan_targets)).start();
   }
-
+  
   private String[][] fetch_scan() {
     String[][] test_data = {{"电视","键盘"},{"键盘"},{"电视"},{"笔记本电脑"},{"人"},{"人","人"},{"人","人","人"}};
     return test_data;
