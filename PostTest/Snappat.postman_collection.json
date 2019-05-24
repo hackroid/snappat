@@ -39,12 +39,12 @@
 					"urlencoded": [
 						{
 							"key": "phone",
-							"value": "13530519760",
+							"value": "13536265343",
 							"type": "text"
 						},
 						{
 							"key": "username",
-							"value": "13530519760",
+							"value": "13536265343",
 							"type": "text"
 						}
 					]
@@ -416,7 +416,7 @@
 					"urlencoded": [
 						{
 							"key": "username",
-							"value": "未命名",
+							"value": "18537247015",
 							"type": "text"
 						},
 						{
@@ -735,7 +735,7 @@
 							"pm.test(\"addMystery\", function () {",
 							"    var res = pm.response.json();",
 							"    pm.response.to.have.status(200);",
-							"    pm.expect(res.errno).to.include.any.members([0,1002]);",
+							"    pm.expect([0,1002]).to.include.any.members([res.errno]);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -757,7 +757,7 @@
 					"urlencoded": [
 						{
 							"key": "mystery",
-							"value": "{\"coins\":100}",
+							"value": "{\"coins\":1}",
 							"type": "text"
 						},
 						{
@@ -858,6 +858,22 @@
 		},
 		{
 			"name": "selectHotestMystery",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "81508104-f9b2-4909-b632-2704594e931a",
+						"exec": [
+							"pm.test(\"addMystery\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -909,7 +925,12 @@
 					"script": {
 						"id": "e3ee0090-5944-43a7-9cc3-11250c0886f3",
 						"exec": [
-							"tests[\"selectHotestMysteryWrongParameter\"] = responseBody.has(\"Internal Server Error\");"
+							"pm.test(\"selectUserDonnotExit\", function () {",
+							"    var res = pm.response.json();",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(res.errno).to.eql(0);",
+							"    pm.expect(JSON.parse(res.data.dataString)).to.be.an(\"array\");",
+							"});"
 						],
 						"type": "text/javascript"
 					}
