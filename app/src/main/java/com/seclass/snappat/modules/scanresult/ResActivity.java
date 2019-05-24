@@ -61,14 +61,19 @@ public class ResActivity extends BaseActivity<ResView, ResPresenter> implements 
     protected void initData() {
         byte[] img = getIntent().getByteArrayExtra("img");
         String[] result = getIntent().getStringArrayExtra("result");
+        String treasure = getIntent().getStringExtra("treasure");
+        String coins = getIntent().getStringExtra("coins");
 
         StringBuilder sb = new StringBuilder();
-        for (String i : result) {
-            sb.append(i);
-            sb.append("~");
+        if(result!=null){
+            for (String i : result) {
+                sb.append(i);
+                sb.append("~");
+            }
+            ToastUtils.showShortToast(sb.toString()+"\n"+treasure+"\n"+coins);
+            pub_img.setImageBitmap(Bytes2Bimap(img));
         }
-        ToastUtils.showShortToast(sb.toString());
-        pub_img.setImageBitmap(Bytes2Bimap(img));
+
     }
 
     @Override
