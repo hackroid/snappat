@@ -45,21 +45,17 @@ public class LegacyCameraConnectionFragment extends Fragment {
   private Camera.PreviewCallback imageListener;
   private Size desiredSize;
 
-  /**
-   * The layout identifier to inflate for this Fragment.
-   */
+  /** The layout identifier to inflate for this Fragment. */
   private int layout;
 
   public LegacyCameraConnectionFragment(
-          final Camera.PreviewCallback imageListener, final int layout, final Size desiredSize) {
+      final Camera.PreviewCallback imageListener, final int layout, final Size desiredSize) {
     this.imageListener = imageListener;
     this.layout = layout;
     this.desiredSize = desiredSize;
   }
 
-  /**
-   * Conversion from screen rotation to JPEG orientation.
-   */
+  /** Conversion from screen rotation to JPEG orientation. */
   private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
 
   static {
@@ -70,14 +66,14 @@ public class LegacyCameraConnectionFragment extends Fragment {
   }
 
   /**
-   * {@link TextureView.SurfaceTextureListener} handles several lifecycle events on a
-   * {@link TextureView}.
+   * {@link TextureView.SurfaceTextureListener} handles several lifecycle events on a {@link
+   * TextureView}.
    */
   private final TextureView.SurfaceTextureListener surfaceTextureListener =
       new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(
-                final SurfaceTexture texture, final int width, final int height) {
+            final SurfaceTexture texture, final int width, final int height) {
 
           int index = getCameraId();
           camera = Camera.open(index);
@@ -117,7 +113,7 @@ public class LegacyCameraConnectionFragment extends Fragment {
 
         @Override
         public void onSurfaceTextureSizeChanged(
-                final SurfaceTexture texture, final int width, final int height) {}
+            final SurfaceTexture texture, final int width, final int height) {}
 
         @Override
         public boolean onSurfaceTextureDestroyed(final SurfaceTexture texture) {
@@ -128,21 +124,15 @@ public class LegacyCameraConnectionFragment extends Fragment {
         public void onSurfaceTextureUpdated(final SurfaceTexture texture) {}
       };
 
-  /**
-   * An {@link AutoFitTextureView} for camera preview.
-   */
+  /** An {@link AutoFitTextureView} for camera preview. */
   private AutoFitTextureView textureView;
 
-  /**
-   * An additional thread for running tasks that shouldn't block the UI.
-   */
+  /** An additional thread for running tasks that shouldn't block the UI. */
   private HandlerThread backgroundThread;
 
   @Override
   public View onCreateView(
-          final LayoutInflater inflater,
-          final ViewGroup container,
-          final Bundle savedInstanceState) {
+      final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
     return inflater.inflate(layout, container, false);
   }
 
@@ -179,17 +169,13 @@ public class LegacyCameraConnectionFragment extends Fragment {
     super.onPause();
   }
 
-  /**
-   * Starts a background thread and its {@link Handler}.
-   */
+  /** Starts a background thread and its {@link Handler}. */
   private void startBackgroundThread() {
     backgroundThread = new HandlerThread("CameraBackground");
     backgroundThread.start();
   }
 
-  /**
-   * Stops the background thread and its {@link Handler}.
-   */
+  /** Stops the background thread and its {@link Handler}. */
   private void stopBackgroundThread() {
     backgroundThread.quitSafely();
     try {
@@ -214,7 +200,7 @@ public class LegacyCameraConnectionFragment extends Fragment {
     for (int i = 0; i < Camera.getNumberOfCameras(); i++) {
       Camera.getCameraInfo(i, ci);
       if (ci.facing == CameraInfo.CAMERA_FACING_BACK) {
-          return i;
+        return i;
       }
     }
     return -1; // No camera found

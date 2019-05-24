@@ -27,244 +27,241 @@ import butterknife.ButterKnife;
 /**
  * abstract class {@code BaseActivity}.
  *
- * <p>Each activity will extends this activity.</p>
- * <p>All Implemented Interfaces:</p>
- * <p>{@link BaseView}</p>
- * <p>All extends class:</p>
- * <p>{@link AutoLayoutActivity}</p>
+ * <p>Each activity will extends this activity.
+ *
+ * <p>All Implemented Interfaces:
+ *
+ * <p>{@link BaseView}
+ *
+ * <p>All extends class:
+ *
+ * <p>{@link AutoLayoutActivity}
  *
  * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
  * @since 2.0
  */
-public abstract class BaseActivity<V, P extends BasePresent<V>> extends AutoLayoutActivity implements BaseView {
+public abstract class BaseActivity<V, P extends BasePresent<V>> extends AutoLayoutActivity
+    implements BaseView {
 
-    protected P presenter;
-    protected Activity activity;
-    protected ImmersionBar mImmersionBar;
+  protected P presenter;
+  protected Activity activity;
+  protected ImmersionBar mImmersionBar;
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(newBase);
+  @Override
+  protected void attachBaseContext(Context newBase) {
+    super.attachBaseContext(newBase);
+  }
+
+  @Override
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
+    ThemeUtil.setTheme(this);
+    super.onCreate(savedInstanceState);
+    activity = this;
+    // 添加Activity到堆栈
+    AppManager.getAppManager().addActivity(activity);
+    if (getLayoutId() != 0) {
+      setContentView(getLayoutId());
+      presenter = initPresenter();
+      initBind();
+      initViews(savedInstanceState);
+      initData();
+      initEvent();
     }
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        ThemeUtil.setTheme(this);
-        super.onCreate(savedInstanceState);
-        activity = this;
-        // 添加Activity到堆栈
-        AppManager.getAppManager().addActivity(activity);
-        if (getLayoutId() != 0) {
-            setContentView(getLayoutId());
-            presenter = initPresenter();
-            initBind();
-            initViews(savedInstanceState);
-            initData();
-            initEvent();
+    // 初始化沉浸式
+    if (isImmersionBarEnabled()) {
+      initImmersionBar();
+    }
+  }
+
+  protected abstract int getLayoutId();
+
+  /**
+   * init Presenter.
+   *
+   * <p>init Presenter
+   *
+   * @return null
+   * @since 2.0
+   */
+  public abstract P initPresenter();
+
+  protected void initBind() {
+    ButterKnife.bind(activity);
+  }
+
+  protected abstract void initViews(Bundle savedInstanceState);
+
+  protected abstract void initData();
+
+  /**
+   * init event.
+   *
+   * <p>init event
+   *
+   * @since 2.0
+   */
+  public abstract void initEvent();
+
+  /**
+   * 是否可以使用沉浸式
+   *
+   * @return the boolean
+   */
+  protected boolean isImmersionBarEnabled() {
+    return true;
+  }
+
+  @SuppressLint("ResourceAsColor")
+  protected void initImmersionBar() {
+    mImmersionBar = ImmersionBar.with(this);
+    TextView textView = getId(R.id.tv_title);
+    if (!activity.getLocalClassName().contains("Vote")) {
+      if (textView != null) {
+        if (textView.getCurrentTextColor() == -1) {
+          mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.black_box_color);
+          mImmersionBar.statusBarDarkFont(false, 0.2f);
+        } else {
+          mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.white);
+          mImmersionBar.statusBarDarkFont(true, 0.2f);
         }
-
-        //初始化沉浸式
-        if (isImmersionBarEnabled()) {
-            initImmersionBar();
-        }
+      }
+    } else {
+      mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.black);
+      mImmersionBar.statusBarDarkFont(false, 0.2f);
     }
 
-    protected abstract int getLayoutId();
+    mImmersionBar.keyboardEnable(true); // 解决软键盘与底部输入框冲突问题;
+    KeyboardPatch.patch(this).enable();
+    mImmersionBar.init();
+  }
 
-    /**
-     * init Presenter.
-     * <p>init Presenter</p>
-     * @return null
-     * @since 2.0
-     */
-    public abstract P initPresenter();
+  protected <T extends View> T getId(int id) {
+    return (T) findViewById(id);
+  }
 
-    protected void initBind() {
-        ButterKnife.bind(activity);
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    // 关闭堆栈中的Activity
+    AppManager.getAppManager().finishActivity(activity);
+    // 在onDestroy()生命周期中释放P中引用的V。
+    presenter.detach();
+    // 在onDestroy()生命周期中取消所有子线程里面的网络连接。
+
+    OkGo.getInstance().cancelTag(activity);
+    if (mImmersionBar != null) {
+      mImmersionBar.destroy(); // 在BaseActivity里销毁
     }
+  }
 
-    protected abstract void initViews(Bundle savedInstanceState);
+  @Override
+  public void showProgress() {
+    ShowDialog.showDialog(this, "", true, null);
+  }
 
-    protected abstract void initData();
+  @Override
+  public void hideProgress() {
+    ShowDialog.dissmiss();
+  }
 
-    /**
-     * init event.
-     * <p>init event</p>
-     * @since 2.0
-     */
-    public abstract void initEvent();
+  @Override
+  public void toast(CharSequence s) {
+    ToastUtils.showShortToast(s);
+  }
 
-    /**
-     * 是否可以使用沉浸式
-     *
-     * @return the boolean
-     */
-    protected boolean isImmersionBarEnabled() {
-        return true;
+  @Override
+  public void showNullLayout() {}
+
+  @Override
+  public void hideNullLayout() {}
+
+  @Override
+  public void showErrorLayout() {}
+  /* *
+   * 设置title
+   *
+   * @param title 文本*/
+
+  @Override
+  public void hideErrorLayout() {}
+
+  /** 设置左侧返回按钮 */
+  protected void setLeftImg() {
+    getId(R.id.iv_back).setVisibility(View.GONE);
+  }
+
+  protected void setCenterTitle(String title) {
+    if (title == null) {
+      return;
     }
-
-    @SuppressLint("ResourceAsColor")
-    protected void initImmersionBar() {
-        mImmersionBar = ImmersionBar.with(this);
-        TextView textView = getId(R.id.tv_title);
-        if (!activity.getLocalClassName().contains("Vote")) {
-            if (textView != null) {
-                if (textView.getCurrentTextColor() == -1) {
-                    mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.black_box_color);
-                    mImmersionBar.statusBarDarkFont(false, 0.2f);
-                } else {
-                    mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.white);
-                    mImmersionBar.statusBarDarkFont(true, 0.2f);
-                }
-            }
-        }else {
-            mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.black);
-            mImmersionBar.statusBarDarkFont(false, 0.2f);
-        }
-
-        mImmersionBar.keyboardEnable(true); //解决软键盘与底部输入框冲突问题;
-        KeyboardPatch.patch(this).enable();
-        mImmersionBar.init();
+    TextView tvTitle = getId(R.id.tv_title);
+    ImageView tvTitle1 = getId(R.id.iv_back);
+    tvTitle.setVisibility(View.VISIBLE);
+    tvTitle.setText(title);
+    goBack();
+    if (!activity.getLocalClassName().contains("Vote")) {
+      if (Utils.getSpUtils().getString("loginmode", "").equals("blackbox")) {
+        tvTitle1.setImageResource(R.mipmap.white_back);
+        setRightImg(false);
+      } else {
+        tvTitle1.setImageResource(R.mipmap.back);
+      }
     }
+  }
+  /* *
+   * 设置返回按钮事件*/
 
-    protected <T extends View> T getId(int id) {
-        return (T) findViewById(id);
-    }
+  protected void goBack() {
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // 关闭堆栈中的Activity
-        AppManager.getAppManager().finishActivity(activity);
-        //在onDestroy()生命周期中释放P中引用的V。
-        presenter.detach();
-        //在onDestroy()生命周期中取消所有子线程里面的网络连接。
-
-        OkGo.getInstance().cancelTag(activity);
-        if (mImmersionBar != null) {
-            mImmersionBar.destroy();  //在BaseActivity里销毁
-        }
-
-    }
-
-    @Override
-    public void showProgress() {
-        ShowDialog.showDialog(this, "", true, null);
-    }
-
-    @Override
-    public void hideProgress() {
-        ShowDialog.dissmiss();
-    }
-
-    @Override
-    public void toast(CharSequence s) {
-        ToastUtils.showShortToast(s);
-    }
-
-    @Override
-    public void showNullLayout() {
-
-    }
-
-    @Override
-    public void hideNullLayout() {
-
-    }
-
-    @Override
-    public void showErrorLayout() {
-    }
-    /* *
-     * 设置title
-     *
-     * @param title 文本*/
-
-    @Override
-    public void hideErrorLayout() {
-    }
-
-
-    /**
-     * 设置左侧返回按钮
-     */
-    protected void setLeftImg() {
-        getId(R.id.iv_back).setVisibility(View.GONE);
-    }
-
-    protected void setCenterTitle(String title) {
-        if (title == null) {
-            return;
-        }
-        TextView tvTitle = getId(R.id.tv_title);
-        ImageView tvTitle1 = getId(R.id.iv_back);
-        tvTitle.setVisibility(View.VISIBLE);
-        tvTitle.setText(title);
-        goBack();
-        if (!activity.getLocalClassName().contains("Vote")) {
-            if (Utils.getSpUtils().getString("loginmode", "").equals("blackbox")) {
-                tvTitle1.setImageResource(R.mipmap.white_back);
-                setRightImg(false);
-            } else {
-                tvTitle1.setImageResource(R.mipmap.back);
-            }
-        }
-
-    }
-    /* *
-     * 设置返回按钮事件*/
-
-    protected void goBack() {
-
-        getId(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    getId(R.id.iv_back)
+        .setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
                 KeyBoardUtil.getInstance(activity).hide();
                 ActivityUtils.goBack(activity);
-            }
-        });
+              }
+            });
+  }
+
+  /**
+   * 设置右侧文本
+   *
+   * @param title 文字
+   * @param isVisibility 是否显示
+   */
+  protected void setRightTitle(String title, Boolean isVisibility) {
+    if (title == null) {
+      return;
     }
-
-    /**
-     * 设置右侧文本
-     *
-     * @param title        文字
-     * @param isVisibility 是否显示
-     */
-
-    protected void setRightTitle(String title, Boolean isVisibility) {
-        if (title == null) {
-            return;
-        }
-        TextView tvTitle = getId(R.id.tv_right_text);
-        tvTitle.setText(title);
-        if (isVisibility == true) {
-            tvTitle.setVisibility(View.VISIBLE);
-        } else {
-            tvTitle.setVisibility(View.GONE);
-        }
+    TextView tvTitle = getId(R.id.tv_right_text);
+    tvTitle.setText(title);
+    if (isVisibility == true) {
+      tvTitle.setVisibility(View.VISIBLE);
+    } else {
+      tvTitle.setVisibility(View.GONE);
     }
+  }
 
-    /**
-     * 设置右侧
-     *
-     * @param isVisibility 是否显示
-     */
-
-    protected void setRightImg(Boolean isVisibility) {
-        ImageView rightImg = getId(R.id.img_right);
-        if (isVisibility == true) {
-            rightImg.setVisibility(View.VISIBLE);
-        } else {
-            rightImg.setVisibility(View.GONE);
-        }
+  /**
+   * 设置右侧
+   *
+   * @param isVisibility 是否显示
+   */
+  protected void setRightImg(Boolean isVisibility) {
+    ImageView rightImg = getId(R.id.img_right);
+    if (isVisibility == true) {
+      rightImg.setVisibility(View.VISIBLE);
+    } else {
+      rightImg.setVisibility(View.GONE);
     }
+  }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // 在Activity中初始化P，并且连接V
-        presenter.attach((V) activity);
-    }
-
+  @Override
+  protected void onResume() {
+    super.onResume();
+    // 在Activity中初始化P，并且连接V
+    presenter.attach((V) activity);
+  }
 }

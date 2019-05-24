@@ -15,7 +15,6 @@ import com.seclass.snappat.bean.CodeAuthBean;
  * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
  * @since 2.0
  */
-
 public interface LoginView extends BaseView {
 
   void getCodeDataHttp(String message);

@@ -13,5 +13,4 @@ public interface HomeView extends BaseView {
   void getPuzzleSucc(JSONArray msg);
 
   void getPuzzleFail(CommonResponse<CommonResponse.Test> msg);
-
 }

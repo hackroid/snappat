@@ -17,9 +17,7 @@ package com.seclass.snappat.modules.scan.env;
 
 import android.os.SystemClock;
 
-/**
- * A simple utility timer for measuring CPU time and wall-clock splits.
- */
+/** A simple utility timer for measuring CPU time and wall-clock splits. */
 public class SplitTimer {
   private final Logger logger;
 

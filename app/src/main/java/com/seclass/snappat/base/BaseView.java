@@ -12,40 +12,25 @@ package com.seclass.snappat.base;
  * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
  * @since 2.0
  */
-
 public interface BaseView {
-    /**
-     * 显示loading框
-     */
-    void showProgress();
+  /** 显示loading框 */
+  void showProgress();
 
-    /**
-     * 隐藏loading框
-     */
-    void hideProgress();
+  /** 隐藏loading框 */
+  void hideProgress();
 
-    /**
-     * show toast
-     */
-    void toast(CharSequence s);
+  /** show toast */
+  void toast(CharSequence s);
 
-    /**
-     * 显示空数据布局
-     */
-    void showNullLayout();
+  /** 显示空数据布局 */
+  void showNullLayout();
 
-    /**
-     * 隐藏空数据布局
-     */
-    void hideNullLayout();
+  /** 隐藏空数据布局 */
+  void hideNullLayout();
 
-    /**
-     * 显示异常布局
-     */
-    void showErrorLayout();
+  /** 显示异常布局 */
+  void showErrorLayout();
 
-    /**
-     * 隐藏异常布局
-     */
-    void hideErrorLayout();
+  /** 隐藏异常布局 */
+  void hideErrorLayout();
 }

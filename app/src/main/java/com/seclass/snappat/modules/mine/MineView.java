@@ -13,9 +13,11 @@ import org.json.JSONObject;
 /**
  * Interface {@code MineView}.
  *
- * <p>Interface for self information page.</p>
- * <p>extends class:</p>
- * <p>{@link BaseView}</p>
+ * <p>Interface for self information page.
+ *
+ * <p>extends class:
+ *
+ * <p>{@link BaseView}
  *
  * @author <a href="11612717@mail.sustech.edu.com">Tao Ren</a>
  * @since 3.0

@@ -9,10 +9,9 @@ import com.seclass.snappat.base.BasePresent;
 /**
  * class {@code NormalPresenter}.
  *
- * <p>normal activity presenter.</p>
+ * <p>normal activity presenter.
  *
  * @author <a href="mobile_app@sustechapp.com">Sen Wang</a>
  * @since 2.0
  */
-public class NormalPresenter extends BasePresent<NormalView> {
-}
+public class NormalPresenter extends BasePresent<NormalView> {}
