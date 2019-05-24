@@ -9,53 +9,44 @@
   android:layout_height="match_parent"
   tools:context="com.seclass.snappat.modules.notify.NotifyFragment">
 
-        <TextView
-          android:id="@+id/emptyTextView"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:padding="16dp"
-          android:text="@string/start_chatting" />
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimens_60"
+    android:contentDescription="@string/top_bar_bg"
+    android:scaleType="fitXY"
+    android:src="@mipmap/person_bg"/>
 
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-        <LinearLayout
-          android:id="@+id/footer"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_alignParentStart="true"
-          android:layout_alignParentLeft="true"
-          android:layout_alignParentBottom="true"
-          android:paddingStart="16dp"
-          android:paddingEnd="16dp"
-          android:paddingLeft="16dp"
-          android:orientation="horizontal">
+    <RelativeLayout
+      android:id="@+id/title"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/dimens_60"
+      android:gravity="center_vertical">
 
-            <EditText
-              android:id="@+id/messageEdit"
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:hint="@string/hint_message"
-              android:imeOptions="actionDone"
-              android:importantForAutofill="no"
-              android:inputType="text"
-              tools:ignore="UnusedAttribute" />
-
-            <Button
-              android:id="@+id/sendButton"
-              style="@style/Widget.AppCompat.Button.Borderless.Colored"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="bottom|end"
-              android:text="@string/send" />
-
-        </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/notify_tv"
+      <TextView
+        android:id="@+id/name"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="@string/notify_text"/>
-
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/notification_title_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_19"/>
+      <ImageView
+        android:id="@+id/iv_scan"
+        android:layout_width="@dimen/dimens_50"
+        android:layout_height="@dimen/dimens_50"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/main_page_scanner"
+        android:scaleType="center"
+        android:src="@mipmap/home_scan"/>
+    </RelativeLayout>
+    <include layout="@layout/fragment_msg_list"/>
+  </LinearLayout>
 
 </RelativeLayout>

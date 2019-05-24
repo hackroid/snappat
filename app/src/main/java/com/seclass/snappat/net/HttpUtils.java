@@ -16,7 +16,7 @@ public class HttpUtils {
     /**
      * Gets requets.
      *
-     * @param <T>      the type parameter
+     * @param <T>      the msgType parameter
      * @param url      the url
      * @param tag      the tag
      * @param map      the map
@@ -32,7 +32,7 @@ public class HttpUtils {
     /**
      * Post request.
      *
-     * @param <T>      the type parameter
+     * @param <T>      the msgType parameter
      * @param url      the url
      * @param tag      the tag
      * @param map      the map
@@ -48,7 +48,7 @@ public class HttpUtils {
     /**
      * Post request.
      *
-     * @param <T>      the type parameter
+     * @param <T>      the msgType parameter
      * @param url      the url
      * @param tag      the tag
      * @param parms    the parms

@@ -112,7 +112,7 @@ public class ObjectTracker {
 
   /**
    * A simple class that records keypoint information, which includes
-   * local location, score and type. This will be used in calculating
+   * local location, score and msgType. This will be used in calculating
    * FrameChange.
    */
   public static class Keypoint {

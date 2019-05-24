@@ -3,22 +3,40 @@ package com.seclass.snappat.modules.home;
 import java.io.Serializable;
 
 public class GoodsEntity implements Serializable {
-  public String goodsName; // 货物名称
+  public String goodsUsername;
+  public String goodsHint; // 货物名称
   public String goodsPrice; // 货物价格
+  public String goodsTreasure;
 
   public GoodsEntity() {}
 
-  public GoodsEntity(String imgPath, String goodsName, String goodsPrice) {
-    this.goodsName = goodsName;
+  public GoodsEntity(String goodsHint, String goodsPrice) {
+    this.goodsHint = goodsHint;
     this.goodsPrice = goodsPrice;
   }
 
-  public String getGoodsName() {
-    return goodsName;
+  public String getGoodsTreasure() {
+    return goodsTreasure;
   }
 
-  public void setGoodsName(String goodsName) {
-    this.goodsName = goodsName;
+  public void setGoodsTreasure(String goodsTreasure) {
+    this.goodsTreasure = goodsTreasure;
+  }
+
+  public String getgoodsUsername() {
+    return goodsUsername;
+  }
+
+  public void setgoodsUsername(String goodsUsername) {
+    this.goodsUsername = goodsUsername;
+  }
+
+  public String getGoodsHint() {
+    return goodsHint;
+  }
+
+  public void setGoodsHint(String goodsHint) {
+    this.goodsHint = goodsHint;
   }
 
   public String getGoodsPrice() {
@@ -32,8 +50,8 @@ public class GoodsEntity implements Serializable {
   @Override
   public String toString() {
     return "GoodsEntity{"
-        + "goodsName='"
-        + goodsName
+        + "goodsHint='"
+        + goodsHint
         + '\''
         + ", goodsPrice='"
         + goodsPrice
