@@ -43,7 +43,12 @@
         android:scaleType="center"
         android:src="@mipmap/home_scan"/>
     </RelativeLayout>
-    <include layout="@layout/fragment_card_list"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+      android:id="@+id/homePullToRefresh"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <include layout="@layout/fragment_card_list"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
   </LinearLayout>
   <android.support.design.widget.FloatingActionButton
     android:id="@+id/addNew"

@@ -75,7 +75,7 @@ Back-end is the infrastructure of the application. We use PHP as back-end server
     coins: 100,											// Bonus the user will obtain when sovled the puzzle
     decoder:[1], 										// User's id who solved the puzzle
     favor:0, 												// Count of likes for the puzzle
-    comment:[], 										// Comment of the puzzle
+    msgComment:[], 										// Comment of the puzzle
     view:[], 												// Users' id who have view the puzzle
   }
   ,...
@@ -101,9 +101,9 @@ Back-end is the infrastructure of the application. We use PHP as back-end server
 [
   {
     content:"",	// the content of message
-    user:"",		// sender
-    type:1,			//消息类型,可选值有3: 1表示有人favor了你发布的mystery; 2表示有人comment了你的mystery; 3表示有人解开了你的mystery
-    read:1, 		//是否已阅,1为已阅,0为未读
+    user:"",		// msgSender
+    msgType:1,			//消息类型,可选值有3: 1表示有人favor了你发布的mystery; 2表示有人comment了你的mystery; 3表示有人解开了你的mystery
+    msgRead:1, 		//是否已阅,1为已阅,0为未读
   }
   ,...
 ]
@@ -157,7 +157,7 @@ This part immports lots of google's code, and there are also some places to impr
 
 ##### updateMystery
 
-* Positive: with right cookie and mystery decoder,favor,comment,view info, it will update and return success.
+* Positive: with right cookie and mystery decoder,favor,msgComment,view info, it will update and return success.
 * Negative: lacking of mystery info  or unexcepted cookie, it will return failed.
 
 ##### crackMystery

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal">
+
+  <android.support.design.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimens_5"
+    android:layout_marginBottom="@dimen/dimens_5"
+    android:padding="@dimen/dimens_5"
+    app:cardBackgroundColor="@color/material_gray_300"
+    app:cardCornerRadius="@dimen/dimens_20"
+    app:cardElevation="@dimen/dimens_3"
+    app:cardMaxElevation="@dimen/dimens_5"
+    app:strokeColor="@color/white"
+    app:strokeWidth="@dimen/dimens_2">
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <de.hdodenhof.circleimageview.CircleImageView
+          android:id="@+id/circle_profile"
+          android:layout_width="@dimen/dimens_40"
+          android:layout_height="@dimen/dimens_40"
+          android:layout_margin="@dimen/dimens_10"
+          android:src="@drawable/bg_slide_lock"/>
+
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+          android:id="@+id/msg_username"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/dimens_5"
+          android:layout_gravity="center_vertical"
+          android:textSize="15sp"
+          />
+        <TextView
+          android:id="@+id/msg_content"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/dimens_5"
+          android:textSize="15sp"
+          android:textColor="@color/black"/>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </android.support.design.card.MaterialCardView>
+</LinearLayout>
