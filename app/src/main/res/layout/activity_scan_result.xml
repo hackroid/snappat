@@ -1,29 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dimens_200"
-        android:layout_marginBottom="@dimen/dimens_200"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:maxWidth="350dp"
-        android:maxHeight="350dp">
+        android:layout_height="@dimen/dimens_48"
+        android:orientation="horizontal"
+        android:background="@color/mediumaquamarine">
+
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/scan_img_result"/>
+            android:id="@+id/back_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            app:srcCompat="@mipmap/back"
+            android:layout_marginTop="@dimen/dimens_5"
+            android:layout_marginLeft="@dimen/dimens_10"
+            />
 
         <TextView
-            android:id="@+id/scan_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/dimens_20"
-            android:gravity="center"
-            android:text="hahahaaaa" />
+            android:text="@string/scan_mystery_title"
+            android:layout_marginTop="@dimen/dimens_5"
+            />
+
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:padding="@dimen/dimens_0">
+
+        <ImageView
+            android:id="@+id/scan_img_result"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/dimens_5"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_20"
+        android:layout_marginLeft="@dimen/dimens_20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dip"
+            android:id="@+id/scan_result_str"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimens_20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/award_result_str"
+            android:padding="4dip"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/scan_rtn_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="@dimen/dimens_20"
+        android:layout_marginLeft="@dimen/dimens_20"
+        android:layout_marginRight="@dimen/dimens_20"
+        android:background="@color/mediumaquamarine"
+        android:text="@string/return_page" />
+
+</LinearLayout>

@@ -62,9 +62,11 @@
     <string name="enter_hint_text">请输入提示语：</string>
     <string name="award_hint_text">奖励金额: </string>
     <string name="add_mystery_title">添加谜题</string>
+    <string name="scan_mystery_title">扫描结果</string>
     <string name="award_value_hint_text">1~999</string>
     <string name="user_message">你想告诉解谜者什么？</string>
     <string name="btn_publish">发布</string>
   <string name="notification_title_text">Notification</string>
   <string name="rewards_text">奖励</string>
+    <string name="return_page">返回</string>
 </resources>

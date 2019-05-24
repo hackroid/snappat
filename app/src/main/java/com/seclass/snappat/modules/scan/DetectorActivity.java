@@ -54,11 +54,17 @@ import com.seclass.snappat.modules.scan.tracking.MultiBoxTracker;
 import com.seclass.snappat.R;
 
 import org.json.JSONArray;
+
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -157,11 +163,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
               flag = false;
               break;
             }
+
           }
         }
         if (!flag) break;
       }
-
     }
   }
 
@@ -234,6 +240,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   private void fetch_scan() {
      getPuzzleInfo();
+
   }
 
   @Override

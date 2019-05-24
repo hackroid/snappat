@@ -7,9 +7,13 @@ package com.seclass.snappat.modules.scanresult;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.seclass.snappat.R;
+import com.seclass.snappat.app.ActivityUtils;
 import com.seclass.snappat.base.BaseActivity;
 import com.seclass.snappat.utils.ToastUtils;
 
@@ -27,7 +31,14 @@ public class ResActivity extends BaseActivity<ResView, ResPresenter> implements 
 
     @BindView(R.id.scan_img_result)
     ImageView pub_img;
-
+    @BindView(R.id.scan_rtn_btn)
+    Button rtn_btn;
+    @BindView(R.id.scan_result_str)
+    TextView scan_result_text;
+    @BindView(R.id.award_result_str)
+    TextView award_result_text;
+    @BindView(R.id.back_imageView)
+    ImageView back_img;
     /**
      * change bytes to bitmap.
      * @param b Byte array
@@ -54,7 +65,8 @@ public class ResActivity extends BaseActivity<ResView, ResPresenter> implements 
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
-
+        scan_result_text.setText("扫描结果:"+"人~");
+        award_result_text.setText("获得金币"+1000+"coins");
     }
 
     @Override
@@ -78,7 +90,18 @@ public class ResActivity extends BaseActivity<ResView, ResPresenter> implements 
 
     @Override
     public void initEvent() {
-
+        back_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        rtn_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 }
