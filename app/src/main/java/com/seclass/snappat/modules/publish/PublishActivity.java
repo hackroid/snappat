@@ -145,6 +145,6 @@ public class PublishActivity extends BaseActivity<PublishView, PublishPresenter>
             }
         }
         hideProgress();
-        toast(msg.toString());
+        toast("发布错误，请完整填写！");
     }
 }

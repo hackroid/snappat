@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -30,6 +31,18 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * Class {@code HomeFragment} maintaining the home fragement of this app.
+ *
+ * <p>After click picture take btn, this activity will appear and help user to publish a new mystery
+ *
+ * <p>extends {@code BaseFragment} with {@code HomeView} and {@code HomePresenter}
+ *
+ * <p>implement {@code HomeView}
+ *
+ * @author <a href="11611310@mail.sustech.edu.cn">Bohong Zhao</a>
+ * @since 3.0
+ */
 public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implements HomeView {
 
   View rootView;
@@ -50,14 +63,31 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
   // 自定义recyclerveiw的适配器
   private CollectRecycleAdapter mCollectRecyclerAdapter;
 
+  /**
+   * initialize Presenter.
+   *
+   * @return a new {@code HomePresenter} object
+   * @since 3.0
+   */
   @Override
   public HomePresenter initPresenter() {
     return new HomePresenter(getActivity());
   }
 
+  /**
+   * initialize View.
+   *
+   * @param savedInstanceState {@code Bundle}
+   * @since 3.0
+   */
   @Override
-  protected void initViews(Bundle savedInstanceState) {}
+  protected void initViews(@NonNull Bundle savedInstanceState) {}
 
+  /**
+   * initialize goodEntityList from the start of this fragment.
+   *
+   * @since 3.0
+   */
   @Override
   protected void initData() {
     for (int i = 0; i < 10; i++) {
@@ -68,6 +98,11 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
     }
   }
 
+  /**
+   * initialize RecyclerView
+   * <p>initialize RecyclerView for the Entity list.</p>
+   * @since 3.0
+   */
   private void initRecyclerView() {
     // 获取RecyclerView
     mCollectRecyclerView = (RecyclerView) rootView.findViewById(R.id.puzzle_list);
@@ -93,6 +128,11 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
         });
   }
 
+  /**
+   * initialize Event
+   * <p>initialize Event for the fragment.</p>
+   * @since 3.0
+   */
   @Override
   public void initEvent() {
     scan.setOnClickListener(
@@ -127,14 +167,30 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
         });
   }
 
+  /**
+   * get layout id
+   * <p>get layout id of current fragment.</p>
+   * @return id of current fragment
+   * @since 3.0
+   */
   @Override
   protected int getContentViewLayoutID() {
     return R.layout.fragment_home;
   }
 
+  /**
+   * create view
+   * <p>Create view for fragment, initialize inner function and data.</p>
+   *
+   * @param inflater {@code LayoutInflater}
+   * @param container {@code ViewGroup}
+   * @param savedInstanceState {@code Bundle}
+   * @return rootView {@code View} object
+   * @since 3.0
+   */
   @Override
   public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+      @NonNull LayoutInflater inflater, @NonNull ViewGroup container, @NonNull Bundle savedInstanceState) {
     rootView = super.onCreateView(inflater, container, savedInstanceState);
     assert rootView != null;
     unbinder = ButterKnife.bind(this, rootView);
@@ -143,14 +199,27 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
     return rootView;
   }
 
+  /**
+   * destroy view
+   * <p>Destroy current view, clean up.</p>
+   *
+   * @since 3.0
+   */
   @Override
   public void onDestroyView() {
     super.onDestroyView();
     unbinder.unbind();
   }
 
+  /**
+   * implement puzzle info
+   * <p>Set up data after refresh, and then notify the RecycleView.</p>
+   *
+   * @param msg {@code JSONArray}
+   * @since 3.0
+   */
   @Override
-  public void getPuzzleSucc(JSONArray msg) {
+  public void getPuzzleSucc(@NonNull JSONArray msg) {
     try {
       goodsEntityList.clear();
       for (int i = 0; i < msg.length(); i++) {
@@ -165,34 +234,21 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter> implemen
         goodsEntityList.add(goodsEntity);
       }
       mCollectRecyclerAdapter.notifyDataChanged(getActivity(), goodsEntityList);
-      // 成功
-      //      String userid = msg.getString("userid");
-      //      String hint = msg.getString("hint");
-      //      String coins = msg.getString("coins");
-      //
-      //      if(des.length()==0){
-      //        des="这个人很懒,什么都没写";
-      //      }
-      //      String c = msg.getString("coins");
-      //      String fl = msg.getString("follower");
-
-      //      if(fl.equals("[]")){
-      //        fl="";
-      //      }
-      //      userText.setText("用户名: "+username);
-      //      Log.d("debug-username", username);
-      //      phone.setText("电话: "+phone_number);
-      //      description.setText("简介:"+des);
-      //      coin.setText("金币:"+c);
-      //      follower.setText("关注你的人:"+fl.length());
       Log.d("info:", "getPuzzleSucc" + goodsEntityList.toString());
     } catch (Exception e) {
       Log.d("Exception", "getPuzzleSucc" + e);
     }
   }
 
+  /**
+   * implement puzzle info failure
+   * <p>Toast message when failed getting puzzle info.</p>
+   *
+   * @param msg {@code CommonResponse<Test>}
+   * @since 3.0
+   */
   @Override
-  public void getPuzzleFail(CommonResponse<Test> msg) {
+  public void getPuzzleFail(@NonNull CommonResponse<Test> msg) {
     if (msg.errno != 0) {
       if (msg.errno == 1003) {}
     }
